@@ -14,7 +14,7 @@ const Header_Men = () => {
                 <div class="menuContents dropdownContent">
                     <div class="dropDownMenu">
                         <div class="col-xs-7 noPd navSeperator">
-                            <div class="col-xs-4 noPd">
+                            <div class="col-xs-4 noPd topwear">
                                 <a class="headings singleEntry false" href="/top-wear-for-men">Topwear</a>
                                 <a class="singleEntry false" href="/men-printed-tshirts">
                                     <span>Printed T-Shirts</span>
@@ -73,7 +73,7 @@ const Header_Men = () => {
                                         <span>All Topwear</span>
                                     </a>
                             </div>
-                            <div class="col-xs-4 noPd">
+                            <div class="col-xs-4 noPd bottomwear">
                                 <a class="headings singleEntry false" href="/men-bottom-wear-collection">Bottomwear</a>
                                 <a class="singleEntry false" href="/cargos-for-men">
                                     <span>Cargos</span>
@@ -108,7 +108,7 @@ const Header_Men = () => {
                                     <span>All Bottomwear</span>
                                 </a>
                             </div>
-                            <div class="col-xs-4 noPd">
+                            <div class="col-xs-4 noPd mobileCovers">
                                 <a class="headings singleEntry false" href="/winter-wear-for-men">Winterwear</a>
                                 <a class="singleEntry false" href="/men-hoodies-sweatshirts"><span>Sweatshirts &amp; Hoodies</span></a>
                                 <a class="singleEntry false" href="/men-jackets"><span>Jackets</span></a>
@@ -152,7 +152,7 @@ const Header_Men = () => {
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 specials">
                             <span class="singleEntry headings specials">SPECIALS</span>
                             <a class="singleEntry false" href="/campaign/hatke-clearance-men">
                                 <img class="pull-left navBall" src="https://images.bewakoof.com/nav_menu/Circle-icon-HatkeSale-circlenav-1695214718.png" title="The Hatke Sale" alt="The Hatke Sale" />

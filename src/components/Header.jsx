@@ -1,5 +1,5 @@
 import React from 'react'
-// import Header_Men from './Header_Men'
+import Header_Men from './Header_Men'
 import HeaderMenuWrapper from './HeaderMenuWrapper'
 import SearchWrapper from './SearchWrapper'
 
@@ -17,10 +17,10 @@ const Header = () => {
             </div>
         </div>
 
-        <div className='mainHeaderCols searchMyAccount'>
+        {/* <div className='mainHeaderCols searchMyAccount'>
             <SearchWrapper />
             <HeaderMenuWrapper />
-        </div>
+        </div> */}
     </div>
   )
 }
