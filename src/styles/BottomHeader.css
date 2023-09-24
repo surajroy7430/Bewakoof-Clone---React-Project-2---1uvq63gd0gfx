@@ -1,0 +1,39 @@
+.bottomHeaderWrapper {
+font-size: 100%;
+z-index: 3;
+background-color: #fff;
+width: 100%;
+overflow-y: scroll;
+display: inline-flex;
+white-space: nowrap;
+position: fixed;
+top: 78px;
+}
+ul {
+    display: flex;
+}
+.tabNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ul li {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+    /* border-bottom: 4px solid transparent; */
+    transition: all .3s ease-in 0s;
+}
+ul li a{
+    list-style-type: none;
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 17px;
+    display: block;
+    letter-spacing: .07px;
+    line-height: 13px;
+    padding: 21px 24px;
+}

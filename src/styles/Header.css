@@ -1,0 +1,61 @@
+.dropDownWrapper {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: #333;
+    font-family: montserrat,sans-serif;
+    text-rendering: optimizeLegibility;
+    line-height: 52px;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    min-height: 1px;
+    float: left;
+    width: 41.66666667%;
+    position: static;
+    padding: 0;
+}
+.mainHeaderCols {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: #333;
+    font-family: montserrat,sans-serif;
+    text-rendering: optimizeLegibility;
+    line-height: 52px;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    float: left;
+    padding: 0!important;
+    white-space: nowrap;
+    text-align: left;
+}
+.searchMyAccount {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: #333;
+    font-family: montserrat,sans-serif;
+    text-rendering: optimizeLegibility;
+    line-height: 52px;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    padding: 0 9px!important;
+    position: relative;
+    min-height: 1px;
+    float: left;
+    width: 41.66666667%;
+    display: flex!important;
+    flex-direction: row-reverse!important;
+}
