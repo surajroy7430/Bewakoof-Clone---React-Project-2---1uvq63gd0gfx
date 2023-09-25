@@ -55,7 +55,6 @@
     visibility: visible;
 }
 .menuDropdownWrpr {
-    display: none;
     opacity: 0;
     visibility: hidden;
     left: 0;

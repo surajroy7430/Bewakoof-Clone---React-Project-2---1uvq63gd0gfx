@@ -3,13 +3,14 @@ import '../styles/Header_Men.css'
 
 const Header_Men = () => {
   return (
-    <div>
+    <>
         <span class="menuWrapper">
             <a href="/men-clothing" class="menuSelectWrpr" id="testMenuSelect-shop-men">
                 <span class="menuSelect">
                     <span>MEN</span>
                 </span>
             </a>
+            
             <div class="container menuDropdownWrpr">
                 <div class="menuContents dropdownContent">
                     <div class="dropDownMenu">
@@ -152,7 +153,7 @@ const Header_Men = () => {
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xs-3 specials">
+                        <div class="col-xs-3">
                             <span class="singleEntry headings specials">SPECIALS</span>
                             <a class="singleEntry false" href="/campaign/hatke-clearance-men">
                                 <img class="pull-left navBall" src="https://images.bewakoof.com/nav_menu/Circle-icon-HatkeSale-circlenav-1695214718.png" title="The Hatke Sale" alt="The Hatke Sale" />
@@ -258,7 +259,7 @@ const Header_Men = () => {
                 </div>
             </div>
         </span>
-    </div>
+    </>
   )
 }
 

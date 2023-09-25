@@ -1,18 +1,66 @@
-.dropDownWrapper {
+.headerDivWrapper {
+    width: 100%;
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    height: 79px;
+    transition: all .5s ease-in-out;
+}
+.topBarWrapper {
+    background: #eee;
+    text-align: center;
+}
+.topBarWrapper, .topBar {
+    display: inline-block;
+    width: 100%;
+}
+.mainHeaderWrapper {
+    width: 100%;
+    background: #fff;
+    height: 52px;
     line-height: 52px;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    position: relative;
+}
+.mainHeader {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+.bewakoofLogoDiv {
+    padding: 0 9px!important;
+    position: relative;
     min-height: 1px;
+    line-height: 52px;
+    height: 52px;
+    overflow-y: hidden;
+} 
+.col-xs-2 {
+    width: 16.66666667%;
     float: left;
-    width: 41.66666667%;
+}
+.bewakoofLogoDiv a {
+    text-decoration: none;
+    color: rgba(0,0,0,.9);
+    display: inline-block;
+    height: inherit;
+}
+.bewakoofLogoDiv a img {
+    height: 20px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    width: 147px;
+}
+.dropDownWrapper {
     position: static;
 }
-.mainHeaderCols {
-    padding: 0!important;
-    white-space: nowrap;
-    text-align: left;
+.col-xs-5 {
+    width: 41.66666667%;
+    float: left;
+    min-height: 1px;
+    position: relative;
 }
-.searchMyAccount {
+.mainHeaderCols {
     display: flex;
     flex-direction: row-reverse;
     padding: 0 9px;
-    position: relative;
 }

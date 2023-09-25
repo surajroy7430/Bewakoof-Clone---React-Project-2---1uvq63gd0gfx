@@ -1,0 +1,63 @@
+.searchMyAccount .searchWrapper {
+    position: relative;
+    width: calc(100% - 150px);
+}
+.pull-right {
+    float: right;
+}
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+    height: 52px;
+}
+.searchContainer {
+    width: 100%;
+    text-align: left;
+    height: 40px;
+    margin-top: 6px;
+    transition: .5s ease;
+    float: right;
+}
+.icon-addon.addon-sm .form-controls {
+    padding: 5px 5px 5px 40px;
+    font-size: 12px;
+    line-height: 1.5;
+    box-shadow: none;
+    width: 100%;
+    background: #eaeaea;
+    border: 1px solid transparent;
+    color: rgba(0,0,0,.5);
+    border-radius: 5px;
+    position: relative;
+    margin: 0;
+    height: 100%;
+    transition: all .1s ease-in .1s;
+}
+
+.icon-addon .form-controls {
+    float: left;
+    font-weight: 400;
+}
+.icon-addon.addon-sm:focus-within .form-controls, .icon-addon.addon-sm:focus .form-controls {
+    background: #fff;
+    border-color: #979797;
+    outline: none;
+}
+.searchMyAccount .searchWrapper i {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    font-size: 18px;
+    color: rgba(0,0,0,.5);
+}
+.seperator {
+    display: inline-block;
+    height: 20px;
+    opacity: .3;
+    background: #000;
+    width: 1px;
+    position: absolute;
+    right: -15px;
+    top: calc(50% - 10px);
+}
