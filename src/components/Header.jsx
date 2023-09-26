@@ -1,11 +1,11 @@
 import React from 'react'
 import '../styles/Header.css'
-import Header_Men from './Header_Men'
-import HeaderMenuWrapper from './HeaderMenuWrapper'
-import SearchWrapper from './SearchWrapper'
-import Header_Women from './Header_Women'
-import Header_MobileCovers from './Header_MobileCovers'
-import TopHeader from './TopHeader'
+import Header_Men from './Header_Components/Header_Men'
+import HeaderMenuWrapper from './Header_Components/HeaderMenuWrapper'
+import SearchWrapper from './Header_Components/SearchWrapper'
+import Header_Women from './Header_Components/Header_Women'
+import Header_MobileCovers from './Header_Components/Header_MobileCovers'
+import TopHeader from './Header_Components/TopHeader'
 
 const Header = () => {
   return (
@@ -23,15 +23,15 @@ const Header = () => {
                     </div>
                     <div className='col-xs-5 dropDownWrapper'>
                         <div className='mainHeaderCols'>
-                            <Header_Men />
-                            <Header_Women />
-                            <Header_MobileCovers />
+                            {/* <Header_Men /> */}
+                            {/* <Header_Women /> */}
+                            {/* <Header_MobileCovers /> */}
                         </div>
                     </div>
 
                     <div className='col-xs-5 mainHeaderCols searchMyAccount'>
                         <HeaderMenuWrapper />
-                        <SearchWrapper />
+                        {/* <SearchWrapper /> */}
                     </div>
                 </>
             </div>

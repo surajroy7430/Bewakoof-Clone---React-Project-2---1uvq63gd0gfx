@@ -19,3 +19,7 @@ body {
     width: auto;
     top: initial;
 }
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}

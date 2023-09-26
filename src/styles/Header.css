@@ -1,3 +1,6 @@
+header {
+    display: block;
+}
 .headerDivWrapper {
     width: 100%;
     z-index: 51;
