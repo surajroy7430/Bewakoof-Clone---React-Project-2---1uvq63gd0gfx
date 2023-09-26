@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/Login.css'
 import { 
     Typography, 
     Paper, 
@@ -6,45 +7,23 @@ import {
     FormControl, 
     InputLabel,
     Input,
-    Button
+    Button,
+    Grid
 } from '@mui/material';
-import { makeStyles } from 'tss-react/mui';
 import { LockOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-    main: {
-        width: 'auto',
-        display: 'block',
-        marginTop: '6em',
-        marginBottom: '7em',
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(500 + theme.spacing.unit * 3 * 2)]: {
-            width: 500,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    paper: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    }
-}));
-
 const Login = () => {
-    const classes = useStyles();
   return (
-    <main className={classes.main}>
-        <Paper className={classes.paper}>
-            <Avatar className={classes.avatar}>
+    <main className='main'>
+        <Paper className='paper'>
+            <Avatar className='avatar'>
                 <LockOutlined />
             </Avatar>
             <Typography component='h1' variant='h5'>Log in to your account</Typography>
             <Typography variant='p'>for Latest trends, exciting offers and everything Bewakoof®!</Typography>
 
-            <form className={classes.form}>
+            <form className='form'>
                 <FormControl fullWidth required margin='normal'>
                     <InputLabel htmlFor="email">Email</InputLabel>
                     <Input 
@@ -60,11 +39,10 @@ const Login = () => {
                         id='password' 
                         name='password' 
                         autoComplete='off' 
-                        autoFocus
                     />
                 </FormControl>
                 <Button 
-                    className={classes.submit}
+                    className='submit'
                     type='submit' 
                     fullWidth
                     variant='contained'>
