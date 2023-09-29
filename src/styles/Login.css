@@ -1,17 +1,83 @@
-.main {
+.main-login-form {
     width: auto;
     display: block;
-    border: 5px solid gray;
-    border-radius: 10px;
-    margin-top: 6em;
-    margin-bottom: 7em;
-    max-width: 500;
-    margin-left: auto;
-    margin-right: auto;
-    
 }
-.paper {
+.login-form-wrap {
+    display: flex;
+    margin-top: 79px;
+    height: calc(100vh - 79px);
+    background-image: linear-gradient(0deg,#fff4c4,#fff);
+}
+.login-form-wrap .body-container {
+    height: 90%;
+    width: 1170px;
+    background-color: #fff;
+    box-shadow: 0 2px 31px 0 hsl(0deg 0% 73% / 7%);
+    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.login-form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 45%;
+    height: 100%;
+    margin: auto;
+    padding: 20px;
+}
+.login-form-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 16px 0px 35px;
+}
+.login-form-container .avatar {
+    background-color: #42a2a2;
+}
+.login-form .email-input, 
+.login-form .password-input {
+    width: 100%;
+    margin-bottom: 40px;
+}
+.email-input label,
+.password-input label {
+    font-size: 18px;
+    font-weight: 500;
+}
+.email-input input,
+.password-input input {
+    font-size: 18px;
+    font-weight: 500;
+}
+button.login-submit {
+    background-color: #42a2a2;
+    color: white;
+    margin-top: 24px;
+    height: 60px;
+    font-size: 24px;
+}
+button.login-submit:hover {
+    background-color: #3d9292;
+}
+button.login-submit[disabled] {
+    cursor: none;
+    background-color: #989898;
+    color: white;
+}
+.xgroup {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+}
+.xgroup p, .xgroup a{
+    font-size: 18px;
+    font-family: 500;
+    color: #42a2a2;
+    text-decoration: none;
+}
+.xgroup a:hover {
+    text-decoration: underline;
+}
+.xgroup .register-account {
+    display: flex;
 }

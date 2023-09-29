@@ -1,0 +1,107 @@
+.footer-container1 {
+    padding: 4% 8% 2% 7%;
+    background-color: #181818;
+    color: #fff;
+}
+.footerLogo {
+    margin-bottom: 15px;
+}
+.footerLogo a {
+    font-size: 36px;
+    color: #fdd835;
+    font-weight: bolder;
+}
+.footerLogo a sup {
+    font-size: 20px;
+}
+footer a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    vertical-align: baseline;
+    background: transparent;
+    color: #fff;
+    outline: none;
+}
+.footer-container1 .row {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+.footer-container1 .col-md-3,
+.footer-container1 .col-sm-6 {
+    padding: 8px 0px;
+    width: 25%;
+}
+.footer-container1 .list-group {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+}
+
+footer ul {
+    list-style-type: none;
+}
+footer heading {
+    color: #fdd835;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 20px;
+}
+.footer-container1 input {
+    background: transparent;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #fdd835;
+    color: #fff;
+    width: 30%;
+    height: 34px;
+    padding: 0px 12px;
+    font-size: 14px;
+    color: #555;
+}
+.footer-container1 input:focus {
+    outline: none;
+}
+.footer-container1 button {
+    border: 1px solid #fdd835;
+    background-color: #fdd835;
+    color: #000;
+    height: 34px;
+    width: 45%;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.fb-insta .facebook_logo,
+.fb-insta .instagram_logo {
+    margin-bottom: 10px;
+}
+
+
+.footer-container2 {
+    background-image: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+    padding: 1rem;
+}
+.footer-container2 div {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+.footer-container2 h5 {
+    color: #1b1b1b;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.footer-container2 .neon {
+    color: #f8fb42c4;
+    font-size: 1rem;
+    text-shadow: 0 0 3px #f4730a;
+}
+.githubLogo {
+    color: #181818;
+    vertical-align: -20%;
+}
