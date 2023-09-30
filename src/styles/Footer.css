@@ -16,8 +16,8 @@
 }
 footer a {
     text-decoration: none;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 3px;
     vertical-align: baseline;
     background: transparent;
     color: #fff;
@@ -46,7 +46,8 @@ footer heading {
     color: #fdd835;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
     display: block;
     margin-bottom: 20px;
 }
@@ -69,7 +70,7 @@ footer heading {
     border: 1px solid #fdd835;
     background-color: #fdd835;
     color: #000;
-    height: 34px;
+    height: 36px;
     width: 45%;
     font-size: 14px;
     font-weight: 500;
@@ -92,16 +93,45 @@ footer heading {
     text-align: center;
 }
 .footer-container2 h5 {
+    white-space: nowrap;
     color: #1b1b1b;
-    font-size: 1rem;
+    font-size: 20px;
     font-weight: 600;
 }
 .footer-container2 .neon {
     color: #f8fb42c4;
-    font-size: 1rem;
+    font-size: 22px;
     text-shadow: 0 0 3px #f4730a;
 }
 .githubLogo {
     color: #181818;
     vertical-align: -20%;
+}
+.socialLogo {
+    vertical-align: -18%;
+}
+.socialLogo.fbLogo {
+    color: #1877f2;
+    border-radius: 6px;
+}
+.socialLogo.instaLogo {
+    color: rgb(241, 61, 38);
+    border-radius: 6px;
+}
+.twitterLogo {
+    color: #00d2ff;
+}
+.pinterestLogo {
+    color: red;
+    background-color: #fff;
+    border-radius: 50%;
+}
+.appleLogo {
+    color: silver;
+}
+.historyLogo, .rupeeLogo {
+    vertical-align: -23%;
+}
+.android_app:hover, .ios_app:hover {
+    transform: scale(1.1);
 }

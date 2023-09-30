@@ -59,27 +59,27 @@ const Footer = () => {
                                     <div className='fb-insta'>
                                         <div className='facebook_logo'>
                                             <Link>
-                                                <Facebook /> 4.7M People Like this
+                                                <Facebook className="socialLogo fbLogo" /> 4.7M People Like this
                                             </Link>
                                         </div>
                                         <div className='instagram_logo'>
                                             <Link>
-                                                <Instagram /> 1M Followers
+                                                <Instagram className="socialLogo instaLogo" /> 1M Followers
                                             </Link>
                                         </div>
                                     </div>
                                     <div>
-                                        <Link>
-                                            <Twitter />
+                                        <Link style={{marginRight: '7px'}}>
+                                            <Twitter className="twitterLogo" />
+                                        </Link>
+                                        <Link style={{marginRight: '7px'}}>
+                                            <Pinterest className="pinterestLogo" />
+                                        </Link>
+                                        <Link style={{marginRight: '7px'}}>
+                                            <Apple className="appleLogo" />
                                         </Link>
                                         <Link>
-                                            <Pinterest />
-                                        </Link>
-                                        <Link>
-                                            <Apple />
-                                        </Link>
-                                        <Link>
-                                            <GetApp />
+                                            <GetApp className="downloadLogo" />
                                         </Link>
                                     </div>
                                 </ul>
@@ -92,7 +92,7 @@ const Footer = () => {
                                 <ul>
                                     <Form inline>
                                         <InputGroup>
-                                            <input type='email' placeholder='Enter Email Id' />
+                                            <input type='email' required placeholder='Enter Email Id' />
                                             <button type="submit">SUBSCRIBE</button>
                                         </InputGroup>
                                     </Form>
@@ -106,20 +106,20 @@ const Footer = () => {
                     <Row>
                         <Col sm={6} md={3}>
                             <ListGroup>
-                                <ul>
+                                <ul style={{paddingBottom: '5px'}}>
                                     <small>
-                                        <History fontSize="small" />
+                                        <History className="historyLogo" fontSize='small' />
                                     </small>
                                     <Link style={{paddingLeft: '5px'}}>
-                                        <big>15 Days return policy*</big>
+                                        15 Days return policy*
                                     </Link>
                                 </ul>
                                 <ul>
                                     <small>
-                                        <CurrencyRupeeSharp fontSize="small" />
+                                        <CurrencyRupeeSharp className="rupeeLogo" fontSize='small' />
                                     </small>
                                     <Link style={{paddingLeft: '5px'}}>
-                                        <big>Cash On Delivery*</big>
+                                        Cash On Delivery*
                                     </Link>
                                 </ul>
                             </ListGroup>
@@ -138,6 +138,7 @@ const Footer = () => {
                                             width='120px'
                                             src='https://images.bewakoof.com/web/app_android_v1.png' 
                                             alt='android_app' 
+                                            className='android_app'
                                             thumbnail
                                         />
                                     </Link>
@@ -150,6 +151,7 @@ const Footer = () => {
                                             width='120px'
                                             src='https://images.bewakoof.com/web/app_ios_v1.png' 
                                             alt='ios_app' 
+                                            className='ios_app'
                                             thumbnail
                                         />
                                     </Link>
@@ -174,14 +176,16 @@ const Footer = () => {
             </footer>
             <footer className='footer-container2'>
                 <div>
-                    <h5>&copy; All Rights Reserved by&nbsp;
+                    <h5>&copy; {new Date().getFullYear()} All Rights Reserved by {' '}
                         <Link 
                             className="neon" 
                             target='_blank' 
                             rel='noreferrer' 
                             to='https://www.linkedin.com/in/suraj-roy-317515143'
-                        >Suraj Roy</Link>
-                        &nbsp;| Source On{' '}
+                        >
+                            Suraj Roy
+                        </Link>
+                        <span> | Source On </span>
                         <Link
                             className='footer2_logo' 
                             target='_blank' 
