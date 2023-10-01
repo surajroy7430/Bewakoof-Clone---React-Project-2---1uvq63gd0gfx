@@ -33,9 +33,9 @@ const Footer = () => {
                             <heading>Customer Service</heading>
                             <ListGroup>
                                 <ul>
-                                    <li><Link>Contact Us</Link></li>
-                                    <li><Link>Track Order</Link></li>
-                                    <li><Link>Return Order</Link></li>
+                                    <li className='li'><Link>Contact Us</Link></li>
+                                    <li className='li'><Link>Track Order</Link></li>
+                                    <li className='li'><Link>Return Order</Link></li>
                                     <li><Link>Cancel Order</Link></li>
                                 </ul>
                             </ListGroup>
@@ -44,49 +44,51 @@ const Footer = () => {
                             <heading>Company</heading>
                             <ListGroup>
                                 <ul>
-                                    <li><Link>About Us</Link></li>
-                                    <li><Link>We're Hiring</Link></li>
-                                    <li><Link>Terms & Conditions</Link></li>
-                                    <li><Link>Privacy Policy</Link></li>
+                                    <li className='li'><Link>About Us</Link></li>
+                                    <li className='li'><Link>We're Hiring</Link></li>
+                                    <li className='li'><Link>Terms & Conditions</Link></li>
+                                    <li className='li'><Link>Privacy Policy</Link></li>
                                     <li><Link>Blog</Link></li>
                                 </ul>
                             </ListGroup>
                         </Col>
-                        <Col sm={6} md={3} className='footerMenu'>
+                        <Col sm={6} md={3} className='footerMenuSocial'>
                             <heading>Connect With Us</heading>
                             <ListGroup>
-                                <ul>
-                                    <div className='fb-insta'>
-                                        <div className='facebook_logo'>
+                                <ul className='socialIcons'>
+                                    <li className='fb-insta'>
+                                        <span className='facebook_logo'>
                                             <Link>
-                                                <Facebook className="socialLogo fbLogo" /> 4.7M People Like this
+                                                <Facebook className="socialLogo fbLogo" /> 
+                                                <span> 4.7M People Like this</span>
                                             </Link>
-                                        </div>
-                                        <div className='instagram_logo'>
+                                        </span>
+                                        <span className='instagram_logo'>
                                             <Link>
-                                                <Instagram className="socialLogo instaLogo" /> 1M Followers
+                                                <Instagram className="socialLogo instaLogo" />
+                                                <span> 1M Followers</span>
                                             </Link>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <Link style={{marginRight: '7px'}}>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <Link style={{marginRight: '10px'}}>
                                             <Twitter className="twitterLogo" />
                                         </Link>
-                                        <Link style={{marginRight: '7px'}}>
+                                        <Link style={{marginRight: '10px'}}>
                                             <Pinterest className="pinterestLogo" />
                                         </Link>
-                                        <Link style={{marginRight: '7px'}}>
+                                        <Link style={{marginRight: '10px'}}>
                                             <Apple className="appleLogo" />
                                         </Link>
                                         <Link>
                                             <GetApp className="downloadLogo" />
                                         </Link>
-                                    </div>
+                                    </li>
                                 </ul>
                             </ListGroup>
                         </Col>
 
-                        <Col sm={6} md={3} className='footerMenu'>
+                        <Col sm={6} md={3} className='footerMenuSearch'>
                             <heading style={{paddingBottom: '1rem'}}>Keep up to date</heading>
                             <ListGroup>
                                 <ul>
@@ -102,7 +104,7 @@ const Footer = () => {
                     </Row>
                 </section>
 
-                <section style={{paddingTop: '4rem'}}>
+                <section className='section2'>
                     <Row>
                         <Col sm={6} md={3}>
                             <ListGroup>
@@ -158,7 +160,7 @@ const Footer = () => {
                                 </ul>
                             </ListGroup>
                         </Col>
-                        <Col sm={12} md={6} style={{padding: '8px 10px'}}>
+                        <Col sm={12} md={6} style={{padding: '8px 10px'}} className='securePayment'>
                             <ListGroup>
                                 <heading>100% secure payment</heading>
                                 <ul>

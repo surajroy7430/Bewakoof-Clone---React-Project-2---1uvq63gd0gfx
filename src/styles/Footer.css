@@ -1,5 +1,5 @@
 .footer-container1 {
-    padding: 4% 8% 2% 7%;
+    padding: 5% 6% 2% 6%;
     background-color: #181818;
     color: #fff;
 }
@@ -7,16 +7,18 @@
     margin-bottom: 15px;
 }
 .footerLogo a {
-    font-size: 36px;
+    font-size: 30px;
     color: #fdd835;
-    font-weight: bolder;
+    font-weight: 900;
+    font-family: 'Montserrat';
 }
 .footerLogo a sup {
-    font-size: 20px;
+    font-size: 15px;
+    font-weight: 700;
 }
 footer a {
     text-decoration: none;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 3px;
     vertical-align: baseline;
     background: transparent;
@@ -31,7 +33,58 @@ footer a {
 .footer-container1 .col-md-3,
 .footer-container1 .col-sm-6 {
     padding: 8px 0px;
-    width: 25%;
+    width: 23%;
+}
+.footerMenuSearch {
+    width: 31%;
+}
+@media (max-width: 1190px) {
+    .footer-container1 .col-md-3,
+    .footer-container1 .col-sm-6 {
+        width: 50%;
+    }  
+}
+@media (max-width: 736px) {
+    .footer-container1 .col-md-3,
+    .footer-container1 .col-sm-6 {
+        width: 100%;
+    }
+    .footerMenuSearch {
+        display: none;
+    }
+    footer ul li, .footerMenuSocial .socialIcons{
+        display: inline-block;
+    }
+    .footerMenu, .footerMenuSocial {
+        margin-bottom: 18px;
+    }
+    .footerMenu ul li.li::after {
+        padding-right: 5px;
+        content: ' |';
+    }
+    .footerMenuSocial .fb-insta {
+        display: inline;
+    }
+    .fb-insta .socialLogo {
+        vertical-align: 0%;
+        margin-right: 10px;
+    }
+    .footerMenuSocial .fb-insta a span{
+        display: none;
+    }
+    .securePayment {
+        display: none;
+    }
+    footer .section2 {
+        border-top: 2px solid rgba(219, 219, 219, 0.4);
+    }
+    .footer-container1 heading {
+        margin-bottom: 15px;
+    }
+    .footer-container2 h5 {
+        font-size: 10px;
+        font-weight: 400;
+    }
 }
 .footer-container1 .list-group {
     background-color: transparent;
@@ -46,7 +99,7 @@ footer heading {
     color: #fdd835;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     display: block;
     margin-bottom: 20px;
@@ -57,7 +110,7 @@ footer heading {
     outline: none;
     border-bottom: 1px solid #fdd835;
     color: #fff;
-    width: 30%;
+    width: 45%;
     height: 34px;
     padding: 0px 12px;
     font-size: 14px;
@@ -76,9 +129,16 @@ footer heading {
     font-weight: 500;
     cursor: pointer;
 }
+.fb-insta {
+    display: flex;
+    flex-direction: column;
+}
 .fb-insta .facebook_logo,
 .fb-insta .instagram_logo {
     margin-bottom: 10px;
+}
+footer .section2 {
+    padding-top: 1rem;
 }
 
 
@@ -95,13 +155,13 @@ footer heading {
 .footer-container2 h5 {
     white-space: nowrap;
     color: #1b1b1b;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 .footer-container2 .neon {
-    color: #f8fb42c4;
-    font-size: 22px;
-    text-shadow: 0 0 3px #f4730a;
+    color: #f4730a;
+    font-size: 20px;
+    text-shadow: 0 0 12px #41f40a;
 }
 .githubLogo {
     color: #181818;
