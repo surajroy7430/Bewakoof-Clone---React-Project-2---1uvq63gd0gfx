@@ -1,17 +1,14 @@
 import React from 'react'
 import '../../styles/Header_Components_Styles/Header_Men.css'
+import { NavLink } from 'react-router-dom'
 
 const Header_Men = () => {
   return (
-    <>
-        <span class="menuWrapper">
-            <a href="/men-clothing" class="menuSelectWrpr" id="testMenuSelect-shop-men">
-                <span class="menuSelect">
-                    <span>MEN</span>
-                </span>
-            </a>
-        </span>
-    </>
+    <div class="menuWrapper">
+      <NavLink to="/men-clothing" class="menuSelectWrpr">
+        <span class="menuSelect">MEN</span>
+      </NavLink>
+    </div>
   )
 }
 

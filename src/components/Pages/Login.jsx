@@ -22,10 +22,10 @@ const Login = () => {
         event.preventDefault();
     }
     return (
-        <div id='main-login-form' className='centered-flex'>
+        <div id='main-login-form'>
             <div className='body-container'>
                 <div className='login-form-container'>
-                    <Avatar className='avatar centered-flex' />
+                    <Avatar className='avatar' />
                     <Typography variant='h2'>Log in to your account</Typography>
                     <form className='login-form'>
                         <FormControl fullWidth required margin='normal' className='email-input'>

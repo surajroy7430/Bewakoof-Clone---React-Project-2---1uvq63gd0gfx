@@ -5,14 +5,10 @@ import HeaderMenuWrapper from './Header_Components/HeaderMenuWrapper'
 import SearchWrapper from './Header_Components/SearchWrapper'
 import Header_Women from './Header_Components/Header_Women'
 import Header_MobileCovers from './Header_Components/Header_MobileCovers'
-import TopHeader from './Header_Components/TopHeader'
 
 const Header = () => {
   return (
     <header className='headerDivWrapper'>
-        <div className='topBarWrapper'>
-            <TopHeader />
-        </div>
         <div className="mainHeaderWrapper" >
             <div className='mainHeader row'>
                 <>
@@ -23,15 +19,15 @@ const Header = () => {
                     </div>
                     <div className='col-xs-5 dropDownWrapper'>
                         <div className='mainHeaderCols'>
-                            {/* <Header_Men /> */}
-                            {/* <Header_Women /> */}
-                            {/* <Header_MobileCovers /> */}
+                            <Header_Men />
+                            <Header_Women />
+                            <Header_MobileCovers />
                         </div>
                     </div>
 
                     <div className='col-xs-5 mainHeaderCols searchMyAccount'>
+                        <SearchWrapper />
                         <HeaderMenuWrapper />
-                        {/* <SearchWrapper /> */}
                     </div>
                 </>
             </div>

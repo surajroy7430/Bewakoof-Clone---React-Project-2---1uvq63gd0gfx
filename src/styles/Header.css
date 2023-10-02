@@ -64,6 +64,5 @@ header {
 }
 .mainHeaderCols {
     display: flex;
-    flex-direction: row-reverse;
     padding: 0 9px;
 }

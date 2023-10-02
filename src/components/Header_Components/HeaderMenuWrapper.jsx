@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/Header_Components_Styles/HeaderMenuWrapper.css'
 import {ReactComponent as ShoppingBag} from '../../assets/shoppingBag.svg';
 import {ReactComponent as WishList} from '../../assets/wishlist.svg'
+import { ShoppingBagOutlined } from '@mui/icons-material';
 
 const HeaderMenuWrapper = () => {
   return (
@@ -15,13 +16,12 @@ const HeaderMenuWrapper = () => {
                 </span>
                 <span class="actionMenu actionMenuInner" id="testHeaderCart">
                     <a href="/cart" class="cartIcon">
-                        {/* <ShoppingBag className='icon_bag' /> */}
-                        <i className='icon_bag'></i>
+                        <ShoppingBagOutlined />
+                        {/* <i className='icon_bag'></i> */}
                     </a>
                 </span>
                 <span class="actionMenu" id="testHeadWish">
                     <a class="">
-                        {/* <WishList className='icon_wishlist' /> */}
                         <i className='icon_wishlist'></i>
                     </a>
                 </span>

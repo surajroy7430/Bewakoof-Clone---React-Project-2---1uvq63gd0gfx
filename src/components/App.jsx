@@ -3,14 +3,16 @@ import "../styles/App.css";
 import BottomHeader from './Header_Components/BottomHeader';
 import Header from './Header';
 import Login from './Pages/Login';
+import Signup from './Pages/Signup';
 import Footer from './Footer';
 
 function App() {
   return (
     <div className="App">
-      <Login />
-      {/* <Header /> */}
+      <Header />
       {/* <BottomHeader /> */}
+      {/* <Login /> */}
+      {/* <Signup /> */}
       {/* <Footer /> */}
     </div>
   )

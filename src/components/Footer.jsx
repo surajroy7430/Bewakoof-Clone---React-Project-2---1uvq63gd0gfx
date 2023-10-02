@@ -183,7 +183,7 @@ const Footer = () => {
                         className="neon" 
                         target='_blank' 
                         rel='noreferrer' 
-                        to='https://www.linkedin.com/in/suraj-roy-317515143'
+                        to='https://www.linkedin.com/in/surajroy7430'
                     >
                         Suraj Roy
                     </Link>
