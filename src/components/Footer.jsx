@@ -178,25 +178,26 @@ const Footer = () => {
             </footer>
             <footer className='footer-container2'>
                 <div>
-                    <h5>&copy; {new Date().getFullYear()} All Rights Reserved by {' '}
-                        <Link 
-                            className="neon" 
-                            target='_blank' 
-                            rel='noreferrer' 
-                            to='https://www.linkedin.com/in/suraj-roy-317515143'
-                        >
-                            Suraj Roy
-                        </Link>
-                        <span> | Source On </span>
-                        <Link
-                            className='footer2_logo' 
-                            target='_blank' 
-                            rel='noreferrer' 
-                            to='https://github.com/surajroy7430/Bewakoof-Clone---React-Project-2---1uvq63gd0gfx'
-                        >
-                            <GitHub className="githubLogo" />
-                        </Link>
-                    </h5>
+                    &copy; {new Date().getFullYear()} All Rights Reserved by {' '}
+                    <Link 
+                        className="neon" 
+                        target='_blank' 
+                        rel='noreferrer' 
+                        to='https://www.linkedin.com/in/suraj-roy-317515143'
+                    >
+                        Suraj Roy
+                    </Link>
+                </div>
+                <div>
+                    <span> Source On </span>
+                    <Link
+                        className='footer2_logo' 
+                        target='_blank' 
+                        rel='noreferrer' 
+                        to='https://github.com/surajroy7430/Bewakoof-Clone---React-Project-2---1uvq63gd0gfx'
+                    >
+                        <GitHub className="githubLogo" />
+                    </Link>
                 </div>
             </footer>
         </Container>

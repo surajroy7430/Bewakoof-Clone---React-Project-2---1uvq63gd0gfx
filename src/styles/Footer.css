@@ -38,13 +38,13 @@ footer a {
 .footerMenuSearch {
     width: 31%;
 }
-@media (max-width: 1190px) {
+@media (max-width: 1200px) {
     .footer-container1 .col-md-3,
     .footer-container1 .col-sm-6 {
         width: 50%;
     }  
 }
-@media (max-width: 736px) {
+@media (max-width: 768px) {
     .footer-container1 .col-md-3,
     .footer-container1 .col-sm-6 {
         width: 100%;
@@ -80,10 +80,6 @@ footer a {
     }
     .footer-container1 heading {
         margin-bottom: 15px;
-    }
-    .footer-container2 h5 {
-        font-size: 10px;
-        font-weight: 400;
     }
 }
 .footer-container1 .list-group {
@@ -144,23 +140,18 @@ footer .section2 {
 
 .footer-container2 {
     background-image: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
-    padding: 1rem;
+    padding: 7px;
 }
 .footer-container2 div {
-    max-width: 1280px;
-    margin: 0 auto;
-    width: 90%;
     text-align: center;
-}
-.footer-container2 h5 {
-    white-space: nowrap;
     color: #1b1b1b;
     font-size: 18px;
     font-weight: 600;
+    padding: 3px;
 }
 .footer-container2 .neon {
     color: #f4730a;
-    font-size: 20px;
+    font-size: 18px;
     text-shadow: 0 0 12px #41f40a;
 }
 .githubLogo {

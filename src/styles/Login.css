@@ -1,38 +1,42 @@
-.main-login-form {
-    width: auto;
-    display: block;
-}
-.login-form-wrap {
-    display: flex;
+#main-login-form {
     margin-top: 79px;
-    height: calc(100vh - 79px);
-    background-image: linear-gradient(0deg,#fff4c4,#fff);
+    width: 100%;
+    height: 100%;
 }
-.login-form-wrap .body-container {
+#main-login-form .body-container {
+    display: flex;
     height: 90%;
-    width: 1170px;
     background-color: #fff;
-    box-shadow: 0 2px 31px 0 hsl(0deg 0% 73% / 7%);
     margin: auto;
     padding-left: 15px;
     padding-right: 15px;
 }
+.centered-flex {
+    
+}
 .login-form-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 45%;
-    height: 100%;
+    justify-content: center;
+    flex-direction: column;
     margin: auto;
     padding: 20px;
+    border: 1px solid #42a2a2;
+    border-radius: 25px;
+    background-color: #ececec;
+    position: relative;
 }
 .login-form-container h2 {
     font-size: 24px;
-    font-weight: bold;
-    margin: 16px 0px 35px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    white-space: nowrap;
 }
 .login-form-container .avatar {
     background-color: #42a2a2;
+    width: 65px;
+    height: 65px;
+    transform: translateY(-80%);
 }
 .login-form .email-input, 
 .login-form .password-input {
@@ -41,14 +45,16 @@
 }
 .email-input label,
 .password-input label {
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 500;
+    transition: 0.3s ease;
 }
 .email-input input,
 .password-input input {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
 }
+
 button.login-submit {
     background-color: #42a2a2;
     color: white;
@@ -67,17 +73,46 @@ button.login-submit[disabled] {
 .xgroup {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 30px 0;
+    white-space: nowrap;
 }
 .xgroup p, .xgroup a{
     font-size: 18px;
-    font-family: 500;
+    font-weight: 500;
     color: #42a2a2;
     text-decoration: none;
 }
 .xgroup a:hover {
     text-decoration: underline;
 }
-.xgroup .register-account {
-    display: flex;
+
+@media (max-width: 1150px) {
+    .login-form-container h2 {
+        font-size: 23px;
+    }
+    .xgroup p, .xgroup a{
+        font-size: 16px;
+    }
+}
+@media (max-width: 970px) {
+    .xgroup {
+        flex-direction: column;
+    }
+    .xgroup p, .xgroup a{
+        padding-bottom: 10px;
+    }
+}
+@media (max-width: 768px) {
+    .login-form-container h2 {
+        font-size: 21px;
+    }
+}
+@media (max-width: 596px) {
+    .login-form-container h2 {
+        font-size: 18px;
+    }
+    .xgroup p, .xgroup a{
+        font-size: 14px;
+    }
 }
