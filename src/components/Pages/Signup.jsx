@@ -1,19 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../styles/SignUp.css'
 import { Avatar, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { getHeaderWithProjectIDAndBody } from '../utils/configs';
+import axios from 'axios';
 
-const Signup = () => {
+const SignUp = () => {
+    const [userInfo, setUserInfo] = useState({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setUserInfo({
+            ...userInfo, 
+            [name]: value
+        });
+    }
+
+    const register = async (userInfo) => {
+        userInfo.appType = 'ecommerce';
+        const config = getHeaderWithProjectIDAndBody();
+
+        try {
+            const res = await axios.post(
+                'https://academics.newtonschool.co/api/v1/user/signup',
+                userInfo, config
+            );
+            console.log('response', res);
+
+            if(res.data.token) {
+                sessionStorage.setItem('authToken', res.data.token);
+                sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user))
+            }
+        } catch (error) {
+            if(error) {
+                console.error(error.response.data.message);
+            }
+        }
+    }
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        register(userInfo);
+    }
+    
   return (
     <div id='main-signup-form'>
       <div className='body-container'>
           <div className='signup-form-container'>
               <Avatar className='avatar' />
               <Typography variant='h2'>Register an Account</Typography>
-              <form className='signup-form'>
+              <form className='signup-form' onSubmit={handleSignUp}>
                   <FormControl fullWidth required margin='normal' className='name-input'>
                       <InputLabel 
-                          htmlFor="username" 
+                          htmlFor="name" 
                           variant='standard' 
                           autoComplete='off' 
                           style={{color: 'gray'}}
@@ -21,11 +65,13 @@ const Signup = () => {
                         Name
                       </InputLabel>
                       <Input 
-                          id='username' 
-                          name='username' 
+                          id='name' 
+                          name='name' 
                           type='text' 
                           autoComplete='off' 
-                          autoFocus
+                          autoFocus 
+                          value={userInfo.name} 
+                          onChange={handleInputChange}
                       />
                   </FormControl>
                   <FormControl fullWidth required margin='normal' className='email-input'>
@@ -41,6 +87,8 @@ const Signup = () => {
                           name='email' 
                           type='email' 
                           autoComplete='off' 
+                          value={userInfo.email} 
+                          onChange={handleInputChange}
                       />
                       
                   </FormControl>
@@ -55,7 +103,9 @@ const Signup = () => {
                       <Input 
                           id='password' 
                           name='password' 
-                          type='text'
+                          type='text' 
+                          value={userInfo.password} 
+                          onChange={handleInputChange}
                       />
                   </FormControl>
                   <FormControl fullWidth required margin='normal' className='confirmPassword-input'>
@@ -69,7 +119,9 @@ const Signup = () => {
                       <Input 
                           id='confirmPassword' 
                           name='confirmPassword' 
-                          type='text'
+                          type='text' 
+                          value={userInfo.confirmPassword} 
+                          onChange={handleInputChange}
                       />
                   </FormControl>
                   
@@ -92,4 +144,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignUp

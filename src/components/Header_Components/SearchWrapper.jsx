@@ -7,8 +7,7 @@ const SearchWrapper = () => {
       <div class="pull-right mainHeaderCols searchWrapper">
           <div class="icon-addon addon-sm">
             <form class="searchContainer" style={{position: 'relative', borderBottom: 'none'}}>
-                <input class="searchInput form-controls" placeholder="Search by product, category or collection" type="text" autocomplete="off" />
-                <i class="icon_search"></i>
+                <input class="searchInput form-controls" placeholder="Search..." type="text" autocomplete="off" />
             </form>
             <div class="seperator"></div>
           </div>

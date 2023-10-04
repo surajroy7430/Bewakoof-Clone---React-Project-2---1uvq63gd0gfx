@@ -12,8 +12,15 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { getHeaderWithProjectIDAndBody } from '../utils/configs';
+import axios from 'axios';
 
 const Login = () => {
+    const [userInfo, setUserInfo] = useState({
+        email: '', 
+        password: '',
+    });
+
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
         setShowPassword((show) => !show);
@@ -21,13 +28,39 @@ const Login = () => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUserInfo({ ...userInfo, [name]: value });
+    }
+
+    const signIn = async(userInfo) => {
+        userInfo.appType = 'ecommerce';
+        const configs = getHeaderWithProjectIDAndBody();
+
+        try {
+            const res = await axios.post(
+                'https://academics.newtonschool.co/api/v1/user/login',
+                userInfo, configs
+            )
+            console.log('response', res);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        signIn(userInfo);
+    }
+
     return (
         <div id='main-login-form'>
             <div className='body-container'>
                 <div className='login-form-container'>
                     <Avatar className='avatar' />
                     <Typography variant='h2'>Log in to your account</Typography>
-                    <form className='login-form'>
+                    <form className='login-form' onSubmit={handleSubmit}>
                         <FormControl fullWidth required margin='normal' className='email-input'>
                             <InputLabel 
                                 htmlFor="email" 
@@ -40,6 +73,8 @@ const Login = () => {
                                 type='email' 
                                 autoComplete='off' 
                                 autoFocus 
+                                value={userInfo.email} 
+                                onChange={handleInputChange}
                             />
                             
                         </FormControl>
@@ -52,7 +87,9 @@ const Login = () => {
                             <Input 
                                 id='password' 
                                 name='password' 
-                                type={showPassword ? 'text' : 'password'}
+                                value={userInfo.password} 
+                                onChange={handleInputChange}
+                                type={showPassword ? 'text' : 'password'} 
                                 endAdornment={
                                     <InputAdornment position="end">
                                         <IconButton
@@ -78,7 +115,7 @@ const Login = () => {
                             <Link to='/forgot'>Forgot Password?</Link>
                             <div className='register-account'>
                                 <p>Don't have an account?&nbsp;
-                                    <Link to='/register'>SignUp</Link>
+                                    <Link to='/signup'>SignUp</Link>
                                 </p>
                             </div>
                         </div>
