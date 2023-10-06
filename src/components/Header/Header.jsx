@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Header.css'
+import './styles/Header.css'
 import { Link } from 'react-router-dom'
 import { AppBar, Box, Button, Divider, InputBase, Toolbar, alpha, styled } from '@mui/material'
 import { Favorite, SearchOutlined, ShoppingBag } from '@mui/icons-material'
@@ -40,6 +40,10 @@ const Header = () => {
             },
         },
     }));
+
+    const handleSearch = () => {
+
+    }
   return (
     <Box>
         <AppBar position='fixed' className='header' style={{zIndex: '9999', backgroundColor: 'white'}}>
@@ -63,7 +67,11 @@ const Header = () => {
                         <SearchIconWrapper>
                             <SearchOutlined style={{color: 'black'}} />
                         </SearchIconWrapper>
-                        <StyledInputBase placeholder='Search...' inputProps={{ 'aria-label': 'search' }} />
+                        <StyledInputBase 
+                            placeholder='Search...' 
+                            inputProps={{ 'aria-label': 'search' }} 
+                            onChange={handleSearch}
+                        />
                     </Search>
 
                     <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: 'white'}} />

@@ -1,6 +1,6 @@
-import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react';
-import '../styles/Products.css';
+import './Products.css';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material';
 
 const Products = (props) => {
     const {name, displayImage, color, category, price, seller, type} = props
@@ -14,7 +14,7 @@ const Products = (props) => {
         sx={{width: '20%'}}
         className='productImage'
       />
-      <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      <Box sx={{display: 'flex', flexDirection: 'column'}}>
         <CardContent>
           <Typography component='div' variant='h5' color='text.secondary'>{name}</Typography>
           <Typography variant='p' color='text.secondary'>$ {price}</Typography>

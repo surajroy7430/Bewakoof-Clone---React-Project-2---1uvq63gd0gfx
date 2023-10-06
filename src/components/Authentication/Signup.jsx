@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/SignUp.css'
+import './styles/SignUp.css'
 import { Avatar, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs';
@@ -25,20 +25,24 @@ const SignUp = () => {
         userInfo.appType = 'ecommerce';
         const config = getHeaderWithProjectIDAndBody();
 
-        try {
-            const res = await axios.post(
-                'https://academics.newtonschool.co/api/v1/user/signup',
-                userInfo, config
-            );
-            console.log('response', res);
-
-            if(res.data.token) {
-                sessionStorage.setItem('authToken', res.data.token);
-                sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user))
-            }
-        } catch (error) {
-            if(error) {
-                console.error(error.response.data.message);
+        if(userInfo.password !== userInfo.confirmPassword){
+            window.alert('Password Not Matched!')
+        }else {
+            try {
+                const res = await axios.post(
+                    'https://academics.newtonschool.co/api/v1/user/signup',
+                    userInfo, config
+                );
+                console.log('response', res);
+    
+                if(res.data.token) {
+                    sessionStorage.setItem('authToken', res.data.token);
+                    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user))
+                }
+            } catch (error) {
+                if(error) {
+                    console.error(error.response.data.message);
+                }
             }
         }
     }

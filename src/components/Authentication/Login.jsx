@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/Login.css'
+import './styles/Login.css'
 import { 
     Typography, 
     Avatar, 
@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { getHeaderWithProjectIDAndBody } from '../utils/configs';
+import { getHeaderWithProjectIDAndBody } from '../utils/configs.js';
 import axios from 'axios';
 
 const Login = () => {

@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getHeaderWithProjectId } from '../utils/configs';
-import Products from '../../ProductComponets/Products';
+import Products from '../ProductsData/Products.jsx';
 
 const HomePage = () => {
     const [products, setProducts] = useState([]);
+    const limit = 15;
 
     const fetchProducts = async () => {
         const config = getHeaderWithProjectId();
 
         try {
             const productsData = await axios.get(
-                'https://academics.newtonschool.co/api/v1/ecommerce/clothes/products/?limit=10',
+                `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products/?limit=${limit}`,
                 config
             );
             

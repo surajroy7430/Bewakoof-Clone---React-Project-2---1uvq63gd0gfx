@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Header_Components_Styles/BottomHeader.css'
+import './styles/BottomHeader.css'
 
 const BottomHeader = () => {
   return (

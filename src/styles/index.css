@@ -3,17 +3,17 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  font-family: 'Montserrat', sans-serif;
+  vertical-align: baseline;
 }
 body {
-  font-family: 'Montserrat', sans-serif;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  box-sizing: border-box;
-  vertical-align: baseline;
   background: transparent;
   line-height: 1;
   background-color: #fff;
-  text-rendering: optimizeLegibility;
   overflow-y: overlay;
   position: initial;
   width: auto;
