@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles/SignUp.css'
 import { Avatar, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -14,6 +14,8 @@ const SignUp = () => {
         password: '',
         confirmPassword: ''
     });
+
+    const navigate = useNavigate();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -42,16 +44,14 @@ const SignUp = () => {
     
                 if(res.data.token) {
                     sessionStorage.setItem('authToken', res.data.token);
-                    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user));
-                    
+                    sessionStorage.setItem('userInfo', JSON.stringify({Name: name, Email: email}));
+
                     toast.success('Account Created Succesfully, Now login', {
                         position: 'top-left'
                     });
                 }
             } catch (error) {
-                if(error) {
-                    toast.error(error.response.data.message);
-                }
+                toast.error(error.response.data.message);
             }
         }
     }
@@ -60,7 +60,7 @@ const SignUp = () => {
         e.preventDefault();
         register(userInfo);
     }
-    
+
   return (
     <div id='main-signup-form'>
         <ToastContainer />

@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs.js';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [userInfo, setUserInfo] = useState({
@@ -46,7 +47,9 @@ const Login = () => {
                 userInfo, configs
             )
             // console.log('response', res); 
-            toast.success('Login Successful')
+            toast.success('Login Successful', {
+                position: 'top-left'
+            });
         } catch (error) {
             toast.error(error.response.data.message);
         }
@@ -60,7 +63,7 @@ const Login = () => {
     return (
         <Box sx={{marginTop: '150px'}}>
             <ToastContainer />
-            <Box className='body-container'>
+            <Box sx={{display: 'flex'}}>
                 <Box className='login-form-container'>
                     <Avatar className='avatar' />
                     <Typography variant='h2'>Log in to your account</Typography>

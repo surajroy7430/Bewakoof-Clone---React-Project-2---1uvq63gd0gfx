@@ -1,11 +1,3 @@
-.body-container {
-    display: flex;
-    height: 90%;
-    background-color: #fff;
-    margin: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
 .login-form-container {
     display: flex;
     align-items: center;
