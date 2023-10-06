@@ -8,8 +8,9 @@ const Header = () => {
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.black, 0.2),
-        '&:focus': {
+        border: '1px solid #979797',
+        backgroundColor: alpha(theme.palette.common.white, 0.15),
+        '&:hover': {
             backgroundColor: alpha(theme.palette.common.white, 0.2)
         },
         width: '100%',
@@ -22,14 +23,13 @@ const Header = () => {
         padding: theme.spacing(0, 2),
         height: '100%',
         position: 'absolute',
-        pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     }));
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'gray',
+        color: '#979797',
         '& .MuiInputBase-input': {
             padding: theme.spacing(1, 1, 1, 0),
             paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -46,8 +46,14 @@ const Header = () => {
     }
   return (
     <Box>
-        <AppBar position='fixed' className='header' style={{zIndex: '9999', backgroundColor: 'white'}}>
-            <Toolbar>
+        <AppBar 
+            position='fixed' 
+            style={{
+                zIndex: '9999', 
+                backgroundColor: 'white',
+            }}
+        >
+            <Toolbar sx={{justifyContent: 'space-evenly'}}>
                 <Link to="/">
                     <img 
                         src="https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg" 
@@ -65,16 +71,17 @@ const Header = () => {
                 <div style={{display: 'flex'}}>
                     <Search>
                         <SearchIconWrapper>
-                            <SearchOutlined style={{color: 'black'}} />
+                            <SearchOutlined style={{color: '#979797'}} />
                         </SearchIconWrapper>
                         <StyledInputBase 
                             placeholder='Search...' 
                             inputProps={{ 'aria-label': 'search' }} 
+                            sx={{color: '#979797'}}
                             onChange={handleSearch}
                         />
                     </Search>
 
-                    <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: 'white'}} />
+                    <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     
                     <Button 
                         variant='text' 

@@ -4,6 +4,8 @@ import { Avatar, Button, FormControl, Input, InputLabel, Typography } from '@mui
 import { Link } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
@@ -26,22 +28,29 @@ const SignUp = () => {
         const config = getHeaderWithProjectIDAndBody();
 
         if(userInfo.password !== userInfo.confirmPassword){
-            window.alert('Password Not Matched!')
+            toast.warn('Password Not Matched!', {
+                position: 'top-right'
+            })
         }else {
             try {
                 const res = await axios.post(
                     'https://academics.newtonschool.co/api/v1/user/signup',
                     userInfo, config
                 );
-                console.log('response', res);
+                const {name, email} = res.data.data.user
+                console.log({Name: name, Email: email});
     
                 if(res.data.token) {
                     sessionStorage.setItem('authToken', res.data.token);
-                    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user))
+                    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data.user));
+                    
+                    toast.success('Account Created Succesfully, Now login', {
+                        position: 'top-left'
+                    });
                 }
             } catch (error) {
                 if(error) {
-                    console.error(error.response.data.message);
+                    toast.error(error.response.data.message);
                 }
             }
         }
@@ -54,6 +63,7 @@ const SignUp = () => {
     
   return (
     <div id='main-signup-form'>
+        <ToastContainer />
       <div className='body-container'>
           <div className='signup-form-container'>
               <Avatar className='avatar' />

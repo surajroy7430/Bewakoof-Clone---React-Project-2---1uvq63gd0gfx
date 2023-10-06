@@ -186,3 +186,7 @@ footer .section2 {
 .android_app:hover, .ios_app:hover {
     transform: scale(1.1);
 }
+
+footer *::selection {
+    color: black;
+}

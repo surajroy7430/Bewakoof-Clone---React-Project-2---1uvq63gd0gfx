@@ -1,0 +1,28 @@
+.empty_cart_container {
+    padding: 30px 0 0;
+    margin: 80px auto;
+    text-align: center;
+    font-size: 18px;
+    max-width: 430px;
+    min-height: 200px;
+}
+p.empty_title {
+    color: #484949;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+a.empty_cart_button {
+    background-color: #51cccc;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 20px 0 10px;
+    width: 200px;
+    height: 40px;
+    box-shadow: none;
+}
+a.empty_cart_button:hover {
+    background-color: #51cccc;
+    opacity: 0.7;
+    box-shadow: none;
+}

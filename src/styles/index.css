@@ -4,9 +4,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-rendering: optimizeLegibility;
-  font-family: 'Montserrat', sans-serif;
-  vertical-align: baseline;
+}
+*::selection {
+  background-color: yellow;
+  color: #fff;
 }
 body {
   -webkit-text-size-adjust: 100%;
@@ -18,6 +19,9 @@ body {
   position: initial;
   width: auto;
   top: initial;
+  text-rendering: optimizeLegibility;
+  font-family: 'Montserrat', sans-serif;
+  vertical-align: baseline;
 }
 ::-webkit-scrollbar {
   width: 0;

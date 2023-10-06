@@ -16,7 +16,7 @@ const HomePage = () => {
                 config
             );
             
-            console.log(productsData);
+            // console.log(productsData);
             const productsList = productsData.data.data;
             setProducts(productsList);
         } catch (error) {

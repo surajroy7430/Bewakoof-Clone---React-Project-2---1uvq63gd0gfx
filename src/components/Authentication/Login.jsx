@@ -8,12 +8,14 @@ import {
     Input,
     Button,
     InputAdornment,
-    IconButton
+    IconButton,
+    Box
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs.js';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
     const [userInfo, setUserInfo] = useState({
@@ -43,9 +45,10 @@ const Login = () => {
                 'https://academics.newtonschool.co/api/v1/user/login',
                 userInfo, configs
             )
-            console.log('response', res);
+            // console.log('response', res); 
+            toast.success('Login Successful')
         } catch (error) {
-            console.error(error);
+            toast.error(error.response.data.message);
         }
     }
 
@@ -55,9 +58,10 @@ const Login = () => {
     }
 
     return (
-        <div id='main-login-form'>
-            <div className='body-container'>
-                <div className='login-form-container'>
+        <Box sx={{marginTop: '150px'}}>
+            <ToastContainer />
+            <Box className='body-container'>
+                <Box className='login-form-container'>
                     <Avatar className='avatar' />
                     <Typography variant='h2'>Log in to your account</Typography>
                     <form className='login-form' onSubmit={handleSubmit}>
@@ -120,9 +124,9 @@ const Login = () => {
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 
