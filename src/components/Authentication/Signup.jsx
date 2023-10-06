@@ -49,6 +49,8 @@ const SignUp = () => {
                     toast.success('Account Created Succesfully, Now login', {
                         position: 'top-left'
                     });
+
+                    navigate('/login');
                 }
             } catch (error) {
                 toast.error(error.response.data.message);

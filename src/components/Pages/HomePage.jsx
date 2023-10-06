@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getHeaderWithProjectId } from '../utils/configs';
 import Products from '../ProductsData/Products.jsx';
+import { useAuth } from '../utils/AuthProvider';
 
 const HomePage = () => {
+  const { user } = useAuth();
+  // console.log('user', user);
     const [products, setProducts] = useState([]);
     const limit = 15;
 

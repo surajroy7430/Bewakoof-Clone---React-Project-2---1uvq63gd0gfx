@@ -1,6 +1,6 @@
 import React from 'react';
 import "../src/styles/App.css";
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Header from '../src/components/Header/Header.jsx';
 import Footer from '../src/components/Footer/Footer.jsx';
 import HomePage from '../src/components/Pages/HomePage.jsx';
@@ -11,22 +11,25 @@ import WishList from './components/ProductPages/WishList';
 import Cart from './components/ProductPages/Cart';
 import Success from './components/ProductPages/Success';
 import ErrorPage from './components/Pages/ErrorPage';
+import { useAuth } from './components/utils/AuthProvider';
+import { toast } from 'react-toastify';
 
 
 function App() {
+  const { user } = useAuth();
   return (
     <div className="App">
       <Header />
 
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/products' element={<HomePage />} />
         <Route path='/product/:id' element={<SingleProduct />} />
-        <Route path='/wishlist' element={<WishList />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/success' element={<Success />} />
+        <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />
+        <Route path='/cart' element={user ? <Cart /> : <Navigate to='/login' />} />
+        <Route path='/cart/success' element={<Success />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
 

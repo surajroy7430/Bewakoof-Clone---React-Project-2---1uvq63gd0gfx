@@ -12,17 +12,21 @@ import {
     Box
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs.js';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth } from '../utils/AuthProvider';
 
 const Login = () => {
+    const { login } = useAuth();
     const [userInfo, setUserInfo] = useState({
         email: '', 
         password: '',
     });
+
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => {
@@ -46,11 +50,14 @@ const Login = () => {
                 'https://academics.newtonschool.co/api/v1/user/login',
                 userInfo, configs
             )
+            login(res.data.data)
             // console.log('response', res); 
             toast.success('Login Successful', {
                 position: 'top-left'
             });
-        } catch (error) {
+            navigate('/')
+        } 
+        catch (error) {
             toast.error(error.response.data.message);
         }
     }
