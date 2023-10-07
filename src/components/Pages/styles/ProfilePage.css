@@ -1,0 +1,21 @@
+hr.profileDivider {
+    width: 100%;
+    max-width: 130px;
+    background: #fdd835;
+    height: 2px;
+    margin: 15px 0 50px;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    border-style: inset;
+    border-width: 0;
+}
+.accountOptions {
+    width: 33%;
+}
+.accountOptions a {
+    text-decoration: none;
+    color: #494949;
+}
+p.myAccOptionsTitle {
+    font-size: 30px;
+}

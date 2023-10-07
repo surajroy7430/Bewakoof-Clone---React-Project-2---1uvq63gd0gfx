@@ -1,11 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styles/Header.css'
 import { Link } from 'react-router-dom'
-import { AppBar, Box, Button, Divider, InputBase, Toolbar, alpha, styled } from '@mui/material'
+import { 
+    AppBar, Avatar, Box, Button, Divider, 
+    InputBase, Menu, MenuItem, Toolbar, alpha, styled 
+} from '@mui/material';
 import { Favorite, SearchOutlined, ShoppingBag } from '@mui/icons-material'
+import { useAuth } from '../utils/AuthProvider'
 
 const Header = () => {
+    const { user, isLoggedIn, logout} = useAuth();
+    const [anchorElUser, setAnchorElUser] = useState(null);
+
+    const handleAvatarClick = (event) => {
+        setAnchorElUser(event.currentTarget);
+    }
+    const handleClose = () => {
+        setAnchorElUser(null);
+    }
+    const handleLogout = () => {
+        logout();
+        handleClose();
+    }
+ 
     const Search = styled('div')(({ theme }) => ({
+        display: 'flex',
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
         border: '1px solid #979797',
@@ -49,7 +68,7 @@ const Header = () => {
         <AppBar 
             position='fixed' 
             style={{
-                zIndex: '9999', 
+                zIndex: '1', 
                 backgroundColor: 'white',
             }}
         >
@@ -83,12 +102,36 @@ const Header = () => {
 
                     <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     
-                    <Button 
-                        variant='text' 
-                        style={{color: 'black'}}
-                        LinkComponent={Link} 
-                        to='/login' 
-                    >Login</Button>
+                    {isLoggedIn && user ? (
+                        <>
+                            <Button onClick={handleAvatarClick}>
+                                <Avatar style={{backgroundColor: 'black',  width: '30px', height: '30px'}} />
+                            </Button>
+                            <Menu 
+                                sx={{mt: '5px', zIndex: '2'}}
+                                anchorEl={anchorElUser}
+                                open={Boolean(anchorElUser)} 
+                                onClose={handleClose} 
+                            >
+                                <MenuItem style={{backgroundColor: 'rgba(0,0,0,.05)'}}>
+                                    <i style={{color: 'rgba(0,0,0,.5)'}}>Hi, {user.name}</i>
+                                </MenuItem>
+                                <MenuItem component={Link} to='/myaccount'>My Account</MenuItem>
+                                <MenuItem component={Link} to='/wishlist'>My Wishlist</MenuItem>
+                                <MenuItem component={Link} to='/myaccount/orders'>My Orders</MenuItem>
+                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            </Menu>
+                        </>
+                    ) : (
+                        <>
+                            <Button 
+                                variant='text' 
+                                style={{color: 'black'}}
+                                LinkComponent={Link} 
+                                to='/login' 
+                            >Login</Button>
+                        </>
+                    )}
 
                     <Button 
                         LinkComponent={Link} 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './styles/SignUp.css'
-import { Avatar, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
+import './styles/LoginAndSignup.css'
+import { Avatar, Box, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { getHeaderWithProjectIDAndBody } from '../utils/configs';
 import axios from 'axios';
@@ -64,99 +64,99 @@ const SignUp = () => {
     }
 
   return (
-    <div id='main-signup-form'>
+    <Box sx={{marginTop: '150px'}}>
         <ToastContainer />
-      <div className='body-container'>
-          <div className='signup-form-container'>
-              <Avatar className='avatar' />
-              <Typography variant='h2'>Register an Account</Typography>
-              <form className='signup-form' onSubmit={handleSignUp}>
-                  <FormControl fullWidth required margin='normal' className='name-input'>
-                      <InputLabel 
-                          htmlFor="name" 
-                          variant='standard' 
-                          autoComplete='off' 
-                          style={{color: 'gray'}}
-                      >
-                        Name
-                      </InputLabel>
-                      <Input 
-                          id='name' 
-                          name='name' 
-                          type='text' 
-                          autoComplete='off' 
-                          autoFocus 
-                          value={userInfo.name} 
-                          onChange={handleInputChange}
-                      />
-                  </FormControl>
-                  <FormControl fullWidth required margin='normal' className='email-input'>
-                      <InputLabel 
-                          htmlFor="email" 
-                          variant='standard'
-                          style={{color: 'gray'}}
-                      >
-                        Email
-                      </InputLabel>
-                      <Input 
-                          id='email' 
-                          name='email' 
-                          type='email' 
-                          autoComplete='off' 
-                          value={userInfo.email} 
-                          onChange={handleInputChange}
-                      />
+        <Box sx={{display: 'flex'}}>
+            <Box className='form-container'>
+                <Avatar className='avatar' />
+                <Typography variant='h2'>Register an Account</Typography>
+                <form className='main-form' onSubmit={handleSignUp}>
+                    <FormControl fullWidth required margin='normal' className='name-input'>
+                        <InputLabel 
+                            htmlFor="name" 
+                            variant='standard' 
+                            autoComplete='off' 
+                            style={{color: 'gray'}}
+                        >
+                            Name
+                        </InputLabel>
+                        <Input 
+                            id='name' 
+                            name='name' 
+                            type='text' 
+                            autoComplete='off' 
+                            autoFocus 
+                            value={userInfo.name} 
+                            onChange={handleInputChange}
+                        />
+                    </FormControl>
+                    <FormControl fullWidth required margin='normal' className='email-input'>
+                        <InputLabel 
+                            htmlFor="email" 
+                            variant='standard'
+                            style={{color: 'gray'}}
+                        >
+                            Email
+                        </InputLabel>
+                        <Input 
+                            id='email' 
+                            name='email' 
+                            type='email' 
+                            autoComplete='off' 
+                            value={userInfo.email} 
+                            onChange={handleInputChange}
+                        />
                       
-                  </FormControl>
-                  <FormControl fullWidth required margin='normal' className='password-input'>
-                      <InputLabel 
-                          htmlFor='password' 
-                          variant='standard' 
-                          style={{color: 'gray'}}
-                      >
-                        Password
-                      </InputLabel>
-                      <Input 
-                          id='password' 
-                          name='password' 
-                          type='text' 
-                          value={userInfo.password} 
-                          onChange={handleInputChange}
-                      />
-                  </FormControl>
-                  <FormControl fullWidth required margin='normal' className='confirmPassword-input'>
-                      <InputLabel 
-                          htmlFor='confirmPassword' 
-                          variant='standard' 
-                          style={{color: 'gray'}}
-                      >
-                        Confirm Password
-                      </InputLabel>
-                      <Input 
-                          id='confirmPassword' 
-                          name='confirmPassword' 
-                          type='text' 
-                          value={userInfo.confirmPassword} 
-                          onChange={handleInputChange}
-                      />
-                  </FormControl>
+                    </FormControl>
+                    <FormControl fullWidth required margin='normal' className='password-input'>
+                        <InputLabel 
+                            htmlFor='password' 
+                            variant='standard' 
+                            style={{color: 'gray'}}
+                        >
+                            Password
+                        </InputLabel>
+                        <Input 
+                            id='password' 
+                            name='password' 
+                            type='text' 
+                            value={userInfo.password} 
+                            onChange={handleInputChange}
+                        />
+                    </FormControl>
+                    <FormControl fullWidth required margin='normal' className='confirmPassword-input'>
+                        <InputLabel 
+                            htmlFor='confirmPassword' 
+                            variant='standard' 
+                            style={{color: 'gray'}}
+                        >
+                            Confirm Password
+                        </InputLabel>
+                        <Input 
+                            id='confirmPassword' 
+                            name='confirmPassword' 
+                            type='text' 
+                            value={userInfo.confirmPassword} 
+                            onChange={handleInputChange}
+                        />
+                    </FormControl>
                   
-                  <Button 
-                      className='signup-submit'
-                      type='submit' 
-                      fullWidth 
-                      variant='contained'>
-                      <Typography>Sign Up</Typography>
-                  </Button>
-                  <div className="xgroup">
-                      <p>Already Have an Account?&nbsp;
-                          <Link to='/login'>Sign In</Link>
-                      </p>
-                  </div>
-              </form>
-          </div>
-      </div>
-    </div>
+                    <Button 
+                        className='submit_button'
+                        type='submit' 
+                        fullWidth 
+                        variant='contained'>
+                        <Typography>Sign Up</Typography>
+                    </Button>
+                    <div className="xgroup">
+                        <p>Already Have an Account?&nbsp;
+                            <Link to='/login'>Sign In</Link>
+                        </p>
+                    </div>
+                </form>
+            </Box>
+        </Box>
+    </Box>
   )
 }
 

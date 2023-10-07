@@ -13,6 +13,8 @@ import Success from './components/ProductPages/Success';
 import ErrorPage from './components/Pages/ErrorPage';
 import { useAuth } from './components/utils/AuthProvider';
 import { toast } from 'react-toastify';
+import ProfilePage from './components/Pages/ProfilePage';
+import MyOrders from './components/ProductPages/MyOrders';
 
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/products' element={<HomePage />} />
         <Route path='/product/:id' element={<SingleProduct />} />
+        <Route path='/myaccount' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
+        <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />
         <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />
         <Route path='/cart' element={user ? <Cart /> : <Navigate to='/login' />} />
         <Route path='/cart/success' element={<Success />} />

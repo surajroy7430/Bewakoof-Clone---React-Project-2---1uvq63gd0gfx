@@ -1,17 +1,4 @@
-#main-signup-form {
-    margin-top: 150px;
-    width: 100%;
-    height: 100%;
-}
-#main-signup-form .body-container {
-    display: flex;
-    height: 90%;
-    background-color: #fff;
-    margin: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.signup-form-container {
+.form-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,24 +9,26 @@
     border-radius: 25px;
     background-color: #ececec;
 }
-.signup-form-container h2 {
+.form-container h2 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
     white-space: nowrap;
 }
-.signup-form-container .avatar {
+.form-container .avatar {
     background-color: #42a2a2;
     width: 65px;
     height: 65px;
     transform: translateY(-80%);
 }
-.name-input, .email-input, 
-.password-input, .confirmPassword-input {
+.name-input,
+.email-input, 
+.password-input,
+.confirmPassword-input {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
-.name-input label, 
+.name-input label,
 .email-input label,
 .password-input label,
 .confirmPassword-input label {
@@ -47,36 +36,44 @@
     font-weight: 500;
     transition: 0.3s ease;
 }
-.name-input input, 
+.name-input input,
 .email-input input,
 .password-input input,
 .confirmPassword-input input {
     font-size: 20px;
     font-weight: 500;
 }
-
-button.signup-submit {
+.forgotPassword a{
+    text-decoration: none;
+    color: #42a2a2;
+}
+.forgotPassword a:hover {
+    text-decoration: underline;
+}
+button.submit_button {
     background-color: #42a2a2;
     color: white;
     margin-top: 24px;
     height: 60px;
     font-size: 24px;
 }
-button.signup-submit:hover {
+button.submit_button:hover {
     background-color: #3d9292;
 }
-button.signup-submit[disabled] {
+button.submit_button[disabled] {
     cursor: none;
     background-color: #989898;
     color: white;
 }
 .xgroup {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
     margin: 30px 0;
     white-space: nowrap;
 }
-.xgroup p, .xgroup a{
+.xgroup p,
+.xgroup a{
     font-size: 18px;
     font-weight: 500;
     color: #42a2a2;
@@ -87,31 +84,31 @@ button.signup-submit[disabled] {
 }
 
 @media (max-width: 1150px) {
-    .signup-form-container h2 {
+    .main-form-container h2 {
         font-size: 23px;
     }
-    .xgroup p, .xgroup a{
-        font-size: 15px;
+    .xgroup p, .xgroup a, .forgotPassword a{
+        font-size: 16px;
     }
 }
 @media (max-width: 970px) {
     .xgroup {
         flex-direction: column;
     }
-    .xgroup p, .xgroup a{
-        font-size: 13px;
+    .xgroup p, .xgroup a, .forgotPassword a{
+        padding-bottom: 10px;
     }
 }
 @media (max-width: 768px) {
-    .signup-form-container h2 {
+    .main-form-container h2 {
         font-size: 21px;
     }
 }
 @media (max-width: 596px) {
-    .signup-form-container h2 {
+    .main-form-container h2 {
         font-size: 18px;
     }
-    .xgroup p, .xgroup a{
+    .xgroup p, .xgroup a, .forgotPassword a{
         font-size: 14px;
     }
 }

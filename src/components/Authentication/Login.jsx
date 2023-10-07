@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/Login.css'
+import './styles/LoginAndSignup.css';
 import { 
     Typography, 
     Avatar, 
@@ -71,10 +71,10 @@ const Login = () => {
         <Box sx={{marginTop: '150px'}}>
             <ToastContainer />
             <Box sx={{display: 'flex'}}>
-                <Box className='login-form-container'>
+                <Box className='form-container'>
                     <Avatar className='avatar' />
                     <Typography variant='h2'>Log in to your account</Typography>
-                    <form className='login-form' onSubmit={handleSubmit}>
+                    <form className='main-form' onSubmit={handleSubmit}>
                         <FormControl fullWidth required margin='normal' className='email-input'>
                             <InputLabel 
                                 htmlFor="email" 
@@ -90,7 +90,6 @@ const Login = () => {
                                 value={userInfo.email} 
                                 onChange={handleInputChange}
                             />
-                            
                         </FormControl>
                         <FormControl fullWidth required margin='normal' className='password-input'>
                             <InputLabel 
@@ -117,21 +116,21 @@ const Login = () => {
                                 }
                             />
                         </FormControl>
+                        <div className="forgotPassword">
+                            <Link to='/forgot' style={{float: 'right'}}>Forgot Password?</Link>
+                        </div>
                         
                         <Button 
-                            className='login-submit'
+                            className='submit_button'
                             type='submit' 
                             fullWidth 
                             variant='contained'>
                             <Typography>Log In</Typography>
                         </Button>
                         <div className="xgroup">
-                            <Link to='/forgot'>Forgot Password?</Link>
-                            <div className='register-account'>
-                                <p>Don't have an account?&nbsp;
-                                    <Link to='/signup'>SignUp</Link>
-                                </p>
-                            </div>
+                            <p>Don't have an account?&nbsp;
+                                <Link to='/signup'>SignUp</Link>
+                            </p>
                         </div>
                     </form>
                 </Box>
