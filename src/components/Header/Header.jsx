@@ -3,7 +3,7 @@ import './styles/Header.css'
 import { Link } from 'react-router-dom'
 import { 
     AppBar, Avatar, Box, Button, Divider, 
-    InputBase, Menu, MenuItem, Toolbar, alpha, styled 
+    InputBase, Menu, MenuItem, Toolbar, alpha, styled, useMediaQuery 
 } from '@mui/material';
 import { Favorite, SearchOutlined, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
@@ -11,6 +11,9 @@ import { useAuth } from '../utils/AuthProvider'
 const Header = () => {
     const { user, isLoggedIn, logout} = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [searchVisible, setSearchVisible] = useState(false);
+    const isMobile = useMediaQuery('(max-width: 970px)');
+    const isTablet = useMediaQuery('(max-width: 1150px)');
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -21,6 +24,9 @@ const Header = () => {
     const handleLogout = () => {
         logout();
         handleClose();
+    }
+    const handleSearchIconClick = () => {
+        setSearchVisible(!searchVisible);
     }
  
     const Search = styled('div')(({ theme }) => ({
@@ -75,20 +81,25 @@ const Header = () => {
             <Toolbar sx={{justifyContent: 'space-evenly'}}>
                 <Link to="/">
                     <img 
-                        src="https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg" 
+                        src={ isMobile ? 
+                                'https://images.bewakoof.com/web/ic-web-head-bwk-primary-logo-eyes.svg' : 
+                                'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'
+                            }
                         alt="bewakoof_logo" 
                         title="Bewakoof.com" 
                         className='bewakoofLogo'
                     /> 
                 </Link>
-                <Button 
-                    variant='text' 
-                    style={{color: 'black'}}
-                    LinkComponent={Link} 
-                    to='/products'
-                >Products</Button>
+                {(
+                    <Button 
+                        variant='text' 
+                        style={{color: 'black'}}
+                        LinkComponent={Link} 
+                        to='/products'
+                    >Products</Button>
+                )}
                 <div style={{display: 'flex'}}>
-                    <Search>
+                    {(<Search>
                         <SearchIconWrapper>
                             <SearchOutlined style={{color: '#979797'}} />
                         </SearchIconWrapper>
@@ -98,7 +109,7 @@ const Header = () => {
                             sx={{color: '#979797'}}
                             onChange={handleSearch}
                         />
-                    </Search>
+                    </Search>)}
 
                     <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     
