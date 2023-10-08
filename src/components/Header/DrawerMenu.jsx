@@ -27,9 +27,9 @@ const DrawerMenu = () => {
     }
 
     const productTabs = [
-        {id: 1, name: 'MEN', link: '/products'},
-        {id: 2, name: 'WOMEN', link: '/products'},
-        {id: 3, name: 'MOBILE COVERS', link: '/products'},
+        {id: 1, name: 'Men', link: '/products'},
+        {id: 2, name: 'Women', link: '/products'},
+        {id: 3, name: 'Mobile Covers', link: '/products'},
     ];
     const accountListRoutes = [
         {id: 1, name: 'My Account', link: '/myaccount'},
