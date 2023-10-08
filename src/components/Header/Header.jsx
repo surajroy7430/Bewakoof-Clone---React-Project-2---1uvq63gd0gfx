@@ -2,18 +2,20 @@ import React, { useState } from 'react'
 import './styles/Header.css'
 import { Link } from 'react-router-dom'
 import { 
-    AppBar, Avatar, Box, Button, Divider, 
-    InputBase, Menu, MenuItem, Toolbar, alpha, styled, useMediaQuery 
+    AppBar, Badge, Box, Button, Divider,   
+    InputBase, Menu, MenuItem, Tabs, Tab, Toolbar, 
+    alpha, styled, useMediaQuery, useTheme 
 } from '@mui/material';
-import { Favorite, SearchOutlined, ShoppingBag } from '@mui/icons-material'
+import { Favorite, PersonOutline, SearchOutlined, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
+import DrawerMenu from './DrawerMenu';
 
 const Header = () => {
     const { user, isLoggedIn, logout} = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [searchVisible, setSearchVisible] = useState(false);
-    const isMobile = useMediaQuery('(max-width: 970px)');
-    const isTablet = useMediaQuery('(max-width: 1150px)');
+    const theme = useTheme();
+    const isTab = useMediaQuery(theme.breakpoints.down('md'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -25,10 +27,14 @@ const Header = () => {
         logout();
         handleClose();
     }
-    const handleSearchIconClick = () => {
-        setSearchVisible(!searchVisible);
-    }
- 
+    const openSearchInput = () => {}
+
+    const productTabs = [
+        {id: 1, name: 'MEN', link: '/products'},
+        {id: 2, name: 'WOMEN', link: '/products'},
+        {id: 3, name: 'MOBILE COVERS', link: '/products'},
+    ];
+    
     const Search = styled('div')(({ theme }) => ({
         display: 'flex',
         position: 'relative',
@@ -66,9 +72,52 @@ const Header = () => {
         },
     }));
 
-    const handleSearch = () => {
+    const fullScreenTabs = (
+        <>
+            {isLoggedIn && user ? (
+                <>
+                    <Button onClick={handleAvatarClick}>
+                        <PersonOutline style={{color: 'black', width: '35px', height: '35px'}} />
+                    </Button>
+                    <Menu 
+                        sx={{mt: '5px', zIndex: '2'}}
+                        anchorEl={anchorElUser}
+                        open={Boolean(anchorElUser)} 
+                        onClose={handleClose} 
+                    >
+                        <MenuItem style={{backgroundColor: 'rgba(0,0,0,.05)'}}>
+                            <i style={{color: 'rgba(0,0,0,.5)'}}>Hi, {user.name}</i>
+                        </MenuItem>
+                        <MenuItem component={Link} to='/myaccount'>My Account</MenuItem>
+                        <MenuItem component={Link} to='/wishlist'>My Wishlist</MenuItem>
+                        <MenuItem component={Link} to='/myaccount/orders'>My Orders</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    </Menu>
+                </>
+            ) : (
+                <>
+                    <Button 
+                        variant='text' 
+                        style={{color: 'black'}}
+                        LinkComponent={Link} 
+                        to='/login' 
+                    >Login</Button>
+                </>
+            )}
+            
+            {isTab ? null : (
+                <Button>
+                    <img src="https://images.bewakoof.com/web/india-flag-round-1639566913.png" 
+                        alt="countryIcon" 
+                        height="30" 
+                        width="30" 
+                        className="countryIcon" 
+                    />
+                </Button>
+            )}
+        </>
+    );
 
-    }
   return (
     <Box>
         <AppBar 
@@ -78,94 +127,78 @@ const Header = () => {
                 backgroundColor: 'white',
             }}
         >
-            <Toolbar sx={{justifyContent: 'space-evenly'}}>
-                <Link to="/">
-                    <img 
-                        src={ isMobile ? 
-                                'https://images.bewakoof.com/web/ic-web-head-bwk-primary-logo-eyes.svg' : 
-                                'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'
-                            }
-                        alt="bewakoof_logo" 
-                        title="Bewakoof.com" 
-                        className='bewakoofLogo'
-                    /> 
-                </Link>
-                {(
-                    <Button 
-                        variant='text' 
-                        style={{color: 'black'}}
-                        LinkComponent={Link} 
-                        to='/products'
-                    >Products</Button>
+            
+            <Toolbar className='headerDiv' disableGutters>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    {isTab ? <DrawerMenu /> : null}
+                    <Link to="/" className='bewakoofLogo'>
+                        <img 
+                            src={ isTab ? 
+                                    'https://images.bewakoof.com/web/ic-web-head-bwk-primary-logo-eyes.svg' : 
+                                    'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'
+                                }
+                            alt="bewakoof_logo" 
+                            title="Bewakoof.com" 
+                        /> 
+                    </Link>
+                </div>
+                {isTab ? null : (
+                    <>
+                        {productTabs.map(tab => (
+                            <Tabs indicatorColor='rgb(253, 216, 53)'>
+                                <Tab 
+                                    key={tab.id}
+                                    LinkComponent={Link} 
+                                    to={tab.link}
+                                    label={tab.name} 
+                                    style={{fontWeight: '600'}}
+                                />
+                            </Tabs>
+                        ))}
+                    </>
                 )}
-                <div style={{display: 'flex'}}>
-                    {(<Search>
-                        <SearchIconWrapper>
-                            <SearchOutlined style={{color: '#979797'}} />
-                        </SearchIconWrapper>
-                        <StyledInputBase 
-                            placeholder='Search...' 
-                            inputProps={{ 'aria-label': 'search' }} 
-                            sx={{color: '#979797'}}
-                            onChange={handleSearch}
-                        />
-                    </Search>)}
-
-                    <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
-                    
-                    {isLoggedIn && user ? (
-                        <>
-                            <Button onClick={handleAvatarClick}>
-                                <Avatar style={{backgroundColor: 'black',  width: '30px', height: '30px'}} />
-                            </Button>
-                            <Menu 
-                                sx={{mt: '5px', zIndex: '2'}}
-                                anchorEl={anchorElUser}
-                                open={Boolean(anchorElUser)} 
-                                onClose={handleClose} 
-                            >
-                                <MenuItem style={{backgroundColor: 'rgba(0,0,0,.05)'}}>
-                                    <i style={{color: 'rgba(0,0,0,.5)'}}>Hi, {user.name}</i>
-                                </MenuItem>
-                                <MenuItem component={Link} to='/myaccount'>My Account</MenuItem>
-                                <MenuItem component={Link} to='/wishlist'>My Wishlist</MenuItem>
-                                <MenuItem component={Link} to='/myaccount/orders'>My Orders</MenuItem>
-                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                            </Menu>
-                        </>
+                <div className='searchAndMenuWrapper'>
+                    {isMobile ? (
+                        <Button onClick={openSearchInput}>
+                            <SearchOutlined style={{color: '#000'}} />
+                            <StyledInputBase 
+                                className='openedSearchInput'
+                                placeholder='Search...' 
+                                inputProps={{ 'aria-label': 'search' }} 
+                                sx={{color: '#979797'}}
+                            />
+                        </Button>
                     ) : (
-                        <>
-                            <Button 
-                                variant='text' 
-                                style={{color: 'black'}}
-                                LinkComponent={Link} 
-                                to='/login' 
-                            >Login</Button>
-                        </>
+                        <Search>
+                            <SearchIconWrapper>
+                                <SearchOutlined style={{color: '#979797'}} />
+                            </SearchIconWrapper>
+                            <StyledInputBase 
+                                placeholder='Search...' 
+                                inputProps={{ 'aria-label': 'search' }} 
+                                sx={{color: '#979797'}}
+                            />
+                        </Search>
                     )}
-
+                    
+                    {isTab ? null : (
+                        <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
+                    )}
                     <Button 
                         LinkComponent={Link} 
                         to='/wishlist'
                     >
                         <Favorite style={{color: 'black'}} />
                     </Button>
-
                     <Button
                         LinkComponent={Link} 
                         to='/cart'
                     >
-                        <ShoppingBag style={{color: 'black'}} />
+                        <Badge badgeContent={1} color='error'>
+                            <ShoppingBag style={{color: 'black'}} />
+                        </Badge>
                     </Button>
-                    
-                    <Button>
-                        <img src="https://images.bewakoof.com/web/india-flag-round-1639566913.png" 
-                            alt="country" 
-                            height="30" 
-                            width="30" 
-                            className="countryIcon" 
-                        />
-                    </Button>
+                    {isTab ? null : fullScreenTabs}
                 </div>
             </Toolbar>
         </AppBar>

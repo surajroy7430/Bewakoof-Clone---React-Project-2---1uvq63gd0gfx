@@ -1,0 +1,39 @@
+a.bewakoofLogo {
+    margin-left: 100px;
+}
+a.bewakoofLogo img {
+    height: 20px;
+}
+div.headerDiv {
+    display: flex;
+    justify-content: space-between;
+}
+div.searchAndMenuWrapper {
+    display: flex;
+    margin-right: 100px;
+}
+button.drawerMenu {
+    display: none;
+}
+div.openedSearchInput {
+    display: none;
+}
+@media (max-width: 1050px) {
+    a.bewakoofLogo {
+        margin-left: 20px;
+    }
+    div.searchAndMenuWrapper {
+        margin-right: 20px;
+    }
+    button.drawerMenu {
+        display: block;
+    }
+}
+@media (max-width: 899px) {
+    a.bewakoofLogo {
+        margin-left: 5px;
+    }
+}
+@media (max-width: 599px) {
+    
+}
