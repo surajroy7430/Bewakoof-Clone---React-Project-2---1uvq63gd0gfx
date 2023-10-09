@@ -15,6 +15,9 @@ import { useAuth } from './components/utils/AuthProvider';
 import { toast } from 'react-toastify';
 import ProfilePage from './components/Pages/ProfilePage';
 import MyOrders from './components/ProductPages/MyOrders';
+import ProductsPage from './components/Pages/ProductsPage';
+import WomensClothing from './components/ProductsData/WomensClothing';
+import MobileCovers from './components/ProductsData/MobileCovers';
 
 
 function App() {
@@ -27,7 +30,9 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/products' element={<HomePage />} />
+        <Route path='/mens-clothing' element={<ProductsPage />} />
+        <Route path='/womens-clothing' element={<WomensClothing />} />
+        <Route path='/mobile-covers' element={<MobileCovers />} />
         <Route path='/product/:id' element={<SingleProduct />} />
         <Route path='/myaccount' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />

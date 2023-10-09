@@ -13,9 +13,12 @@ import DrawerMenu from './DrawerMenu';
 const Header = () => {
     const { user, isLoggedIn, logout} = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
-    const isTab = useMediaQuery(theme.breakpoints.down('md'));
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    console.log(theme);
+    const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
+    const isTab = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery('(max-width:400px)');
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -30,9 +33,9 @@ const Header = () => {
     const openSearchInput = () => {}
 
     const productTabs = [
-        {id: 1, name: 'MEN', link: '/products'},
-        {id: 2, name: 'WOMEN', link: '/products'},
-        {id: 3, name: 'MOBILE COVERS', link: '/products'},
+        {id: 1, name: 'MEN', link: '/mens-clothing'},
+        {id: 2, name: 'WOMEN', link: '/womens-clothing'},
+        {id: 3, name: 'MOBILE COVERS', link: '/mobile-covers'},
     ];
     
     const Search = styled('div')(({ theme }) => ({
@@ -105,7 +108,7 @@ const Header = () => {
                 </>
             )}
             
-            {isTab ? null : (
+            {isLargeScreen ? null : (
                 <Button>
                     <img src="https://images.bewakoof.com/web/india-flag-round-1639566913.png" 
                         alt="countryIcon" 
@@ -130,10 +133,10 @@ const Header = () => {
             
             <Toolbar className='headerDiv' disableGutters>
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    {isTab ? <DrawerMenu /> : null}
+                    {isLargeScreen ? <DrawerMenu /> : null}
                     <Link to="/" className='bewakoofLogo'>
                         <img 
-                            src={ isTab ? 
+                            src={ isLargeScreen ? 
                                     'https://images.bewakoof.com/web/ic-web-head-bwk-primary-logo-eyes.svg' : 
                                     'https://images.bewakoof.com/web/ic-desktop-bwkf-trademark-logo.svg'
                                 }
@@ -142,23 +145,23 @@ const Header = () => {
                         /> 
                     </Link>
                 </div>
-                {isTab ? null : (
+                {isLargeScreen ? null : (
                     <>
                         {productTabs.map(tab => (
-                            <Tabs indicatorColor='rgb(253, 216, 53)'>
+                            <Tabs value={tabValue} indicatorColor='rgb(253, 216, 53)'>
                                 <Tab 
                                     key={tab.id}
                                     LinkComponent={Link} 
                                     to={tab.link}
                                     label={tab.name} 
-                                    style={{fontWeight: '600'}}
+                                    style={{color: 'black', fontWeight: '600'}}
                                 />
                             </Tabs>
                         ))}
                     </>
                 )}
                 <div className='searchAndMenuWrapper'>
-                    {isMobile ? (
+                    {isTab ? (
                         <Button onClick={openSearchInput}>
                             <SearchOutlined style={{color: '#000'}} />
                             <StyledInputBase 
@@ -181,24 +184,28 @@ const Header = () => {
                         </Search>
                     )}
                     
-                    {isTab ? null : (
+                    {isLargeScreen ? null : (
                         <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     )}
-                    <Button 
-                        LinkComponent={Link} 
-                        to='/wishlist'
-                    >
-                        <Favorite style={{color: 'black'}} />
-                    </Button>
-                    <Button
-                        LinkComponent={Link} 
-                        to='/cart'
-                    >
-                        <Badge badgeContent={1} color='error'>
-                            <ShoppingBag style={{color: 'black'}} />
-                        </Badge>
-                    </Button>
-                    {isTab ? null : fullScreenTabs}
+                    {isMobile ? null : (
+                        <>
+                            <Button 
+                                LinkComponent={Link} 
+                                to='/wishlist'
+                            >
+                                <Favorite style={{color: 'black'}} />
+                            </Button>
+                            <Button
+                                LinkComponent={Link} 
+                                to='/cart'
+                            >
+                                <Badge badgeContent={1} color='error'>
+                                    <ShoppingBag style={{color: 'black'}} />
+                                </Badge>
+                            </Button>
+                        </>
+                    )}
+                    {isLargeScreen ? null : fullScreenTabs}
                 </div>
             </Toolbar>
         </AppBar>

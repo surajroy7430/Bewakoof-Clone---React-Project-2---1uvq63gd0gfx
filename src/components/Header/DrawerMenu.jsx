@@ -27,14 +27,15 @@ const DrawerMenu = () => {
     }
 
     const productTabs = [
-        {id: 1, name: 'Men', link: '/products'},
-        {id: 2, name: 'Women', link: '/products'},
-        {id: 3, name: 'Mobile Covers', link: '/products'},
+        {id: 1, name: 'Men', link: '/mens-clothing'},
+        {id: 2, name: 'Women', link: '/womens-clothing'},
+        {id: 3, name: 'Mobile Covers', link: '/mobile-covers'},
     ];
     const accountListRoutes = [
         {id: 1, name: 'My Account', link: '/myaccount'},
         {id: 2, name: 'My Orders', link: '/myaccount/orders'},
         {id: 3, name: 'My Wishlist', link: '/wishlist'},
+        {id: 3, name: 'My Cart', link: '/cart'},
     ];
     const contactUs = [
         {id: 1, name: 'help & Support'},
@@ -94,7 +95,8 @@ const DrawerMenu = () => {
                     </ListItem>
                     {productTabs.map(tab => (
                         <ListItem disableGutters>
-                            <ListItemButton
+                            <ListItemButton 
+                                key={tab.id}
                                 LinkComponent={Link} 
                                 to={tab.link}
                                 onClick={handleDrawerClose}
@@ -115,15 +117,16 @@ const DrawerMenu = () => {
                                 </Typography>
                             </ListItemText>
                         </ListItem>
-                        {accountListRoutes.map(route => (
+                        {accountListRoutes.map(tab => (
                             <ListItem disableGutters>
-                                <ListItemButton
+                                <ListItemButton 
+                                    key={tab.id}
                                     LinkComponent={Link} 
-                                    to={route.link}
+                                    to={tab.link}
                                     onClick={handleDrawerClose}
                                 >
                                     <ListItemText disableTypography>
-                                        {route.name}
+                                        {tab.name}
                                     </ListItemText>
                                 </ListItemButton>
                             </ListItem>
@@ -154,7 +157,8 @@ const DrawerMenu = () => {
                     </ListItem>
                     {contactUs.map(contact => (
                         <ListItem disableGutters>
-                            <ListItemButton
+                            <ListItemButton 
+                                key={contact.id}
                                 onClick={handleDrawerClose}
                             >
                                 <ListItemText disableTypography>
@@ -175,7 +179,8 @@ const DrawerMenu = () => {
                     </ListItem>
                     {aboutUs.map(about => (
                         <ListItem disableGutters>
-                            <ListItemButton
+                            <ListItemButton 
+                                key={about.id}
                                 onClick={handleDrawerClose}
                             >
                                 <ListItemText disableTypography>
