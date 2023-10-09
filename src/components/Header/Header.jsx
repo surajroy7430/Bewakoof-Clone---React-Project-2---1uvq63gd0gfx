@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './styles/Header.css'
 import { Link } from 'react-router-dom'
 import { 
@@ -9,13 +9,15 @@ import {
 import { Favorite, PersonOutline, SearchOutlined, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
 import DrawerMenu from './DrawerMenu';
+import { getHeaderWithProjectId } from '../utils/configs';
 
 const Header = () => {
     const { user, isLoggedIn, logout} = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [searchResults, setSearchResults] = useState([]);
+    const inputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
-    console.log(theme);
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const isTab = useMediaQuery(theme.breakpoints.down('sm'));
     const isMobile = useMediaQuery('(max-width:400px)');
@@ -30,7 +32,35 @@ const Header = () => {
         logout();
         handleClose();
     }
-    const openSearchInput = () => {}
+
+    const searchProducts = async (searchTerm) => {
+        const apiUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"title":"${searchTerm}"}`
+        const configs = getHeaderWithProjectId();
+
+        try {
+            const res = await axios.get(apiUrl, configs);
+            setSearchResults(res.data.data);
+        } 
+        catch (error) {
+            console.error('Error Fetching Products: ', error);
+            throw error;
+        }
+    }
+    const handleSearchSubmit = async(e) => {
+        e.preventDefault();
+
+        const searchInputTerms = inputRef.current.value.trim();
+
+        if(searchInputTerms !== '') {
+            try {
+                const result = await searchProducts(searchTerm)
+                setSearchResults(result)
+                console.log('Search Result: ', result);
+            } catch (error) {
+                console.error('Error Searching Products: ', error);
+            }
+        }
+    }
 
     const productTabs = [
         {id: 1, name: 'MEN', link: '/mens-clothing'},
@@ -66,7 +96,7 @@ const Header = () => {
         color: '#979797',
         '& .MuiInputBase-input': {
             padding: theme.spacing(1, 1, 1, 0),
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+            paddingLeft: `calc(1em + ${theme.spacing(0.2)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.up('md')]: {
@@ -162,26 +192,46 @@ const Header = () => {
                 )}
                 <div className='searchAndMenuWrapper'>
                     {isTab ? (
-                        <Button onClick={openSearchInput}>
-                            <SearchOutlined style={{color: '#000'}} />
+                        <>
+                            <Button>
+                                <SearchOutlined style={{color: '#000'}} />
+                            </Button>
                             <StyledInputBase 
                                 className='openedSearchInput'
                                 placeholder='Search...' 
                                 inputProps={{ 'aria-label': 'search' }} 
                                 sx={{color: '#979797'}}
                             />
-                        </Button>
+                        </>
                     ) : (
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchOutlined style={{color: '#979797'}} />
-                            </SearchIconWrapper>
-                            <StyledInputBase 
-                                placeholder='Search...' 
-                                inputProps={{ 'aria-label': 'search' }} 
-                                sx={{color: '#979797'}}
-                            />
-                        </Search>
+                        <>
+                        <form onSubmit={handleSearchSubmit}>
+                            <Search>
+                                <Button>
+                                    <SearchIconWrapper>
+                                        <SearchOutlined style={{color: '#979797'}} />
+                                    </SearchIconWrapper>
+                                </Button>
+                                <StyledInputBase 
+                                    placeholder='Search...' 
+                                    inputProps={{ 'aria-label': 'search' }} 
+                                    inputRef={inputRef} 
+                                    sx={{color: '#979797'}}
+                                />
+                            </Search>
+                        </form>
+                        {searchResults.length > 0 && (
+                            <div className="search-results">
+                                <h2>Search Results:</h2>
+                                <ul>
+                                    {searchResults.map((product) => (
+                                        <li key={product._id}>
+                                            <Link to={`/product/${product._id}`}>{product.name}</Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}</>
                     )}
                     
                     {isLargeScreen ? null : (
