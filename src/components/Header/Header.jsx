@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './styles/Header.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { 
     AppBar, Badge, Box, Button, Divider,   
     InputBase, Menu, MenuItem, Tabs, Tab, Toolbar, 
@@ -16,6 +16,7 @@ const Header = () => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const inputRef = useRef(null);
+    const navigate = useNavigate();
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
@@ -31,6 +32,7 @@ const Header = () => {
     const handleLogout = () => {
         logout();
         handleClose();
+        navigate('/login');
     }
 
     const searchProducts = async (searchTerm) => {

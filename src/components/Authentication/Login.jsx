@@ -13,14 +13,13 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import { getHeaderWithProjectIDAndBody } from '../utils/configs.js';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../utils/AuthProvider';
+import { signInUser } from '../utils/Apis';
 
 const Login = () => {
-    const { login } = useAuth();
+    const { loginUser } = useAuth();
     const [userInfo, setUserInfo] = useState({
         email: '', 
         password: '',
@@ -41,30 +40,20 @@ const Login = () => {
         setUserInfo({ ...userInfo, [name]: value });
     }
 
-    const signIn = async(userInfo) => {
-        userInfo.appType = 'ecommerce';
-        const configs = getHeaderWithProjectIDAndBody();
-
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        
         try {
-            const res = await axios.post(
-                'https://academics.newtonschool.co/api/v1/user/login',
-                userInfo, configs
-            )
-            login(res.data.data)
-            // console.log('response', res); 
+            const userData = await signInUser(userInfo);
+            loginUser(userData);
+
             toast.success('Login Successful', {
                 position: 'top-left'
             });
-            navigate('/')
-        } 
-        catch (error) {
-            toast.error(error.response.data.message);
+            navigate('/');
+        } catch (error) {
+            toast.error(error);
         }
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        signIn(userInfo);
     }
 
     return (

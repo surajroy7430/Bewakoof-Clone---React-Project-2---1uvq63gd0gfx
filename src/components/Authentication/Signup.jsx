@@ -6,6 +6,7 @@ import { getHeaderWithProjectIDAndBody } from '../utils/configs';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { registerUser } from '../utils/Apis';
 
 const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
@@ -25,42 +26,27 @@ const SignUp = () => {
         });
     }
 
-    const register = async (userInfo) => {
-        userInfo.appType = 'ecommerce';
-        const config = getHeaderWithProjectIDAndBody();
-
-        if(userInfo.password !== userInfo.confirmPassword){
-            toast.warn('Password Not Matched!', {
-                position: 'top-right'
-            })
-        }else {
-            try {
-                const res = await axios.post(
-                    'https://academics.newtonschool.co/api/v1/user/signup',
-                    userInfo, config
-                );
-                const {name, email} = res.data.data.user
-                console.log({Name: name, Email: email});
-    
-                if(res.data.token) {
-                    sessionStorage.setItem('authToken', res.data.token);
-                    sessionStorage.setItem('userInfo', JSON.stringify({Name: name, Email: email}));
-
-                    toast.success('Account Created Succesfully, Now login', {
-                        position: 'top-left'
-                    });
-
-                    navigate('/login');
-                }
-            } catch (error) {
-                toast.error(error.response.data.message);
-            }
-        }
-    }
-
-    const handleSignUp = (e) => {
+    const handleSignUp = async(e) => {
         e.preventDefault();
-        register(userInfo);
+
+        try {
+            if(userInfo.password !== userInfo.confirmPassword){
+                toast.warn('Password Not Matched!', {
+                    position: 'top-right'
+                })
+            }
+            else {
+                await registerUser(userInfo, navigate);
+                setUserInfo({
+                    name: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: ''
+                })
+            }
+        } catch (error) {
+            toast.error(error);
+        }
     }
 
   return (

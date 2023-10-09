@@ -4,7 +4,6 @@ div.productCards {
     border: .2px solid rgb(206, 206, 206);
     border-radius: 7px;
     box-shadow: none;
-    cursor: pointer;
 }
 div.productImage {
     width: 100%;
@@ -15,7 +14,6 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
 div.columnContainer {
     margin-top: 100px;
 }

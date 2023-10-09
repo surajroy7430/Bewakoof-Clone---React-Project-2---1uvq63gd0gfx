@@ -137,6 +137,7 @@ const DrawerMenu = () => {
                                 onClick={() => {
                                     setOpenDrawer(false)
                                     logout();
+                                    navigate('/login')
                                 }}
                             >
                                 <ListItemText disableTypography>

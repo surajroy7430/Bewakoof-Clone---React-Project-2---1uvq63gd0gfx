@@ -5,25 +5,23 @@ import { FavoriteBorder } from '@mui/icons-material';
 import { toast, ToastContainer } from 'react-toastify';
 
 const MensClothing = (props) => {
-    const {name, displayImage, price, type, brand} = props;
+    const {name, displayImage, price, brand} = props;
 
   return (
     <>
         <Card className='productCards'>
-            <>
-                <small style={{color: 'white', backgroundColor: '#979797', whiteSpace: 'nowrap'}}>{type}</small>
-                <CardMedia 
-                    component='img'
-                    image={displayImage} 
-                    alt={name} 
-                    className='productImage'
-                />
-            </>
+            <CardMedia 
+                component='img'
+                image={displayImage} 
+                alt={name} 
+                className='productImage' 
+                style={{cursor: 'pointer'}}
+            />
 
             <CardContent>
                 <ToastContainer />
                 <div style={{marginBottom: '10px'}} className='productNameWrapper'>
-                    <p className='brandName'>{brand}</p>
+                    <Typography className='brandName'>{brand}</Typography>
                     <small className='productName'>{name}</small>
                 </div>
                 <div className='priceWrapper'>

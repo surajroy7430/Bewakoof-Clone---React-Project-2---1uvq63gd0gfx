@@ -1,35 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import '../ProductsData/Products.css'
-import axios from 'axios'
-import { getHeaderWithProjectId } from '../utils/configs';
-import { useAuth } from '../utils/AuthProvider';
 import MensClothing from '../ProductsData/MensClothing';
-import { Grid, Paper } from '@mui/material';
+import { Grid } from '@mui/material';
+import { getProductsData } from '../utils/Apis';
 
 const ProductsPage = () => {
-  const { user } = useAuth();
-  // console.log('user', user);
     const [products, setProducts] = useState([]);
     const limit = 100;
 
-    const fetchProducts = async () => {
-        const config = getHeaderWithProjectId();
-
-        try {
-            const productsData = await axios.get(
-                `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?limit=${limit}`,
-                config
-            );
-            
-            // console.log(productsData);
-            const productsList = productsData.data.data;
-            setProducts(productsList);
-        } catch (error) {
-            console.error("Cannot found products", error);
-        }
+    const fetchData = async() => {
+      try {
+        const productsData = await getProductsData(limit);
+        setProducts(productsData);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
     }
     useEffect(() => {
-        fetchProducts();
+        fetchData();
     }, []);
 
   return (
