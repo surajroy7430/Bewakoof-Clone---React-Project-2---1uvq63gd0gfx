@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Col, Image, Row } from 'react-bootstrap';
+import '../styles/Home.css'
 
 const Categories = () => {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Categories = () => {
 
   return (
     <div>
-      <Row fixed>
+      <Row fixed className='catogories'>
             <Col xs={6} md={2} style={{cursor: 'pointer'}}>
                 <Image 
                     onClick={toProducts} 

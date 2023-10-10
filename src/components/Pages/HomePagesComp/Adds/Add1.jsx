@@ -11,7 +11,7 @@ const Add1 = () => {
 
   return (
     <div>
-        <Row fixed>
+        <Row fixed className='catogories'>
             <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 

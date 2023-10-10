@@ -13,7 +13,7 @@ import Success from './components/ProductPages/Success';
 import ErrorPage from './components/Pages/ErrorPage';
 import ProfilePage from './components/Pages/ProfilePage';
 import MyOrders from './components/ProductPages/MyOrders';
-import ProductsPage from './components/Pages/ProductsPage';
+import MensClothing from './components/ProductsData/MensClothing';
 import WomensClothing from './components/ProductsData/WomensClothing';
 import MobileCovers from './components/ProductsData/MobileCovers';
 import SingleProductDetails from './components/ProductPages/SingleProductDetails';
@@ -28,10 +28,10 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/mens-clothing' element={<ProductsPage />} />
+        <Route path='/mens-clothing' element={<MensClothing />} />
         <Route path='/womens-clothing' element={<WomensClothing />} />
         <Route path='/mobile-covers' element={<MobileCovers />} />
-        <Route path='/product/:id' element={<SingleProductDetails />} />
+        <Route path='/product/:productId' element={<SingleProductDetails />} />
         <Route path='/myaccount' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />
         <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />

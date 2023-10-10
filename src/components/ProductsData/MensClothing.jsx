@@ -1,67 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import './Products.css';
-import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { FavoriteBorder } from '@mui/icons-material';
-import { toast, ToastContainer } from 'react-toastify';
-import { Loader } from '../Loader/Loader';
+import './styles/Products.css'
+import { Grid, Pagination, useMediaQuery, useTheme } from '@mui/material';
+import { getProductsData } from '../utils/Apis';
+import ProductCards from './ProductCards';
 
-const MensClothing = (props) => {
-    const {name, displayImage, price, brand} = props;
-    const [isLoading, setIsLoading] = useState(true);
+const MensClothing = () => {
+    const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
+    const limit = 15;
+    const theme = useTheme();
+    const isLG = useMediaQuery(theme.breakpoints.up('lg'));
+    const isMD = useMediaQuery(theme.breakpoints.up('md'));
+    const isSM = useMediaQuery(theme.breakpoints.up('sm'));
 
+    const fetchData = async(page) => {
+      try {
+        const productsData = await getProductsData(page, limit);
+        setProducts(productsData);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
     useEffect(() => {
-        const timeOut = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
+        fetchData(page);
+    }, [page]);
 
-        return () => clearTimeout(timeOut);
-    }, []);
+    const handlePageChange = (event, value) => {
+      setPage(value);
+    };
 
   return (
-    <>
-        <Card className='productCards'> 
-        {isLoading ? (
-            <Loader width={300} height={270} />
-        ) : (
-            <CardMedia 
-                component='img'
-                image={displayImage} 
-                alt={name} 
-                className='productImage' 
-                style={{cursor: 'pointer'}}
-            />
-        )}
-            <CardContent>
-                <ToastContainer />
-                {isLoading ? (
-                    <Loader width={200} height={25} />
-                ) : (
-                    <div style={{marginBottom: '10px'}} className='productNameWrapper'>
-                        <Typography className='brandName'>{brand}</Typography>
-                        <small className='productName'>{name}</small>
-                    </div>
-                )}
-                
-                <div className='priceWrapper'>
-                {isLoading ? (
-                    <Loader width={150} height={25} />
-                ) : (
-                    <>
-                        <div>
-                            <strong>₹{price}</strong>&nbsp;
-                            <span><del>₹999</del></span>&nbsp;
-                        <span style={{color: 'white', backgroundColor: '#00ff00'}}>53% OFF</span>
-                        </div>
-                        <IconButton aria-label='add to wishlist'>
-                            <FavoriteBorder />
-                        </IconButton>
-                    </>
-                )}
-                </div>
-            </CardContent>
-        
-        </Card>
-    </>
+    <Grid 
+      container 
+      direction='column'
+      alignItems='center' 
+      justifyContent='center' 
+      className='columnContainer'
+    >
+      <Grid 
+        item 
+        container 
+        direction='row' 
+        alignItems='center' 
+        justifyContent='center' 
+        className='rowContainer' 
+        gap='20px'
+      >
+        {products.map((cards) => (
+            <ProductCards key={cards._id} {...cards} />
+        ))}
+
+      </Grid>
+
+        <Pagination
+          count={Math.ceil(135 / limit)}
+          variant="outlined"
+          shape="rounded"
+          color="primary"
+          page={page}
+          onChange={handlePageChange}
+          style={{ marginTop: '20px' }}
+        />
+    </Grid>
   )
 }
 

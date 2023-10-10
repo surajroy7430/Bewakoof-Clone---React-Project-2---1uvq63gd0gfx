@@ -5,10 +5,11 @@ const BASE_DOMAIN = 'https://academics.newtonschool.co';
 const configById = getHeaderWithProjectId();
 const configByIdAndBody = getHeaderWithProjectIDAndBody();
 
-export const getProductsData = async(limit) => {
+export const getProductsData = async(page, limit) => {
     try {
         const response = await axios.get(
-            `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?limit=${limit}`, configById
+            `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?page=${page}&limit=${limit}`, 
+            configById
         );
         
         return response.data.data;
