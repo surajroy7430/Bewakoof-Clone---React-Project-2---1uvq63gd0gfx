@@ -19,6 +19,17 @@ export const getProductsData = async(page, limit) => {
     }
 }
 
+export const getProductsDetails = async (productId) => {
+    try {
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/product/${productId}`, configById
+        )
+        return response.data.data
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const registerUser = async (userInfo, navigate) => {
     userInfo.appType = 'ecommerce';
     try {
@@ -53,16 +64,30 @@ export const signInUser = async(userInfo) => {
     }
 }
 
-export const getProductsDetails = async (productId) => {
-    try {
-        const response = await axios.get(
-            `${BASE_DOMAIN}/api/v1/ecommerce/product/${productId}`, configById
-        )
-        return response.data.data
-    } catch (error) {
-        throw error;
-    }
-}
+export const getProductsBySearch = async (searchTerm, title) => {
+  try {
+    const response = await axios.get(
+      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?search={"${title}":"${searchTerm}"}`, 
+      configById
+    );
+    return response.data.data;
+  } catch (error) {
+    throw error.response.data.message;
+  }
+};
+
+export const getProductsByFilter = async (filterTerm, title) => {
+  try {
+    const response = await axios.get(
+      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter={"${title}":"${filterTerm}"}`, 
+      configById
+    );
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 export const addProductToCart = async (productId, quantity) => {
     try {

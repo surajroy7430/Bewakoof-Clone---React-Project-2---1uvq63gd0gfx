@@ -94,9 +94,8 @@ const DrawerMenu = () => {
                         </ListItemText>
                     </ListItem>
                     {productTabs.map(tab => (
-                        <ListItem disableGutters>
+                        <ListItem disableGutters key={tab.id}>
                             <ListItemButton 
-                                key={tab.id}
                                 LinkComponent={Link} 
                                 to={tab.link}
                                 onClick={handleDrawerClose}
@@ -118,9 +117,8 @@ const DrawerMenu = () => {
                             </ListItemText>
                         </ListItem>
                         {accountListRoutes.map(tab => (
-                            <ListItem disableGutters>
+                            <ListItem disableGutters key={tab.id}>
                                 <ListItemButton 
-                                    key={tab.id}
                                     LinkComponent={Link} 
                                     to={tab.link}
                                     onClick={handleDrawerClose}
@@ -157,9 +155,8 @@ const DrawerMenu = () => {
                         </ListItemText>
                     </ListItem>
                     {contactUs.map(contact => (
-                        <ListItem disableGutters>
+                        <ListItem disableGutters key={contact.id}>
                             <ListItemButton 
-                                key={contact.id}
                                 onClick={handleDrawerClose}
                             >
                                 <ListItemText disableTypography>
@@ -179,9 +176,8 @@ const DrawerMenu = () => {
                         </ListItemText>
                     </ListItem>
                     {aboutUs.map(about => (
-                        <ListItem disableGutters>
+                        <ListItem disableGutters key={about.id}>
                             <ListItemButton 
-                                key={about.id}
                                 onClick={handleDrawerClose}
                             >
                                 <ListItemText disableTypography>

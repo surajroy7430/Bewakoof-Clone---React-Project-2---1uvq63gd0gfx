@@ -9,19 +9,21 @@ import {
 import { Favorite, PersonOutline, SearchOutlined, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
 import DrawerMenu from './DrawerMenu';
-import { getHeaderWithProjectId } from '../utils/configs';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { getProductsBySearch } from '../utils/Apis';
 
 const Header = () => {
     const { user, isLoggedIn, logout} = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
-    const inputRef = useRef(null);
-    const navigate = useNavigate();
+    const searchInputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const isTab = useMediaQuery(theme.breakpoints.down('sm'));
     const isMobile = useMediaQuery('(max-width:400px)');
+    const navigate = useNavigate();
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -34,32 +36,17 @@ const Header = () => {
         handleClose();
         navigate('/login');
     }
-
-    const searchProducts = async (searchTerm) => {
-        const apiUrl = `https://academics.newtonschool.co/api/v1/ecommerce/clothes/products?search={"title":"${searchTerm}"}`
-        const configs = getHeaderWithProjectId();
-
-        try {
-            const res = await axios.get(apiUrl, configs);
-            setSearchResults(res.data.data);
-        } 
-        catch (error) {
-            console.error('Error Fetching Products: ', error);
-            throw error;
-        }
-    }
-    const handleSearchSubmit = async(e) => {
-        e.preventDefault();
-
-        const searchInputTerms = inputRef.current.value.trim();
-
-        if(searchInputTerms !== '') {
+     
+    const handleSearch = async () => {
+        const searchTerm = searchInputRef.current.value.toLowerCase();
+        const selectedTitle = 'name';
+        if(searchTerm) {
             try {
-                const result = await searchProducts(searchTerm)
-                setSearchResults(result)
-                console.log('Search Result: ', result);
+                const products = await getProductsBySearch(searchTerm, selectedTitle);
+                console.log('products', products);
+                setSearchResults(products);
             } catch (error) {
-                console.error('Error Searching Products: ', error);
+                toast.warn(error);
             }
         }
     }
@@ -155,6 +142,7 @@ const Header = () => {
 
   return (
     <Box>
+        <ToastContainer />
         <AppBar 
             position='fixed' 
             style={{
@@ -180,9 +168,8 @@ const Header = () => {
                 {isLargeScreen ? null : (
                     <>
                         {productTabs.map(tab => (
-                            <Tabs value={tabValue} indicatorColor='rgb(253, 216, 53)'>
+                            <Tabs key={tab.id} value={tabValue} indicatorColor='rgb(253, 216, 53)'>
                                 <Tab 
-                                    key={tab.id}
                                     LinkComponent={Link} 
                                     to={tab.link}
                                     label={tab.name} 
@@ -207,9 +194,9 @@ const Header = () => {
                         </>
                     ) : (
                         <>
-                        <form onSubmit={handleSearchSubmit}>
+                         {/* <form >  */}
                             <Search>
-                                <Button>
+                                <Button onClick={handleSearch}>
                                     <SearchIconWrapper>
                                         <SearchOutlined style={{color: '#979797'}} />
                                     </SearchIconWrapper>
@@ -217,23 +204,12 @@ const Header = () => {
                                 <StyledInputBase 
                                     placeholder='Search...' 
                                     inputProps={{ 'aria-label': 'search' }} 
-                                    inputRef={inputRef} 
+                                    inputRef={searchInputRef} 
                                     sx={{color: '#979797'}}
                                 />
                             </Search>
-                        </form>
-                        {searchResults.length > 0 && (
-                            <div className="search-results">
-                                <h2>Search Results:</h2>
-                                <ul>
-                                    {searchResults.map((product) => (
-                                        <li key={product._id}>
-                                            <Link to={`/product/${product._id}`}>{product.name}</Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}</>
+                        {/* </form> */}
+                        </>
                     )}
                     
                     {isLargeScreen ? null : (

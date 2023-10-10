@@ -14,7 +14,7 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-div.rowContainer {
+div.columnContainer {
     margin-top: 100px;
 }
 div.priceWrapper {

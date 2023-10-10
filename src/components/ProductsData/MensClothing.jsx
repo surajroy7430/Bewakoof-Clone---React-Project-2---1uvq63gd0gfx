@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import './styles/Products.css'
 import { Grid, Pagination, useMediaQuery, useTheme } from '@mui/material';
 import { getProductsData } from '../utils/Apis';
