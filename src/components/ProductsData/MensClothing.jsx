@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Products.css';
 import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
 import { FavoriteBorder } from '@mui/icons-material';
 import { toast, ToastContainer } from 'react-toastify';
+import { Loader } from '../Loader/Loader';
 
 const MensClothing = (props) => {
     const {name, displayImage, price, brand} = props;
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timeOut = setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+
+        return () => clearTimeout(timeOut);
+    }, []);
 
   return (
     <>
-        <Card className='productCards'>
+        <Card className='productCards'> 
+        {isLoading ? (
+            <Loader width={300} height={270} />
+        ) : (
             <CardMedia 
                 component='img'
                 image={displayImage} 
@@ -17,24 +30,36 @@ const MensClothing = (props) => {
                 className='productImage' 
                 style={{cursor: 'pointer'}}
             />
-
+        )}
             <CardContent>
                 <ToastContainer />
-                <div style={{marginBottom: '10px'}} className='productNameWrapper'>
-                    <Typography className='brandName'>{brand}</Typography>
-                    <small className='productName'>{name}</small>
-                </div>
-                <div className='priceWrapper'>
-                    <div>
-                        <strong>₹{price}</strong>&nbsp;
-                        <span><del>₹999</del></span>&nbsp;
-                        <span style={{color: 'white', backgroundColor: '#00ff00'}}>53% OFF</span>
+                {isLoading ? (
+                    <Loader width={200} height={25} />
+                ) : (
+                    <div style={{marginBottom: '10px'}} className='productNameWrapper'>
+                        <Typography className='brandName'>{brand}</Typography>
+                        <small className='productName'>{name}</small>
                     </div>
-                    <IconButton aria-label='add to wishlist'>
-                        <FavoriteBorder />
-                    </IconButton>
+                )}
+                
+                <div className='priceWrapper'>
+                {isLoading ? (
+                    <Loader width={150} height={25} />
+                ) : (
+                    <>
+                        <div>
+                            <strong>₹{price}</strong>&nbsp;
+                            <span><del>₹999</del></span>&nbsp;
+                        <span style={{color: 'white', backgroundColor: '#00ff00'}}>53% OFF</span>
+                        </div>
+                        <IconButton aria-label='add to wishlist'>
+                            <FavoriteBorder />
+                        </IconButton>
+                    </>
+                )}
                 </div>
             </CardContent>
+        
         </Card>
     </>
   )

@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CarouselComp from './CarouselComp'
 import { Container, Image } from 'react-bootstrap'
 import Add1 from './Adds/Add1'
 import { Typography } from '@mui/material'
 import Categories from './Adds/Categories'
+import { CustomLoader } from '../../Loader/Loader';
 
 const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000)
+  }, []);
+
   return (
     <div style={{marginTop: '100px'}}>
+      <CustomLoader />
       <Container style={{width: '100%'}}>
-        <CarouselComp />
+        {!isLoading &&
+        <>
+          <CarouselComp />
         <Add1 />
         <Image 
           src='https://images.bewakoof.com/uploads/grid/app/desktop-deal-banner-Winterwear-1696765056.jpg'
@@ -46,6 +58,8 @@ const Home = () => {
             src='https://images.bewakoof.com/uploads/grid/app/Desktop-Strip-3-1669022420.jpg'
             alt='vote_for_new_designs'
           />
+        </>
+          }
       </Container>
     </div>
   )
