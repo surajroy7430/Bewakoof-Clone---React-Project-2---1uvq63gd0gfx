@@ -65,6 +65,15 @@ button.submit_button[disabled] {
     background-color: #989898;
     color: white;
 }
+button.google-signin-button {
+    color: #000;
+    border: 1px solid #000;
+}
+button.google-signin-button p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .xgroup {
     display: flex;
     justify-content: center;

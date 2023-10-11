@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/LoginAndSignup.css'
-import { Avatar, Box, Button, FormControl, Input, InputLabel, Typography } from '@mui/material';
+import { Avatar, Box, Button, Divider, FormControl, Input, InputLabel, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { getHeaderWithProjectIDAndBody } from '../utils/configs';
-import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerUser } from '../utils/Apis';
+import { Google } from '@mui/icons-material';
 
 const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
@@ -48,6 +47,30 @@ const SignUp = () => {
             toast.error(error);
         }
     }
+
+    // useEffect(() => {
+    //     window.gapi.load('auth2', () => {
+    //         window.gapi.auth2.init({
+    //             client_id: 'YOUR_GOOGLE_CLIENT_ID', // Replace with your Google API Client ID
+    //         });
+    //     });
+    // }, []);
+    
+    // const handleGoogleSignIn = async () => {
+    //     const auth = window.gapi.auth2.getAuthInstance();
+    //     try {
+    //         const googleUser = await auth.signIn();
+    //         const profile = googleUser.getBasicProfile();
+    //         const userData = {
+    //             name: profile.getName(),
+    //             email: profile.getEmail(),
+    //             // add other data as needed
+    //         };
+    //         // Handle the userData object (e.g., send it to your server or perform a login operation)
+    //     } catch (error) {
+    //         console.error('Google Sign-In Error:', error);
+    //     }
+    // };
 
   return (
     <Box sx={{marginTop: '150px'}}>
@@ -134,6 +157,20 @@ const SignUp = () => {
                         variant='contained'>
                         <Typography>Sign Up</Typography>
                     </Button>
+                    <Divider style={{margin: '20px 0', whiteSpace: 'nowrap'}}>OR CONTINUE WITH</Divider>
+
+                    <Button
+                        className='google-signin-button'
+                        // fullWidth
+                        variant='filled'
+                        // onClick={handleGoogleSignIn}
+                    >
+                        <Typography>
+                            <Google />&nbsp;
+                            Gmail
+                        </Typography>
+                    </Button>
+
                     <div className="xgroup">
                         <p>Already Have an Account?&nbsp;
                             <Link to='/login'>Sign In</Link>
