@@ -47,7 +47,7 @@ const ProductCards = (props) => {
                     <Loader width={150} height={25} />
                 ) : (
                     <>
-                        <strong>₹{price}</strong>&nbsp;
+                        <strong>₹{price}</strong>
                         <IconButton aria-label='add to wishlist'>
                             <FavoriteBorder />
                         </IconButton>

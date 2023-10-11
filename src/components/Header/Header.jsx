@@ -39,15 +39,22 @@ const Header = () => {
      
     const handleSearch = async () => {
         const searchTerm = searchInputRef.current.value.toLowerCase();
-        const selectedTitle = 'name';
         if(searchTerm) {
             try {
-                const products = await getProductsBySearch(searchTerm, selectedTitle);
-                console.log('products', products);
-                setSearchResults(products);
+                const products = await getProductsBySearch(searchTerm, 'name');
+                // console.log('products', products);
+                if(products.length === 0) {
+                    toast.warn('No products found');
+                }
+                else {
+                    navigate(`/search/?name=${searchTerm}`);
+                }
             } catch (error) {
                 toast.warn(error);
             }
+        }
+        else {
+            toast.warn('Please enter a search term.');
         }
     }
 
