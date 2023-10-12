@@ -1,0 +1,13 @@
+div.breadcrumbs {
+    margin-top: 80px;
+}
+button.description_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 1px;
+    color: #2d2d2d;
+}
+button.description_button span {
+    padding-left: 80px;
+}

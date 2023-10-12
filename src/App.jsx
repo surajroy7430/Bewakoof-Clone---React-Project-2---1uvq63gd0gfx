@@ -16,8 +16,8 @@ import MyOrders from './components/ProductPages/MyOrders';
 import MensClothing from './components/ProductsData/MensClothing';
 import WomensClothing from './components/ProductsData/WomensClothing';
 import MobileCovers from './components/ProductsData/MobileCovers';
-import SingleProductDetails from './components/ProductPages/SingleProductDetails';
 import SearchResults from './components/ProductPages/SearchResults';
+import SingleProductPage from './components/ProductPages/SingleProductPage';
 
 function App() {
   const { user } = useAuth();
@@ -33,7 +33,7 @@ function App() {
         <Route path='/womens-clothing' element={<WomensClothing />} />
         <Route path='/mobile-covers' element={<MobileCovers />} />
         <Route path="/search" element={<SearchResults />} />
-        <Route path='/product/:productId' element={<SingleProductDetails />} />
+        <Route path='/product/:productId' element={<SingleProductPage />} />
         <Route path='/myaccount' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />
         <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />

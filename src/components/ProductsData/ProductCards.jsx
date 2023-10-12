@@ -4,10 +4,12 @@ import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/mater
 import { FavoriteBorder } from '@mui/icons-material';
 import { toast, ToastContainer } from 'react-toastify';
 import { Loader } from '../Loader/Loader';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ProductCards = (props) => {
-    const {name, displayImage, price, brand} = props;
+    const {_id, name, displayImage, price, brand} = props;
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
@@ -16,6 +18,10 @@ const ProductCards = (props) => {
 
         return () => clearTimeout(timeOut);
     }, []);
+
+    const showProductDetails = () => {
+        navigate(`/product/${_id}`);
+    }
 
   return (
     <>
@@ -27,8 +33,10 @@ const ProductCards = (props) => {
                     component='img'
                     image={displayImage} 
                     alt={name} 
+                    title={name}
                     className='productImage' 
                     style={{cursor: 'pointer'}}
+                    onClick={showProductDetails}
                 />
             )}
             <CardContent>

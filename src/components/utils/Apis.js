@@ -23,8 +23,10 @@ export const getProductsData = async(page, limit, gender) => {
 export const getProductsDetails = async (productId) => {
     try {
         const response = await axios.get(
-            `${BASE_DOMAIN}/api/v1/ecommerce/product/${productId}`, configById
+            `${BASE_DOMAIN}/api/v1/ecommerce/product/${productId}`, 
+            configById
         )
+        console.log('data', response.data.data);
         return response.data.data
     } catch (error) {
         throw error;
@@ -65,10 +67,10 @@ export const signInUser = async(userInfo) => {
     }
 }
 
-export const getProductsBySearch = async (searchTerm, title) => {
+export const getProductsBySearch = async (searchTerm, title, limit) => {
   try {
     const response = await axios.get(
-      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?search={"${title}":"${searchTerm}"}`, 
+      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?search={"${title}":"${searchTerm}"}&limit=${limit}`, 
       configById
     );
     return response.data.data;

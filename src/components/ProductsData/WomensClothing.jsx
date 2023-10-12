@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const WomensClothing = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const limit = 1599;
+  const limit = 500;
   const theme = useTheme();
   const isLG = useMediaQuery(theme.breakpoints.up('lg'));
   const isMD = useMediaQuery(theme.breakpoints.up('md'));
@@ -38,7 +38,9 @@ const WomensClothing = () => {
         <Grid item>
             <Breadcrumbs>
               <Link to='/'>Home</Link>
-              <Typography>Women's Clothing ({products.length})</Typography>
+              <Typography>
+                Women's Clothing <span style={{color: 'gray'}}>({products.length})</span>
+              </Typography>
             </Breadcrumbs>
         </Grid>
 

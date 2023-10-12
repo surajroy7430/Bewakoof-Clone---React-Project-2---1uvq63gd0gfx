@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import './styles/SearchResults.css';
 import { useLocation, useParams } from 'react-router-dom';
 import { getProductsBySearch } from '../utils/Apis';
 import ProductCards from '../ProductsData/ProductCards';
-import { Grid, Pagination } from '@mui/material';
+import { Grid, Typography, Pagination } from '@mui/material';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -11,12 +12,12 @@ const SearchResults = () => {
   const searchTerm = queryParams.get('name');
   const [searchResults, setSearchResults] = useState([]);
   const [page, setPage] = useState(1);
-  const limit = 100;
+  const limit = 500;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const products = await getProductsBySearch(searchTerm, 'name');
+        const products = await getProductsBySearch(searchTerm, 'name', limit);
         setSearchResults(products);
         console.log(products.length);
       } catch (error) {
@@ -30,13 +31,17 @@ const SearchResults = () => {
   }, [searchTerm]);
 
   return (
-    <Grid 
+    <>
+      <Typography variant='h5' style={{marginTop: '100px', marginLeft: '50px', fontWeight: 600}}>
+        Search Result For : "{searchTerm}" <span style={{color: 'gray'}}>({searchResults.length})</span>
+      </Typography>
+      <Grid 
         container 
         direction='column'
         alignItems='center' 
         justifyContent='center' 
         className='columnContainer'
-    >
+      >
         <Grid 
             item 
             container 
@@ -51,7 +56,8 @@ const SearchResults = () => {
         ))}
 
         </Grid>
-    </Grid>
+      </Grid>
+    </>
   );
 };
 

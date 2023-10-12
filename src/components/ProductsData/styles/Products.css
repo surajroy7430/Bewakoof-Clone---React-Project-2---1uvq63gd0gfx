@@ -16,10 +16,15 @@ div.productNameWrapper {
 }
 div.breadcrumbs {
     margin-top: 100px;
+    margin-left: 50px;
 }
-/* div.columnContainer {
+div.breadcrumbs a {
+    text-decoration: none;
+    color: #000;
+}
+div.columnContainer {
     margin-top: 50px;
-} */
+}
 div.priceWrapper {
     display: flex;
     justify-content: space-between;
