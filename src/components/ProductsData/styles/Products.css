@@ -14,9 +14,12 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-div.columnContainer {
+div.breadcrumbs {
     margin-top: 100px;
 }
+/* div.columnContainer {
+    margin-top: 50px;
+} */
 div.priceWrapper {
     display: flex;
     justify-content: space-between;

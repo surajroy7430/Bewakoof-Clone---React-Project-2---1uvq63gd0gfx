@@ -5,14 +5,15 @@ const BASE_DOMAIN = 'https://academics.newtonschool.co';
 const configById = getHeaderWithProjectId();
 const configByIdAndBody = getHeaderWithProjectIDAndBody();
 
-export const getProductsData = async(page, limit) => {
+export const getProductsData = async(page, limit, gender) => {
     try {
         const response = await axios.get(
             `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?page=${page}&limit=${limit}`, 
             configById
         );
+        console.log(response.data);
         
-        return response.data.data;
+        return response.data.data.filter(product => product.gender === gender);
     } catch (error) {
         console.error("Error fetching products: ", error);
         throw error;
