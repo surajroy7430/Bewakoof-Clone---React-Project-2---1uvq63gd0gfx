@@ -3,11 +3,49 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    /* height: 100vh; */
+    height: 50vh;
 }
+
+.categories-container {
+    margin: 20px auto;
+    max-width: 1200px;
+}
+  
 .catogories {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 }
+  
+.catogories > div {
+    margin: 10px;
+    text-align: center;
+}
+  
+/* Media query for medium screens */
+@media (max-width: 768px) {
+    .catogories > div {
+        flex-basis: calc(33.333% - 20px);
+    }
+    .designs-of-the-week h5, .categories-container h5, .missed-container h5{
+        font-size: 20px;
+    }
+}
+  
+/* Media query for small screens */
+@media (max-width: 576px) {
+    .catogories > div {
+        flex-basis: calc(50% - 20px);
+    }
+    .designs-of-the-week h5, .categories-container h5, .missed-container h5{
+        font-size: 16px;
+    }
+}
+
+/* Custom styles for carousel slide buttons */
+.custom-dot-list-style button {
+    background-color: #969696;
+}
+  
+  

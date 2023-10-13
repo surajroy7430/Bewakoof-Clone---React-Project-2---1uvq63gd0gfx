@@ -12,59 +12,65 @@ const Add1 = () => {
   return (
     <div>
         <Row fixed className='catogories'>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-D-230x320-newarrivals-common-1682570370.jpg' 
                     alt='new_arrivals'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>New Arivals</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>New Arivals</Typography>
             </Col>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/thumbnails-Revamp-Combos-1693212865.gif' 
                     alt='combos'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>Combos</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>Combos</Typography>
             </Col>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-D-230x320-common-bestseller-1679567164.jpg' 
                     alt='bestsellers'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>Bestsellers</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>Bestsellers</Typography>
             </Col>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/new-thumbnail-icon-2022-D-230x320-official-collab-common-1682570371.jpg' 
                     alt='collaborations'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>Official Collaborations</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>Official Collaborations</Typography>
             </Col>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/thumbnails-Revamp-Customization--1--1693212866.jpg' 
                     alt='customization'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>Customization</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>Customization</Typography>
             </Col>
-            <Col xs={6} md={2} style={{cursor: 'pointer', textAlign: 'center'}}>
+            <Col style={{cursor: 'pointer', textAlign: 'center'}}>
                 <Image 
                     onClick={toProducts} 
                     src='https://images.bewakoof.com/uploads/grid/app/thumbnails-Revamp-Vote-1693212866.jpg' 
                     alt='vote_for_design'
+                    style={{width: '75%', height: 'auto'}}
                     thumbnail
                 />
-                <Typography>Vote for Designs</Typography>
+                <Typography style={{fontSize: '13px', fontWeight: 600}}>Vote for Designs</Typography>
             </Col>
         </Row>
     </div>
