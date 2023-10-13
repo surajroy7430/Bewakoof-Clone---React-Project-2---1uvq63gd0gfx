@@ -18,7 +18,7 @@ const Cart = () => {
           className='empty_cart_button'
           variant='contained'
           LinkComponent={Link}
-          to='/products'
+          to='/mens-clothing'
         >Continue Shopping</Button>
       </div>
     </div>

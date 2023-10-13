@@ -21,8 +21,8 @@ const Header = () => {
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
-    const isTab = useMediaQuery(theme.breakpoints.down('sm'));
-    const isMobile = useMediaQuery('(max-width:400px)');
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const isExtraSmall = useMediaQuery('(max-width:400px)');
     const navigate = useNavigate();
 
     const handleAvatarClick = (event) => {
@@ -187,42 +187,38 @@ const Header = () => {
                     </>
                 )}
                 <div className='searchAndMenuWrapper'>
-                    {isTab ? (
-                        <>
-                            <Button>
-                                <SearchOutlined style={{color: '#000'}} />
+                    {isSmallScreen ? ( null
+                        // <>
+                        //     <Button>
+                        //         <SearchOutlined style={{color: '#000'}} />
+                        //     </Button>
+                        //     <StyledInputBase 
+                        //         className='openedSearchInput'
+                        //         placeholder='Search...' 
+                        //         inputProps={{ 'aria-label': 'search' }} 
+                        //         sx={{color: '#979797'}}
+                        //     />
+                        // </>
+                    ) : (
+                        <Search>
+                            <Button onClick={handleSearch}>
+                                <SearchIconWrapper>
+                                    <SearchOutlined style={{color: '#979797'}} />
+                                </SearchIconWrapper>
                             </Button>
                             <StyledInputBase 
-                                className='openedSearchInput'
                                 placeholder='Search...' 
                                 inputProps={{ 'aria-label': 'search' }} 
+                                inputRef={searchInputRef} 
                                 sx={{color: '#979797'}}
                             />
-                        </>
-                    ) : (
-                        <>
-                         {/* <form >  */}
-                            <Search>
-                                <Button onClick={handleSearch}>
-                                    <SearchIconWrapper>
-                                        <SearchOutlined style={{color: '#979797'}} />
-                                    </SearchIconWrapper>
-                                </Button>
-                                <StyledInputBase 
-                                    placeholder='Search...' 
-                                    inputProps={{ 'aria-label': 'search' }} 
-                                    inputRef={searchInputRef} 
-                                    sx={{color: '#979797'}}
-                                />
-                            </Search>
-                        {/* </form> */}
-                        </>
+                        </Search>
                     )}
                     
                     {isLargeScreen ? null : (
                         <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     )}
-                    {isMobile ? null : (
+                    {isExtraSmall ? null : (
                         <>
                             <Button 
                                 LinkComponent={Link} 

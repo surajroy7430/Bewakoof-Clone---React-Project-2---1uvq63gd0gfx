@@ -18,6 +18,7 @@ import WomensClothing from './components/ProductsData/WomensClothing';
 import MobileCovers from './components/ProductsData/MobileCovers';
 import SearchResults from './components/ProductPages/SearchResults';
 import SingleProductPage from './components/ProductPages/SingleProductPage';
+import ForgotPassword from './components/Authentication/ForgotPassword';
 
 function App() {
   const { user } = useAuth();
@@ -29,6 +30,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path='/mens-clothing' element={<MensClothing />} />
         <Route path='/womens-clothing' element={<WomensClothing />} />
         <Route path='/mobile-covers' element={<MobileCovers />} />

@@ -67,6 +67,20 @@ export const signInUser = async(userInfo) => {
     }
 }
 
+export const forgotPassword = async (email) => {
+    try {
+        const response = await axios.post(`${BASE_DOMAIN}/api/v1/user/forgotPassword`, {
+            email: email,
+            appType: 'ecommerce'
+        }, configByIdAndBody
+        );
+
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+};
+
 export const getProductsBySearch = async (searchTerm, title, limit) => {
   try {
     const response = await axios.get(

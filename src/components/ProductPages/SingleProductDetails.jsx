@@ -30,8 +30,8 @@ const SingleProductDetails = ({ product }) => {
         <Grid item>
           <Breadcrumbs>
             <Link to='/'>Home</Link>
-            <Typography>{gender} Clothing</Typography>
-            <Typography>{gender} {subCategory}</Typography>
+            <Typography>{gender}'s Clothing</Typography>
+            <Typography>{gender}'s {subCategory}</Typography>
             <Typography>{name}</Typography>
           </Breadcrumbs>
         </Grid>
@@ -43,9 +43,9 @@ const SingleProductDetails = ({ product }) => {
           </div>
         ) : (
         <Grid container spacing={2} className='productWrapper'>
-          <Grid item xs={12} md={6} className='galleryImages'>
+          <Grid item xs={12} md={12} lg={6} className='galleryImages'>
             <Box className='imageGallery'>
-              {images?.map((image, index) => (
+              {images?.slice(-5).map((image, index) => (
                 <img 
                   key={index} 
                   src={image} 
@@ -56,7 +56,7 @@ const SingleProductDetails = ({ product }) => {
             <img src={displayImage} alt={name} className='displayImage' />
           </Grid>
 
-          <Grid item xs={12} md={6} className='productDetails'>
+          <Grid item xs={12} md={12} lg={6} className='productDetails'>
             <Typography variant="body1" className='brandName'>{brand}</Typography>
             <Typography variant="h6" className='productName'>{name}</Typography>
             <Typography className='productPrice'>

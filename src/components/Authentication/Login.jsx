@@ -113,7 +113,7 @@ const Login = () => {
                             />
                         </FormControl>
                         <div className="forgotPassword">
-                            <Link to='/forgot' style={{float: 'right'}}>Forgot Password?</Link>
+                            <Link to='/forgotpassword' style={{float: 'right'}}>Forgot Password?</Link>
                         </div>
                         
                         <Button 

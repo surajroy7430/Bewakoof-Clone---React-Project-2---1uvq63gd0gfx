@@ -55,6 +55,12 @@ button.submit_button[disabled] {
     background-color: #989898;
     color: white;
 }
+button.forgotPassword_button {
+    background-color: #3d9292;
+}
+button.forgotPassword_button:hover {
+    background-color: #3d9292;
+}
 .xgroup {
     display: flex;
     justify-content: center;

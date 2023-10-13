@@ -19,7 +19,7 @@ const WishList = () => {
           className='empty_wish_button'
           variant='contained'
           LinkComponent={Link}
-          to='/products'
+          to='/mens-clothing'
         >Shop Now</Button>
       </div>
     </div>
