@@ -12,7 +12,7 @@ import {
     Box,
     Divider
 } from '@mui/material';
-import { Google, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,6 +25,7 @@ const Login = () => {
         email: '', 
         password: '',
     });
+    const [formValid, setFormValid] = useState(false);
 
     const navigate = useNavigate();
 
@@ -38,7 +39,12 @@ const Login = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setUserInfo({ ...userInfo, [name]: value });
+        setUserInfo({ 
+            ...userInfo, 
+            [name]: value 
+        });
+        // Check if all fields are filled and update form validity
+        setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
     }
 
     const handleSubmit = async(e) => {
@@ -56,29 +62,6 @@ const Login = () => {
             toast.error(error);
         }
     }
-
-    // useEffect(() => {
-    //     window.gapi.load('auth2', () => {
-    //       window.gapi.auth2.init({
-    //         client_id: 'YOUR_GOOGLE_CLIENT_ID', // Replace with your Google API Client ID
-    //       });
-    //     });
-    //   }, []);
-    
-    //   const handleGoogleSignIn = async () => {
-    //     const auth = window.gapi.auth2.getAuthInstance();
-    //     try {
-    //       const googleUser = await auth.signIn();
-    //       const profile = googleUser.getBasicProfile();
-    //       const userData = {
-    //         email: profile.getEmail(),
-    //         // You can handle other data as needed
-    //       };
-    //       // Handle the userData object (e.g., send it to your server or perform a login operation)
-    //     } catch (error) {
-    //       console.error('Google Sign-In Error:', error);
-    //     }
-    //   };
 
     return (
         <Box sx={{marginTop: '150px'}}>
@@ -137,21 +120,10 @@ const Login = () => {
                             className='submit_button'
                             type='submit' 
                             fullWidth 
-                            variant='contained'>
-                            <Typography>Log In</Typography>
-                        </Button>
-                        <Divider style={{margin: '20px 0', whiteSpace: 'nowrap'}}>OR CONTINUE WITH</Divider>
-
-                        <Button
-                            className='google-signin-button'
-                            // fullWidth
-                            variant='filled'
-                            // onClick={handleGoogleSignIn}
+                            variant='contained'
+                            disabled={!formValid}
                         >
-                            <Typography>
-                                <Google />&nbsp;
-                                Gmail
-                            </Typography>
+                            <Typography>Log In</Typography>
                         </Button>
 
                         <div className="xgroup">

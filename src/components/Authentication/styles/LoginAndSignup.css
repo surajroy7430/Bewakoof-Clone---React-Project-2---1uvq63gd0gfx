@@ -1,4 +1,6 @@
 .form-container {
+    width: 60%;
+    max-width: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,27 +23,14 @@
     height: 65px;
     transform: translateY(-80%);
 }
-.name-input,
-.email-input, 
-.password-input,
-.confirmPassword-input {
-    width: 100%;
-    margin-bottom: 40px;
-}
 .name-input label,
 .email-input label,
 .password-input label,
 .confirmPassword-input label {
-    font-size: 21px;
+    font-size: 18px;
     font-weight: 500;
-    transition: 0.3s ease;
-}
-.name-input input,
-.email-input input,
-.password-input input,
-.confirmPassword-input input {
-    font-size: 20px;
-    font-weight: 500;
+    transition: 0.4s ease;
+    color: gray;
 }
 .forgotPassword a{
     text-decoration: none;
@@ -55,24 +44,16 @@ button.submit_button {
     color: white;
     margin-top: 24px;
     height: 60px;
-    font-size: 24px;
+    font-size: 26px;
+    font-weight: bolder;
 }
 button.submit_button:hover {
     background-color: #3d9292;
 }
 button.submit_button[disabled] {
-    cursor: none;
+    cursor: not-allowed;
     background-color: #989898;
     color: white;
-}
-button.google-signin-button {
-    color: #000;
-    border: 1px solid #000;
-}
-button.google-signin-button p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .xgroup {
     display: flex;
@@ -92,7 +73,7 @@ button.google-signin-button p {
     text-decoration: underline;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1199px) {
     .main-form-container h2 {
         font-size: 23px;
     }
@@ -101,6 +82,9 @@ button.google-signin-button p {
     }
 }
 @media (max-width: 970px) {
+    .main-form-container h2 {
+        font-size: 20px;
+    }
     .xgroup {
         flex-direction: column;
     }
@@ -109,13 +93,21 @@ button.google-signin-button p {
     }
 }
 @media (max-width: 768px) {
-    .main-form-container h2 {
-        font-size: 21px;
+    .form-container {
+        width: 75%;
+        max-width: 650px;
     }
-}
-@media (max-width: 596px) {
     .main-form-container h2 {
         font-size: 18px;
+    }
+}
+@media (max-width: 599px) {
+    .form-container {
+        width: 80%;
+        max-width: 700px;
+    }
+    .main-form-container h2 {
+        font-size: 15px;
     }
     .xgroup p, .xgroup a, .forgotPassword a{
         font-size: 14px;
