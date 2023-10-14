@@ -4,10 +4,15 @@ import './styles/SingleProduct.css'
 import { Link } from 'react-router-dom';
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
+// import { addProductToCart } from '../utils/Apis';
+import { ToastContainer, toast } from 'react-toastify';
+import { useAuth } from '../utils/AuthProvider';
+import { addProductToWishlist } from '../utils/Apis';
 
 const SingleProductDetails = ({ product }) => {
   const { displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
   // console.log('images', images);
+  const { isLoggedIn, wishlist, addToWish, cart, addToCart } = useAuth();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,9 +29,51 @@ const SingleProductDetails = ({ product }) => {
     setDescriptionVisible(!isDescriptionVisible);
   };
 
+  const handleAddToWishList = async(productId) => {
+    try {
+      await addProductToWishlist(productId);
+      // Show success message (toast.info)
+      console.log('Product added to the wishlist!');
+    } catch (error) {
+      // Handle error (user not logged in or API error)
+      console.error(error.message);
+      // Show error message (toast.error)
+    }
+    // const productInWish = wishlist.find((item) => item.productId === product.productId);
+
+    // if (!isLoggedIn) {
+    //   toast.warn('Please login first');
+    //   return;
+    // }
+    // if (productInWish) {
+    //   toast.warn('Product already exists in the wishlist!');
+    // } else {
+    //   // Product not in the cart, add it to the cart
+    //   addToWish(product);
+    //   toast('Product added to the wishlist!');
+    // }
+  }
+  
+  const handleAddToCart = async() => {
+    const productInCart = cart.find((item) => item.productId === product.productId);
+
+    if (!isLoggedIn) {
+      toast.warn('Please login first');
+      return;
+    }
+    if (productInCart) {
+      toast.warn('Product already exists in the cart!');
+    } else {
+      // Product not in the cart, add it to the cart
+      addToCart(product);
+      toast('Product added to the cart!');
+    }
+  }
+
   return (
     <>     
       <div className='breadcrumbs'>
+        <ToastContainer />
         <Grid item>
           <Breadcrumbs>
             <Link to='/'>Home</Link>
@@ -67,11 +114,11 @@ const SingleProductDetails = ({ product }) => {
             <Typography variant="body1" className='productColor'>COLOUR: <strong>{color}</strong></Typography>
             
             <div className='addToCartandWishButton'>
-              <Button variant="contained" className='add_to_cart'>
+              <Button variant="contained" className='add_to_cart' onClick={handleAddToCart}>
                 <LocalMall /> ADD TO BAG
               </Button>
 
-              <Button variant="outlined" className='add_to_wishlist'>
+              <Button variant="outlined" className='add_to_wishlist' onClick={handleAddToWishList}>
                 <FavoriteOutlined /> WISHLIST
               </Button>
             </div>

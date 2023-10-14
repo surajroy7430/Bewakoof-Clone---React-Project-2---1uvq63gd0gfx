@@ -96,6 +96,7 @@ const Login = () => {
                             <Input 
                                 id='password' 
                                 name='password' 
+                                autoComplete="off"
                                 value={userInfo.password} 
                                 onChange={handleInputChange}
                                 type={showPassword ? 'text' : 'password'} 

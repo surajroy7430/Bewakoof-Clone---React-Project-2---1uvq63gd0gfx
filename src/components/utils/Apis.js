@@ -1,9 +1,10 @@
 import axios from "axios";
-import { getHeaderWithProjectIDAndBody, getHeaderWithProjectId } from "./configs";
+import { getAuthHeaderConfig, getHeaderWithProjectIDAndBody, getHeaderWithProjectId } from "./configs";
 
 const BASE_DOMAIN = 'https://academics.newtonschool.co';
 const configById = getHeaderWithProjectId();
 const configByIdAndBody = getHeaderWithProjectIDAndBody();
+const authConfig = getAuthHeaderConfig();
 
 export const getProductsData = async(page, limit, gender) => {
     try {
@@ -26,7 +27,7 @@ export const getProductsDetails = async (productId) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/product/${productId}`, 
             configById
         )
-        console.log('data', response.data.data);
+        // console.log('data', response.data.data);
         return response.data.data
     } catch (error) {
         throw error;
@@ -43,8 +44,8 @@ export const registerUser = async (userInfo, navigate) => {
         console.log({Name: name, Email: email});
 
         if(res.data.token) {
-            sessionStorage.setItem('authToken', res.data.token);
-            sessionStorage.setItem('userInfo', JSON.stringify({Name: name, Email: email}));
+            localStorage.setItem('authToken', res.data.token);
+            localStorage.setItem('userInfo', JSON.stringify({Name: name, Email: email}));
 
             navigate('/login');
         }
@@ -60,7 +61,16 @@ export const signInUser = async(userInfo) => {
         const res = await axios.post(
             `${BASE_DOMAIN}/api/v1/user/login`, userInfo, configByIdAndBody
         )
-        return res.data.data
+        const { status, token, data } = res.data;
+        // console.log("login res", res.data);
+        if (status === 'success' && token) {
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('userData', JSON.stringify(data));
+
+            return { status, token, data};
+        } else {
+            throw new Error('Invalid response format');
+        }
     } 
     catch (error) {
         throw error.response.data.message;
@@ -93,15 +103,15 @@ export const getProductsBySearch = async (searchTerm, title, limit) => {
   }
 };
 
-export const getProductsByFilter = async (filterTerm, title) => {
+export const getProductsByFilter = async (filterTerm, title, limit) => {
   try {
     const response = await axios.get(
-      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter={"${title}":"${filterTerm}"}`, 
+      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter={"${title}":"${filterTerm}"}&limit=${limit}`, 
       configById
     );
     return response.data.data;
   } catch (error) {
-    throw error;
+    throw error.response.data.message;
   }
 };
 
@@ -109,15 +119,33 @@ export const getProductsByFilter = async (filterTerm, title) => {
 export const addProductToCart = async (productId, quantity) => {
     try {
         const response = await axios.patch(
-            `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`, {
+            `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`, configById,
+            {
                 quantity: quantity,
-            }, configById
+            }
         );
         return response.data.data;
     } catch (error) {
         throw error;
     }
 }
+
+export const addProductToWishlist = async (productId) => {
+    try {
+        if ('error' in authConfig) {
+            // Handle error (user not logged in)
+            throw new Error(authConfig.error);
+        }
+
+        const response = await axios.patch(
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`, authConfig,
+            { productId: productId },
+        );
+        return response.data.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 export const getProductReviews = async (productId) => {
     try {

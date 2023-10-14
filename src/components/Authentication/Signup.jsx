@@ -116,12 +116,13 @@ const SignUp = () => {
                         type="password"
                         className='password-input'
                         variant="standard"
+                        autoComplete="off"
                         value={userInfo.password}
                         onChange={handleInputChange}
                         error={errors.password}
                         helperText={
                           errors.password &&
-                          'Password must be at least 8 characters with 1 uppercase and 1 lowercase letter, 1 number and 1 special character'
+                          'Password must be at least 8 characters with 1 uppercase and 1 lowercase, 1 number and 1 special character'
                         }
                     />
                     <TextField
@@ -134,10 +135,11 @@ const SignUp = () => {
                         className='confirmPassword-input'
                         type="password"
                         variant="standard"
+                        autoComplete="off"
                         value={userInfo.confirmPassword}
                         onChange={handleInputChange}
                         error={errors.confirmPassword}
-                        helperText={errors.confirmPassword && 'Passwords do not match'}
+                        helperText={errors.confirmPassword && 'Passwords not matched'}
                     />
                   
                     <Button 

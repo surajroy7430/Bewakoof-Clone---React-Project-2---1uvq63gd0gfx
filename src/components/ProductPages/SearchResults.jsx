@@ -19,7 +19,7 @@ const SearchResults = () => {
       try {
         const products = await getProductsBySearch(searchTerm, 'name', limit);
         setSearchResults(products);
-        console.log(products.length);
+        // console.log(products.length);
       } catch (error) {
         console.error(error);
       }

@@ -66,7 +66,7 @@ const CarouselComp = () => {
         <div>
             <img 
                 src='https://images.bewakoof.com/uploads/grid/app/1x1-B1G1F-1696841980.jpg' 
-                alt='second_slide'
+                alt='third_slide'
                 style={{cursor: 'pointer', width: '100%'}}
                 onClick={toProducts}
             />
@@ -74,50 +74,20 @@ const CarouselComp = () => {
         <div>
             <img 
                 src='https://images.bewakoof.com/uploads/grid/app/newbanner-1x1-SweatsHoods-common-prrinted--1--1696841595.jpg' 
-                alt='second_slide'
+                alt='fourth_slide'
+                style={{cursor: 'pointer', width: '100%'}}
+                onClick={toProducts}
+            />
+        </div>
+        <div>
+            <img 
+                src='https://images.bewakoof.com/uploads/grid/app/OOF-SALE-1X1--Common-1697260026.jpg' 
+                alt='fifth_slide'
                 style={{cursor: 'pointer', width: '100%'}}
                 onClick={toProducts}
             />
         </div>
     </Carousel>
-    // <Carousel>
-    //     <Carousel.Item interval={2000}>
-            // <img 
-            //     className='d-block w-100' 
-            //     src='https://images.bewakoof.com/uploads/grid/app/1x1-static-resort-01--1--1697112502.jpg' 
-            //     alt='first_slide'
-            //     style={{cursor: 'pointer', width: '40%'}} 
-            //     onClick={toProducts}
-            // />
-    //     </Carousel.Item>
-    //     <Carousel.Item interval={3000}>
-            // <img 
-            //     className='d-block w-100' 
-            //     src='	https://images.bewakoof.com/uploads/grid/app/1x1-b31199-1696669433.jpg' 
-            //     alt='second_slide'
-            //     style={{cursor: 'pointer', width: '40%'}}
-            //     onClick={toProducts}
-            // />
-    //     </Carousel.Item>
-    //     <Carousel.Item interval={3000}>
-    //         <img 
-    //             className='d-block w-100' 
-    //             src='https://images.bewakoof.com/uploads/grid/app/1x1-B1G1F-1696841980.jpg' 
-    //             alt='third_slide'
-    //             style={{cursor: 'pointer', width: '40%'}}
-    //             onClick={toProducts}
-    //         />
-    //     </Carousel.Item>
-    //     <Carousel.Item interval={3000}>
-    //         <img 
-    //             className='d-block w-100' 
-    //             src='https://images.bewakoof.com/uploads/grid/app/newbanner-1x1-SweatsHoods-common-prrinted--1--1696841595.jpg' 
-    //             alt='fourth_slide'
-    //             style={{cursor: 'pointer', width: '40%'}}
-    //             onClick={toProducts}
-    //         />
-    //     </Carousel.Item>
-    // </Carousel>
   )
 }
 
