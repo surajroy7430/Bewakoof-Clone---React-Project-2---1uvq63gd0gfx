@@ -32,8 +32,8 @@ const Cart = () => {
       <div>
             <h1 style={{margin: '100px'}}>Cart</h1>
             <ul>
-                {cart.map((product) => (
-                    <li key={product._id}>{product.name}</li>
+                {cart.map((product, i) => (
+                    <li key={i+1}>{product.items.name}</li>
                 ))}
             </ul>
       </div>

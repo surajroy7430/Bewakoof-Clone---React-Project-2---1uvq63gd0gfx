@@ -18,7 +18,8 @@ export const getHeaderWithProjectIDAndBody = () => {
 };
 
 export const getAuthHeaderConfig = () => {
-    const token = sessionStorage.getItem("authToken");
+    const token = localStorage.getItem("authToken");
+    // console.log('token', token);
     if (token) {
         return {
             headers: {
@@ -26,7 +27,7 @@ export const getAuthHeaderConfig = () => {
                 projectID: PROJECT_ID,
             },
         };
-    } 
+    }
     else {
         return {
             error: 'Please Login First',

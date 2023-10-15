@@ -12,7 +12,7 @@ export const getProductsData = async(page, limit, gender) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?page=${page}&limit=${limit}`, 
             configById
         );
-        console.log(response.data);
+        // console.log(response.data);
         
         return response.data.data.filter(product => product.gender === gender);
     } catch (error) {
@@ -45,7 +45,7 @@ export const registerUser = async (userInfo, navigate) => {
 
         if(res.data.token) {
             localStorage.setItem('authToken', res.data.token);
-            localStorage.setItem('userInfo', JSON.stringify({Name: name, Email: email}));
+            localStorage.setItem('userInfo', JSON.stringify(res.data.data.user));
 
             navigate('/login');
         }
@@ -61,17 +61,9 @@ export const signInUser = async(userInfo) => {
         const res = await axios.post(
             `${BASE_DOMAIN}/api/v1/user/login`, userInfo, configByIdAndBody
         )
-        const { status, token, data } = res.data;
-        // console.log("login res", res.data);
-        if (status === 'success' && token) {
-            localStorage.setItem('authToken', token);
-            localStorage.setItem('userData', JSON.stringify(data));
-
-            return { status, token, data};
-        } else {
-            throw new Error('Invalid response format');
-        }
-    } 
+        
+        return res.data;
+    }
     catch (error) {
         throw error.response.data.message;
     }
@@ -116,14 +108,23 @@ export const getProductsByFilter = async (filterTerm, title, limit) => {
 };
 
 
-export const addProductToCart = async (productId, quantity) => {
+export const addProductToCart = async (productId, quantity, authToken) => {
     try {
         const response = await axios.patch(
-            `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`, configById,
+            `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
             {
                 quantity: quantity,
+            },
+            {
+                headers: { 
+                    projectId: "1uvq63gd0gfx",
+                    Authorization: `Bearer ${authToken}`,
+                },
             }
         );
+        // console.log(response.data.data.items);
+        // console.log(response.data.data);
+        // console.log(response.data);
         return response.data.data;
     } catch (error) {
         throw error;
@@ -138,8 +139,8 @@ export const addProductToWishlist = async (productId) => {
         }
 
         const response = await axios.patch(
-            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`, authConfig,
-            { productId: productId },
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
+            { productId: productId }, authConfig
         );
         return response.data.data;
     } catch (error) {

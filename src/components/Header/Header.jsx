@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getProductsBySearch } from '../utils/Apis';
 
 const Header = () => {
-    const { user, isLoggedIn, logout} = useAuth();
+    const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [searchResults, setSearchResults] = useState([]);
     const searchInputRef = useRef(null);
@@ -224,15 +224,23 @@ const Header = () => {
                                 LinkComponent={Link} 
                                 to='/wishlist'
                             >
-                                <Favorite style={{color: 'black'}} />
+                                { isLoggedIn && user ? (
+                                    <Favorite style={{color: wishlist.length ? '#ff0000' : 'black'}} />
+                                ) : (
+                                    <Favorite style={{color: 'black'}} />
+                                )}
                             </Button>
                             <Button
                                 LinkComponent={Link} 
                                 to='/cart'
                             >
-                                <Badge badgeContent={1} color='error'>
+                                { isLoggedIn && user ? (
+                                    <Badge badgeContent={cart.length} color='error'>
+                                        <ShoppingBag style={{color: 'black'}} />
+                                    </Badge>
+                                ) : (
                                     <ShoppingBag style={{color: 'black'}} />
-                                </Badge>
+                                )}
                             </Button>
                         </>
                     )}

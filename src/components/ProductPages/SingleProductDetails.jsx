@@ -4,13 +4,13 @@ import './styles/SingleProduct.css'
 import { Link } from 'react-router-dom';
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
-// import { addProductToCart } from '../utils/Apis';
+import { addProductToCart } from '../utils/Apis';
 import { ToastContainer, toast } from 'react-toastify';
 import { useAuth } from '../utils/AuthProvider';
 import { addProductToWishlist } from '../utils/Apis';
 
 const SingleProductDetails = ({ product }) => {
-  const { displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
+  const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
   // console.log('images', images);
   const { isLoggedIn, wishlist, addToWish, cart, addToCart } = useAuth();
 
@@ -39,34 +39,33 @@ const SingleProductDetails = ({ product }) => {
       console.error(error.message);
       // Show error message (toast.error)
     }
-    // const productInWish = wishlist.find((item) => item.productId === product.productId);
-
-    // if (!isLoggedIn) {
-    //   toast.warn('Please login first');
-    //   return;
-    // }
-    // if (productInWish) {
-    //   toast.warn('Product already exists in the wishlist!');
-    // } else {
-    //   // Product not in the cart, add it to the cart
-    //   addToWish(product);
-    //   toast('Product added to the wishlist!');
-    // }
   }
   
   const handleAddToCart = async() => {
-    const productInCart = cart.find((item) => item.productId === product.productId);
+    // console.log('prdoct', _id);
+    // const productInCart = cart.find((item) => item._id === _id);
+    const authToken = localStorage.getItem('authToken');
+    // console.log('authToken', authToken);
 
     if (!isLoggedIn) {
-      toast.warn('Please login first');
+      toast.error('Please login first');
       return;
     }
-    if (productInCart) {
-      toast.warn('Product already exists in the cart!');
-    } else {
-      // Product not in the cart, add it to the cart
-      addToCart(product);
-      toast('Product added to the cart!');
+    // if (productInCart) {
+    //   toast.warn('Product already exists in the cart!');
+    // } 
+    else {
+      try {
+        // Call the API function to add the product to the cart
+        const updatedProduct = await addProductToCart(_id, 1, authToken); // Assuming quantity is 1, adjust as per your requirements
+        // Update the cart state with the updated product from the API response
+        addToCart(updatedProduct);
+        toast('Product added to the cart!');
+      } catch (error) {
+        // Handle API errors here
+        console.error(error);
+        // toast.error('Failed to add product to cart. Please try again later.');
+      }
     }
   }
 

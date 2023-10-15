@@ -20,7 +20,7 @@ const SignUp = () => {
         password: false,
         confirmPassword: false,
     });
-    const [formValid, setFormValid] = useState(false);
+    // const [formValid, setFormValid] = useState(false);
 
     const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ const SignUp = () => {
             [name]: value
         });
         // Check if all fields are filled and update form validity
-        setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
+        // setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
     }
 
     const handleSignUp = async(e) => {
@@ -147,7 +147,6 @@ const SignUp = () => {
                         type='submit' 
                         fullWidth 
                         variant='contained'
-                        disabled={!formValid}
                     >
                         <Typography>Sign Up</Typography>
                     </Button>

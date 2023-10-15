@@ -4,66 +4,48 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(() => {
-        return !!localStorage.getItem('authToken');
-    });
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [cart, setCart] = useState(() => {
-        const storedCart = sessionStorage.getItem('cart');
-        return storedCart ? JSON.parse(storedCart) : []
+        const storedCart = localStorage.getItem('cart');
+        return storedCart ? JSON.parse(storedCart) : [];
     });
     const [wishlist, setWishList] = useState([])
-    // useState(() => {
-    //     const storedWish = sessionStorage.getItem('wishlist');
-    //     return storedWish ? JSON.parse(storedWish) : []
-    // });
 
+    // Check if the user is already logged in on component mount
     useEffect(() => {
-        // Check if user data exists in local storage
+        const authToken = localStorage.getItem('authToken');
         const storedUser = localStorage.getItem('userInfo');
-        // const storedToken = localStorage.getItem('authToken');
-        
-        if (storedUser) {
-            // If user data exists, automatically log in the user
-            // const userData = JSON.parse(storedUser);
-            // loginUser({ ...userData, token: storedToken });
-
+        if (authToken && storedUser) {
             setUser(JSON.parse(storedUser));
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
         }
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
     const loginUser = (userdata) => {
-        setUser(userdata);
+        setUser(userdata.data);
         setIsLoggedIn(true);
-        // const { status, token, data } = userdata;
-        // if(status === 'success' && token) {
-        //     localStorage.setItem('authToken', token);
-        // }
-        // else {
-        //     console.log('token not found');
-        // }
-        // // // Store user data in local storage
-        localStorage.setItem('userInfo', JSON.stringify(userdata));
-        
+
+        // Store the authentication token and user info in localStorage
+        localStorage.setItem('authToken', userdata.token);
+        localStorage.setItem('userInfo', JSON.stringify(userdata.data));
     }
     const logout = () => {
         setUser(null);
         setIsLoggedIn(false);
 
-        // Clear user data from local storage on logout
-        localStorage.removeItem('userInfo');
         localStorage.removeItem('authToken');
-
-        // setCart([]); // Clear the wishlist in state
-        // sessionStorage.removeItem('cart');
-
-        // setWishList([]); // Clear the wishlist in state
-        // sessionStorage.removeItem('wishlist');
+        localStorage.removeItem('userInfo');
     }
 
     const addToWish = (product) => {
         const updatedWish = [...wishlist, product];
         setCart(updatedWish);
-        // sessionStorage.setItem('wishlist', JSON.stringify(updatedWish));
     };
     
     const removeFromWish = (productId) => {
@@ -72,21 +54,8 @@ export const AuthProvider = ({children}) => {
     };
 
     const addToCart = (product) => {
-        // const updatedCart = [...cart, product];
-        // setCart(updatedCart);
-        // localStorage.setItem('cart', JSON.stringify(updatedCart));
-        // Check if the product already exists in the cart
-    const isProductInCart = cart.some((item) => item.productId === product.productId);
-
-    if (!isProductInCart) {
         const updatedCart = [...cart, product];
         setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart));
-    } else {
-        // Product already exists in the cart, handle accordingly (show message, etc.)
-        console.log('Product already exists in the cart.');
-        // Optionally, you can show a toast message or an alert to notify the user
-    }
     };
     
     const removeFromCart = (productId) => {
@@ -94,9 +63,20 @@ export const AuthProvider = ({children}) => {
         setCart(updatedCart);
     };
   return (
-    <AuthContext.Provider value={
-        {user, isLoggedIn, loginUser, logout, wishlist, addToWish, removeFromWish, cart, addToCart, removeFromCart}
-    }>
+    <AuthContext.Provider 
+        value={{
+            user, 
+            isLoggedIn, 
+            loginUser, 
+            logout, 
+            wishlist, 
+            addToWish, 
+            removeFromWish, 
+            cart, 
+            addToCart, 
+            removeFromCart
+        }}
+    >
         {children}
     </AuthContext.Provider>
   )

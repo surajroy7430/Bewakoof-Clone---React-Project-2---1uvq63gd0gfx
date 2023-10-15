@@ -25,7 +25,7 @@ const Login = () => {
         email: '', 
         password: '',
     });
-    const [formValid, setFormValid] = useState(false);
+    // const [formValid, setFormValid] = useState(false);
 
     const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const Login = () => {
             [name]: value 
         });
         // Check if all fields are filled and update form validity
-        setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
+        // setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
     }
 
     const handleSubmit = async(e) => {
@@ -122,7 +122,6 @@ const Login = () => {
                             type='submit' 
                             fullWidth 
                             variant='contained'
-                            disabled={!formValid}
                         >
                             <Typography>Log In</Typography>
                         </Button>
