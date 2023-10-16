@@ -17,20 +17,11 @@ export const getHeaderWithProjectIDAndBody = () => {
     };
 };
 
-export const getAuthHeaderConfig = () => {
-    const token = localStorage.getItem("authToken");
-    // console.log('token', token);
-    if (token) {
-        return {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                projectID: PROJECT_ID,
-            },
-        };
-    }
-    else {
-        return {
-            error: 'Please Login First',
-        };
-    }
+export const getAuthHeaderConfig = (authToken) => {
+    return {
+        headers: {
+            projectID: PROJECT_ID,
+            Authorization: `Bearer ${authToken}`,
+        },
+    };
 };

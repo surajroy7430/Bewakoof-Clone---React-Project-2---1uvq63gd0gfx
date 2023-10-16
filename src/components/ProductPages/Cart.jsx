@@ -1,13 +1,14 @@
 import React from 'react'
 import './styles/Cart.css'
-import { Button, Typography } from '@mui/material'
+import { Breadcrumbs, Button, Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../utils/AuthProvider'
+import CartItems from './CartItems'
 
 const Cart = () => {
   const { cart } = useAuth();
 
-  if(cart.length === 0) {
+  if(cart.items.length === 0) {
     return (
       <div id='empty_cart'>
         <div className='empty_cart_container'>
@@ -30,12 +31,27 @@ const Cart = () => {
   } else {
     return (
       <div>
-            <h1 style={{margin: '100px'}}>Cart</h1>
-            <ul>
-                {cart.map((product, i) => (
-                    <li key={i+1}>{product.items.name}</li>
+            <div className='breadcrumbs'>
+            <Grid item>
+                <Breadcrumbs>
+                  <Link to='/'>Home</Link>
+                  <Typography>
+                    Cart <span style={{color: 'gray'}}>({cart.items.length})</span>
+                  </Typography>
+                </Breadcrumbs>
+            </Grid>
+          </div>
+            <Grid container spacing={2}>
+                {cart.items && cart.items.map((items, i) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={i + 1}>
+                    <CartItems  
+                      product={items.product} 
+                      quantity={items.quantity} 
+                      className='cartCardWrapper' 
+                    />
+                  </Grid>
                 ))}
-            </ul>
+            </Grid>
       </div>
     )
   }

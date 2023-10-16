@@ -1,13 +1,14 @@
 import React from 'react';
 import './styles/WishList.css';
-import { Button, Typography } from '@mui/material';
+import { Breadcrumbs, Button, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthProvider';
+import CartItems from './CartItems';
 
 const WishList = () => {
   const { wishlist, user } = useAuth();
 
-  if(wishlist.length === 0) {
+  if(wishlist === 0) {
     return (
       <div id='empty_wishlist'>
         <div className='empty_wishlist_container'>
@@ -30,7 +31,29 @@ const WishList = () => {
     )
   } else {
     return (
-      <h1 style={{margin: '100px'}}>Wish Item IS Here</h1>
+      <div>
+        <div className='breadcrumbs'>
+            <Grid item>
+                <Breadcrumbs>
+                  <Link to='/'>Home</Link>
+                  <Typography>
+                    Wishlist <span style={{color: 'gray'}}>({wishlist})</span>
+                  </Typography>
+                </Breadcrumbs>
+            </Grid>
+          </div>
+            <Grid container spacing={2}>
+                {wishlist.items && wishlist.items.map((items, i) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={i + 1}>
+                    <CartItems  
+                      product={items.product} 
+                      quantity={items.quantity} 
+                      className='cartCardWrapper' 
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+      </div>
     )
   }
 }

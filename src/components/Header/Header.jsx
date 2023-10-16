@@ -16,7 +16,6 @@ import { getProductsBySearch } from '../utils/Apis';
 const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [searchResults, setSearchResults] = useState([]);
     const searchInputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
@@ -24,6 +23,11 @@ const Header = () => {
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const isExtraSmall = useMediaQuery('(max-width:400px)');
     const navigate = useNavigate();
+
+    // Check if cart or cart.items is undefined before accessing its properties
+    const cartItemCount = cart && cart.items ? cart.items.length : 0;
+    const wishlistItemCount = wishlist && wishlist.items ? wishlist.items.length : 0;
+
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -225,7 +229,7 @@ const Header = () => {
                                 to='/wishlist'
                             >
                                 { isLoggedIn && user ? (
-                                    <Favorite style={{color: wishlist.length ? '#ff0000' : 'black'}} />
+                                    <Favorite style={{color: wishlist.length > 0 ? 'red' : 'black'}} />
                                 ) : (
                                     <Favorite style={{color: 'black'}} />
                                 )}
@@ -235,7 +239,7 @@ const Header = () => {
                                 to='/cart'
                             >
                                 { isLoggedIn && user ? (
-                                    <Badge badgeContent={cart.length} color='error'>
+                                    <Badge badgeContent={cartItemCount} color='error'>
                                         <ShoppingBag style={{color: 'black'}} />
                                     </Badge>
                                 ) : (

@@ -29,21 +29,9 @@ const SingleProductDetails = ({ product }) => {
     setDescriptionVisible(!isDescriptionVisible);
   };
 
-  const handleAddToWishList = async(productId) => {
-    try {
-      await addProductToWishlist(productId);
-      // Show success message (toast.info)
-      console.log('Product added to the wishlist!');
-    } catch (error) {
-      // Handle error (user not logged in or API error)
-      console.error(error.message);
-      // Show error message (toast.error)
-    }
-  }
-  
-  const handleAddToCart = async() => {
+  const handleAddToWishList = async() => {
     // console.log('prdoct', _id);
-    // const productInCart = cart.find((item) => item._id === _id);
+    // const productInCart = cart.find((item) => item._id === productId);
     const authToken = localStorage.getItem('authToken');
     // console.log('authToken', authToken);
 
@@ -57,13 +45,37 @@ const SingleProductDetails = ({ product }) => {
     else {
       try {
         // Call the API function to add the product to the cart
+        const updatedProduct = await addProductToWishlist(_id, authToken); // Assuming quantity is 1, adjust as per your requirements
+        // Update the cart state with the updated product from the API response
+        addToWish(updatedProduct);
+        toast('Product added to the wishlist!');
+      } catch (error) {
+        // Handle API errors here
+        console.error(error);
+        toast.error(error);
+      }
+    }
+  }
+  
+  const handleAddToCart = async() => {
+    // console.log('prdoct', _id);
+    const authToken = localStorage.getItem('authToken');
+    // console.log('authToken', authToken);
+
+    if (!isLoggedIn) {
+      toast.error('Please login first');
+      return;
+    }
+    else {
+      try {
+        // Call the API function to add the product to the cart
         const updatedProduct = await addProductToCart(_id, 1, authToken); // Assuming quantity is 1, adjust as per your requirements
         // Update the cart state with the updated product from the API response
         addToCart(updatedProduct);
         toast('Product added to the cart!');
       } catch (error) {
         // Handle API errors here
-        console.error(error);
+        console.error('error', error);
         // toast.error('Failed to add product to cart. Please try again later.');
       }
     }

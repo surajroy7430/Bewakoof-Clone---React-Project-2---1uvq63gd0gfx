@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles/Products.css'
-import { Breadcrumbs, Grid, Pagination, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Breadcrumbs, Grid, Pagination, Typography } from '@mui/material';
 import { getProductsData } from '../utils/Apis';
 import ProductCards from './ProductCards';
 import { Link } from 'react-router-dom';
@@ -11,10 +11,6 @@ const MensClothing = () => {
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
     const limit = 500;
-    const theme = useTheme();
-    const isLG = useMediaQuery(theme.breakpoints.up('lg'));
-    const isMD = useMediaQuery(theme.breakpoints.up('md'));
-    const isSM = useMediaQuery(theme.breakpoints.up('sm'));
 
     const fetchData = async(page) => {
       try {
@@ -59,31 +55,16 @@ const MensClothing = () => {
                 </Breadcrumbs>
             </Grid>
           </div>
-
-          <Grid 
-            container 
-            direction='column'
-            alignItems='center' 
-            justifyContent='center' 
-            className='columnContainer'
-          >
-            <Grid 
-              item 
-              container 
-              direction='row' 
-              alignItems='center' 
-              justifyContent='center' 
-              className='rowContainer' 
-              gap='20px'
-            >
-              {products.map((cards) => (
-                  <ProductCards key={cards._id} {...cards} />
+          <Grid container spacing={2}>
+              {products && products.map((cards) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={cards._id}>
+                  <ProductCards {...cards} />
+                </Grid>
               ))}
-
-            </Grid>
+          </Grid>
 
               {/* <Pagination
-                count={Math.ceil(1140 / limit)}
+                count={Math.ceil(500 / limit)}
                 variant="outlined"
                 shape="rounded"
                 color="primary"
@@ -91,7 +72,6 @@ const MensClothing = () => {
                 onChange={handlePageChange}
                 style={{ marginTop: '20px' }}
               /> */}
-          </Grid>
         </>
       )}
     </>

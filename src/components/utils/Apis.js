@@ -4,7 +4,6 @@ import { getAuthHeaderConfig, getHeaderWithProjectIDAndBody, getHeaderWithProjec
 const BASE_DOMAIN = 'https://academics.newtonschool.co';
 const configById = getHeaderWithProjectId();
 const configByIdAndBody = getHeaderWithProjectIDAndBody();
-const authConfig = getAuthHeaderConfig();
 
 export const getProductsData = async(page, limit, gender) => {
     try {
@@ -17,7 +16,7 @@ export const getProductsData = async(page, limit, gender) => {
         return response.data.data.filter(product => product.gender === gender);
     } catch (error) {
         console.error("Error fetching products: ", error);
-        throw error;
+        throw error.response.data.message;
     }
 }
 
@@ -30,7 +29,7 @@ export const getProductsDetails = async (productId) => {
         // console.log('data', response.data.data);
         return response.data.data
     } catch (error) {
-        throw error;
+        throw error.response.data.message;
     }
 }
 
@@ -115,36 +114,72 @@ export const addProductToCart = async (productId, quantity, authToken) => {
             {
                 quantity: quantity,
             },
-            {
-                headers: { 
-                    projectId: "1uvq63gd0gfx",
-                    Authorization: `Bearer ${authToken}`,
-                },
-            }
+            getAuthHeaderConfig(authToken)
         );
         // console.log(response.data.data.items);
-        // console.log(response.data.data);
+        console.log('cart API Patch', response.data.data);
         // console.log(response.data);
         return response.data.data;
     } catch (error) {
         throw error;
     }
 }
-
-export const addProductToWishlist = async (productId) => {
+export const getCartProducts = async (authToken) => {
     try {
-        if ('error' in authConfig) {
-            // Handle error (user not logged in)
-            throw new Error(authConfig.error);
-        }
-
-        const response = await axios.patch(
-            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
-            { productId: productId }, authConfig
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/cart`,
+            getAuthHeaderConfig(authToken)
         );
+        // console.log(response.data.data.items);
+        console.log( 'cart API Get', response.data.data);
+        // console.log(response.data);
         return response.data.data;
     } catch (error) {
         throw error;
+    }
+}
+export const deleteProductFromCart = async (productId, authToken) => {
+    try {
+        const response = await axios.delete(
+            `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
+            getAuthHeaderConfig(authToken)
+        );
+        // console.log(response.data.data.items);
+        console.log( 'cart API Get', response.data);
+        // console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+}
+
+export const addProductToWishlist = async (productId, authToken) => {
+    try {
+        const response = await axios.patch(
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
+            { 
+                productId: productId 
+            },
+            getAuthHeaderConfig(authToken)
+        );
+
+        console.log('wishlist API Patch', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+};
+export const getProductfromWishlist = async (authToken) => {
+    try {
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist`,
+            getAuthHeaderConfig(authToken)
+        );
+
+        console.log('wishlist API get', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
     }
 };
 

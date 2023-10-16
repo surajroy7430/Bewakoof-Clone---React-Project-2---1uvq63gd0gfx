@@ -1,31 +1,40 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getCartProducts } from './Apis';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [cart, setCart] = useState(() => {
-        const storedCart = localStorage.getItem('cart');
-        return storedCart ? JSON.parse(storedCart) : [];
-    });
+    const [cart, setCart] = useState([]);
     const [wishlist, setWishList] = useState([])
+    const authToken = localStorage.getItem('authToken');
+    const storedUser = localStorage.getItem('userInfo');
 
     // Check if the user is already logged in on component mount
     useEffect(() => {
-        const authToken = localStorage.getItem('authToken');
-        const storedUser = localStorage.getItem('userInfo');
         if (authToken && storedUser) {
             setUser(JSON.parse(storedUser));
             setIsLoggedIn(true);
+
         } else {
             setIsLoggedIn(false);
         }
     }, []);
 
     useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+        const fetchCartItems = async () => {
+            try {
+                const cartItems = await getCartProducts(authToken);
+                setCart(cartItems);
+                console.log("cartItems", cartItems.items);
+            } catch (error) {
+                console.error('Error fetching cart items:', error);
+            }
+        };
+    
+        fetchCartItems();
+    }, [authToken])
 
     const loginUser = (userdata) => {
         setUser(userdata.data);
@@ -45,7 +54,7 @@ export const AuthProvider = ({children}) => {
 
     const addToWish = (product) => {
         const updatedWish = [...wishlist, product];
-        setCart(updatedWish);
+        setWishList(updatedWish);
     };
     
     const removeFromWish = (productId) => {
@@ -54,13 +63,12 @@ export const AuthProvider = ({children}) => {
     };
 
     const addToCart = (product) => {
-        const updatedCart = [...cart, product];
+        const updatedCart = [cart, product];
         setCart(updatedCart);
     };
     
     const removeFromCart = (productId) => {
-        const updatedCart = cart.filter((item) => item.productId !== productId);
-        setCart(updatedCart);
+        setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
     };
   return (
     <AuthContext.Provider 

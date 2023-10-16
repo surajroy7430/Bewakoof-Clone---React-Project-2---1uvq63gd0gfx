@@ -61,27 +61,14 @@ const WomensClothing = () => {
             </Grid>
 
           </div>
-          <Grid 
-            container 
-            direction='column'
-            alignItems='center' 
-            justifyContent='center' 
-            className='columnContainer'
-          >
-            <Grid 
-              item 
-              container 
-              direction='row' 
-              alignItems='center' 
-              justifyContent='center' 
-              className='rowContainer' 
-              gap='20px'
-            >
-              {products.map((cards) => (
-                  <ProductCards key={cards._id} {...cards} />
+          
+          <Grid container spacing={2}>
+              {products && products.map((cards) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={cards._id}>
+                  <ProductCards {...cards} />
+                </Grid>
               ))}
-
-            </Grid>
+          </Grid>
               
               {/* <Pagination
                 count={Math.ceil(386 / limit)}
@@ -92,7 +79,6 @@ const WomensClothing = () => {
                 onChange={handlePageChange}
                 style={{ marginTop: '20px' }}
               /> */}
-          </Grid>
         </>
       )}
     </>
