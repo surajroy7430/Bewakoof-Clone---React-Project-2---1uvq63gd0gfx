@@ -45,3 +45,12 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+button.addToCartButton {
+    color: #555657;
+    background-color: transparent;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+button.addToCartButton:hover {
+    background-color: #fff8db;
+}

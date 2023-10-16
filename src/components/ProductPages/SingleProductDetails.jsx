@@ -84,7 +84,7 @@ const SingleProductDetails = ({ product }) => {
   return (
     <>     
       <div className='breadcrumbs'>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <Grid item>
           <Breadcrumbs>
             <Link to='/'>Home</Link>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getCartProducts } from './Apis';
+import { getCartProducts, getWishListProducts } from './Apis';
 
 const AuthContext = createContext();
 
@@ -34,6 +34,18 @@ export const AuthProvider = ({children}) => {
         };
     
         fetchCartItems();
+
+        const fetchWishlistItems = async () => {
+            try {
+                const wishlistItems = await getWishListProducts(authToken);
+                setWishList(wishlistItems.items);
+                console.log("wishlistItems", wishlistItems.items);
+            } catch (error) {
+                console.error('Error fetching cart items:', error);
+            }
+        };
+    
+        fetchWishlistItems();
     }, [authToken])
 
     const loginUser = (userdata) => {
@@ -63,7 +75,8 @@ export const AuthProvider = ({children}) => {
     };
 
     const addToCart = (product) => {
-        const updatedCart = [cart, product];
+        console.log('addtocart', cart);
+        const updatedCart = [...cart, product];
         setCart(updatedCart);
     };
     

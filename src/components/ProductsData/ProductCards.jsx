@@ -66,7 +66,7 @@ const ProductCards = (props) => {
                 />
             )}
             <CardContent>
-                <ToastContainer />
+                {/* <ToastContainer /> */}
                 {isLoading ? (
                     <Loader width={200} height={25} />
                 ) : (
@@ -87,7 +87,7 @@ const ProductCards = (props) => {
                             onClick={handleAddToWishList}
                             
                         >
-                            <FavoriteBorder style={{color: wishlist ? 'black' : 'red'}} />
+                            <FavoriteBorder style={{color: wishlist.find(item => item._id === _id) ? 'red' : 'black'}} />
                         </IconButton>
                     </>
                 )}

@@ -4,11 +4,12 @@ import { Breadcrumbs, Button, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthProvider';
 import CartItems from './CartItems';
+import WishListItems from './WishListItems';
 
 const WishList = () => {
   const { wishlist, user } = useAuth();
 
-  if(wishlist === 0) {
+  if(wishlist.length === 0) {
     return (
       <div id='empty_wishlist'>
         <div className='empty_wishlist_container'>
@@ -37,17 +38,16 @@ const WishList = () => {
                 <Breadcrumbs>
                   <Link to='/'>Home</Link>
                   <Typography>
-                    Wishlist <span style={{color: 'gray'}}>({wishlist})</span>
+                    Wishlist <span style={{color: 'gray'}}>({wishlist.length})</span>
                   </Typography>
                 </Breadcrumbs>
             </Grid>
           </div>
             <Grid container spacing={2}>
-                {wishlist.items && wishlist.items.map((items, i) => (
+                {wishlist && wishlist.map((items, i) => (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={i + 1}>
-                    <CartItems  
-                      product={items.product} 
-                      quantity={items.quantity} 
+                    <WishListItems  
+                      products={items.products} 
                       className='cartCardWrapper' 
                     />
                   </Grid>

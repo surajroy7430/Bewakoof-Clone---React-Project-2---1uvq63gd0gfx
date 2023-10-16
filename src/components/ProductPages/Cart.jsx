@@ -42,8 +42,8 @@ const Cart = () => {
             </Grid>
           </div>
             <Grid container spacing={2}>
-                {cart.items && cart.items.map((items, i) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={i + 1}>
+                {cart.items && cart.items.map((items) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={items._id}>
                     <CartItems  
                       product={items.product} 
                       quantity={items.quantity} 

@@ -19,12 +19,14 @@ import MobileCovers from './components/ProductsData/MobileCovers';
 import SearchResults from './components/ProductPages/SearchResults';
 import SingleProductPage from './components/ProductPages/SingleProductPage';
 import ForgotPassword from './components/Authentication/ForgotPassword';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { user } = useAuth();
   return (
     <div className="App">
       <Header />
+      <ToastContainer autoClose={1500} />
 
       <Routes>
         <Route path='/' element={<Home />} />

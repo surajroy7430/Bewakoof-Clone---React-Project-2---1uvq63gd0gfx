@@ -163,13 +163,13 @@ export const addProductToWishlist = async (productId, authToken) => {
             getAuthHeaderConfig(authToken)
         );
 
-        console.log('wishlist API Patch', response.data.data);
-        return response.data.data;
+        console.log('wishlist API Patch', response.data.data.items);
+        return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
     }
 };
-export const getProductfromWishlist = async (authToken) => {
+export const getWishListProducts = async (authToken) => {
     try {
         const response = await axios.get(
             `${BASE_DOMAIN}/api/v1/ecommerce/wishlist`,

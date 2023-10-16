@@ -13,6 +13,7 @@ import {
 } from '@mui/icons-material';
 import { Col, Container, Form, Image, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+// import Bewakoof from '../../'
 
 const Footer = () => {
     return (

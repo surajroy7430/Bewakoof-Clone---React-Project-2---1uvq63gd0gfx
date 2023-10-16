@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles/SearchResults.css';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { getProductsBySearch } from '../utils/Apis';
 import ProductCards from '../ProductsData/ProductCards';
 import { Grid, Typography, Pagination } from '@mui/material';
@@ -35,27 +35,12 @@ const SearchResults = () => {
       <Typography variant='h5' style={{marginTop: '100px', marginLeft: '50px', fontWeight: 600}}>
         Search Result For : "{searchTerm}" <span style={{color: 'gray'}}>({searchResults.length})</span>
       </Typography>
-      <Grid 
-        container 
-        direction='column'
-        alignItems='center' 
-        justifyContent='center' 
-        className='columnContainer'
-      >
-        <Grid 
-            item 
-            container 
-            direction='row' 
-            alignItems='center' 
-            justifyContent='center' 
-            className='rowContainer' 
-            gap='20px'
-        >
-        {searchResults.map((product) => (
+      <Grid container spacing={2}>
+        {searchResults && searchResults.map((product) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
             <ProductCards key={product._id} {...product} />
+          </Grid>
         ))}
-
-        </Grid>
       </Grid>
     </>
   );

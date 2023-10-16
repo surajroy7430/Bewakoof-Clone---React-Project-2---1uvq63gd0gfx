@@ -68,7 +68,7 @@ const SignUp = () => {
 
   return (
     <Box sx={{marginTop: '150px'}}>
-        <ToastContainer />
+        {/* <ToastContainer /> */}
         <Box sx={{display: 'flex'}}>
             <Box className='form-container'>
                 <Avatar className='avatar' />
