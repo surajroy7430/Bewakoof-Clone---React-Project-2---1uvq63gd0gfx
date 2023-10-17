@@ -8,7 +8,7 @@ import CartItems from './CartItems'
 const Cart = () => {
   const { cart } = useAuth();
 
-  if(cart.length === 0) {
+  if(cart.items.length === 0) {
     return (
       <div id='empty_cart'>
         <div className='empty_cart_container'>
@@ -31,27 +31,33 @@ const Cart = () => {
   } else {
     return (
       <div>
-          <div className='breadcrumbs'>
-            <Grid item>
-                <Breadcrumbs>
-                  <Link to='/'>Home</Link>
-                  <Typography>
-                    Cart <span style={{color: 'gray'}}>({cart.length})</span>
-                  </Typography>
-                </Breadcrumbs>
-            </Grid>
+          <div className='breadcrumbsAndOrderButton'>
+            <div className='cartBreadcrumbs'>
+              <Grid item>
+                  <Breadcrumbs>
+                    <Link to='/'>Home</Link>
+                    <Typography>
+                      <b>My Bag</b> <span style={{color: 'gray'}}>{cart.items.length} item</span>
+                    </Typography>
+                  </Breadcrumbs>
+              </Grid>
+            </div>
+            <div className='orderButtonWrapper'>
+              <Typography className='subTotal'><b>Sub Total:</b> ₹{cart.totalPrice}</Typography>
+              <Button variant='contained' className='orderNowButton'>Order Now</Button>
+            </div>
           </div>
-            <Grid container spacing={2}>
-                {cart && cart.map((item, i) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={i+1}>
-                    <CartItems  
-                      product={item.product} 
-                      quantity={item.quantity} 
-                      className='cartCardWrapper' 
-                    />
-                  </Grid>
-                ))}
-            </Grid>
+          <Grid container spacing={2}>
+              {cart && cart.items.map((item, i) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} key={i+1}>
+                  <CartItems  
+                    product={item.product} 
+                    quantity={item.quantity} 
+                    className='cartCardWrapper' 
+                  />
+                </Grid>
+              ))}
+          </Grid>
       </div>
     )
   }

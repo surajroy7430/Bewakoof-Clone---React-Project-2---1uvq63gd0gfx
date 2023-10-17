@@ -9,7 +9,7 @@ import {
 import { Favorite, PersonOutline, SearchOutlined, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
 import DrawerMenu from './DrawerMenu';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getProductsBySearch } from '../utils/Apis';
 
@@ -17,7 +17,7 @@ const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
     const searchInputRef = useRef(null);
-    const [tabValue, setTabValue] = useState(0);
+    const [tabValue, setTabValue] = useState();
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -175,18 +175,21 @@ const Header = () => {
                     </Link>
                 </div>
                 {isLargeScreen ? null : (
-                    <>
+                    <Tabs 
+                        value={tabValue} 
+                        TabIndicatorProps={{style: {backgroundColor: "#fdd835", height: 4}}}
+                        onChange={(event, newValue) => setTabValue(newValue)}
+                    >
                         {productTabs.map(tab => (
-                            <Tabs key={tab.id} value={tabValue} indicatorColor='rgb(253, 216, 53)'>
-                                <Tab 
-                                    LinkComponent={Link} 
-                                    to={tab.link}
-                                    label={tab.name} 
-                                    style={{color: 'black', fontWeight: '600'}}
-                                />
-                            </Tabs>
+                            <Tab 
+                                key={tab.id}
+                                LinkComponent={Link} 
+                                to={tab.link}
+                                label={tab.name} 
+                                style={{color: 'black', fontWeight: '600'}}
+                            />
                         ))}
-                    </>
+                    </Tabs>
                 )}
                 <div className='searchAndMenuWrapper'>
                     {isSmallScreen ? ( null

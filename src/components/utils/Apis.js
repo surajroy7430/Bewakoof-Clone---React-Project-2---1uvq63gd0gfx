@@ -119,7 +119,7 @@ export const addProductToCart = async (productId, quantity, authToken) => {
         // console.log(response.data.data.items);
         console.log('cart API Patch', response.data.data);
         // console.log(response.data);
-        return response.data.data.items;
+        return response.data.data;
     } catch (error) {
         throw error;
     }
@@ -133,7 +133,7 @@ export const getCartProducts = async (authToken) => {
         // console.log(response.data.data.items);
         console.log( 'cart API Get', response.data.data);
         // console.log(response.data);
-        return response.data.data.items;
+        return response.data.data;
     } catch (error) {
         throw error;
     }
@@ -145,9 +145,9 @@ export const deleteProductFromCart = async (productId, authToken) => {
             getAuthHeaderConfig(authToken)
         );
         // console.log(response.data.data.items);
-        console.log( 'cart API Get', response.data);
+        console.log( 'cart API Get', response.data.data);
         // console.log(response.data);
-        return response.data;
+        return response.data.data;
     } catch (error) {
         throw error.response.data.message;
     }

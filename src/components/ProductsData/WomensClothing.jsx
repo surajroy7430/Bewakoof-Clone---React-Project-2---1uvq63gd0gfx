@@ -78,8 +78,8 @@ const WomensClothing = () => {
           </div>
 
           {products && 
-          (<div className='sortButtonContainer' style={{ marginLeft: 'auto' }}>
-                <Button onClick={handleSortClick}>
+          (<div className='sortButtonContainer' style={{ marginLeft: '50px' }}>
+                <Button variant='outlined' onClick={handleSortClick}>
                     Sort By <ArrowDropDown />
                 </Button>
                 <Menu

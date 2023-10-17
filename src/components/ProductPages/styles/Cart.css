@@ -38,3 +38,51 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+div.cartBreadcrumbs {
+    margin-left: 50px;
+}
+div.cartBreadcrumbs a {
+    text-decoration: none;
+    color: #000;
+}
+div.orderButtonWrapper {
+    margin-right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+div.breadcrumbsAndOrderButton {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+    white-space: nowrap;
+}
+button.orderNowButton {
+    background-color: rgb(66, 162, 162);
+    box-shadow: none;
+    font-weight: 600;
+}
+button.orderNowButton:hover {
+    background-color: rgb(66, 162, 162);
+    box-shadow: none;
+}
+p.subTotal {
+    font-size: 20px;
+}
+@media (max-width: 699px) {
+    div.breadcrumbsAndOrderButton {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    div.orderButtonWrapper {
+        margin-left: 50px;
+    }
+}
+@media (max-width: 399px) {
+    div.orderButtonWrapper {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
