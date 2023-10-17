@@ -1,8 +1,8 @@
 import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
-import './styles/WishList.css'
+import './WishList.css'
 import { useNavigate } from 'react-router-dom';
-import { addProductToCart } from '../utils/Apis';
+import { addProductToCart } from '../../utils/Apis';
 import { toast } from 'react-toastify';
 
 const WishListItems = ({ products }) => {

@@ -35,7 +35,7 @@ const DrawerMenu = () => {
         {id: 1, name: 'My Account', link: '/myaccount'},
         {id: 2, name: 'My Orders', link: '/myaccount/orders'},
         {id: 3, name: 'My Wishlist', link: '/wishlist'},
-        {id: 3, name: 'My Cart', link: '/cart'},
+        {id: 4, name: 'My Cart', link: '/cart'},
     ];
     const contactUs = [
         {id: 1, name: 'help & Support'},

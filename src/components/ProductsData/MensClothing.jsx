@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './styles/Products.css'
-import { Breadcrumbs, Grid, Pagination, Typography } from '@mui/material';
+import { Breadcrumbs, Button, Grid, Menu, MenuItem, Pagination, Typography } from '@mui/material';
 import { getProductsData } from '../utils/Apis';
 import ProductCards from './ProductCards';
 import { Link } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';
+import { ArrowDropDown } from '@mui/icons-material';
 
 const MensClothing = () => {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(true);
-    const limit = 500;
+    const [anchorEl, setAnchorEl] = useState(null); // Added state for Menu anchor
+    const [selectedOption, setSelectedOption] = useState(null);
+    const limit = 300;
 
     useEffect(() => {
       const fetchData = async(page) => {
@@ -38,6 +41,25 @@ const MensClothing = () => {
     return () => clearTimeout(timeOut);
   }, []);
 
+  const handleSortClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleSortClose = (option, optionText) => {
+    setAnchorEl(null);
+    setSelectedOption(optionText)
+    // Implement sorting logic based on the selected option
+    if (option === 'price-low-to-high') {
+        // Sort products array by price: low to high
+        const sortedProducts = products.slice().sort((a, b) => a.price - b.price);
+        setProducts(sortedProducts);
+    } else if (option === 'price-high-to-low') {
+        // Sort products array by price: high to low
+        const sortedProducts = products.slice().sort((a, b) => b.price - a.price);
+        setProducts(sortedProducts);
+    }
+  };
+
   return (
     <>
       {isLoading ? (
@@ -56,6 +78,26 @@ const MensClothing = () => {
                 </Breadcrumbs>
             </Grid>
           </div>
+
+          {products && 
+          (<div className='sortButtonContainer' style={{ marginLeft: '50px', marginTop: '15px' }}>
+                <Button variant='outlined' onClick={handleSortClick}>
+                    Sort By {selectedOption || null} <ArrowDropDown />
+                </Button>
+                <Menu
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={() => handleSortClose(null)}
+                >
+                    <MenuItem 
+                      onClick={() => handleSortClose('price-low-to-high', 'Price: Low to High')}>Price: Low to High
+                    </MenuItem>
+                    <MenuItem 
+                      onClick={() => handleSortClose('price-high-to-low', 'Price: High to Low')}>Price: High to Low
+                    </MenuItem>
+                </Menu>
+          </div>)}
+
           <Grid container spacing={2}>
               {products && products.map((cards) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={cards._id}>

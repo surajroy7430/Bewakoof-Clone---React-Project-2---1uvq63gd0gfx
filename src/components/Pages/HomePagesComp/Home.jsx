@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './styles/Home.css';
 import CarouselComp from './CarouselComp'
 import { Container, Image } from 'react-bootstrap'
-import { Typography } from '@mui/material'
+import { Typography, useMediaQuery, useTheme } from '@mui/material'
 import { FadeLoader } from 'react-spinners'
 import Add1 from './Adds/Add1'
 import MensCategories from './Adds/MensCategories'
@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const theme = useTheme();
+  const isSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,7 +40,9 @@ const Home = () => {
         ) : (
         <>
           <CarouselComp />
-          <Add1 />
+          <div className='categories-container'>
+            <Add1 />
+          </div>
           <div className='designs-of-the-week'>
             <Typography variant='h5' textAlign='center'>Designs of the Week</Typography>
             <Image 
@@ -69,22 +73,22 @@ const Home = () => {
             <Image 
               src='https://images.bewakoof.com/uploads/grid/app/DESKTOP-mid-size-hygiene-revamp-B3999-1696669434.jpg'
               alt='DESKTOP-mid-size-hygiene-revamp'
-              style={{width: '50%'}}
+              style={{width: isSM ? '100%' : '50%'}}
             />
             <Image 
               src='https://images.bewakoof.com/uploads/grid/app/Trendy-Tshirt-at-flat-399-desktop-mid-size-banner--1--1696841594.jpg'
               alt='Trendy-Tshirt-at-flat-399'
-              style={{width: '50%'}}
+              style={{width: isSM ? '100%' : '50%'}}
             />
             <Image 
               src='https://images.bewakoof.com/uploads/grid/app/desktop-mid-size-hygiene-Fullsleeve--1--1697004063.jpg'
               alt='OOF-SALE-Desktop-id-Size-Banner'
-              style={{width: '50%'}}
+              style={{width: isSM ? '100%' : '50%'}}
               />
             <Image 
               src='https://images.bewakoof.com/uploads/grid/app/desktop-mid-size-hygiene-JOG-Common-callout-1696518937.jpg'
               alt='desktop-mid-size-hygiene-JOG-Common-callout'
-              style={{width: '50%'}}
+              style={{width: isSM ? '100%' : '50%'}}
             />
           </div>
           <div>

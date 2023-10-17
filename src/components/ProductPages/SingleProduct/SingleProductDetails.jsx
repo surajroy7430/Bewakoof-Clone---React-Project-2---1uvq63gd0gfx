@@ -1,13 +1,13 @@
 import { Box, Breadcrumbs, Button, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import './styles/SingleProduct.css'
+import './SingleProduct.css'
 import { Link } from 'react-router-dom';
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
-import { addProductToCart } from '../utils/Apis';
+import { addProductToCart } from '../../utils/Apis';
 import { toast } from 'react-toastify';
-import { useAuth } from '../utils/AuthProvider';
-import { addProductToWishlist } from '../utils/Apis';
+import { useAuth } from '../../utils/AuthProvider';
+import { addProductToWishlist } from '../../utils/Apis';
 
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;

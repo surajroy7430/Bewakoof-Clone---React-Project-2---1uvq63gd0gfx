@@ -1,8 +1,8 @@
 import React from 'react'
-import './styles/Cart.css'
+import './Cart.css'
 import { Breadcrumbs, Button, Grid, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../utils/AuthProvider'
+import { useAuth } from '../../utils/AuthProvider'
 import CartItems from './CartItems'
 
 const Cart = () => {

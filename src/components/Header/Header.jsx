@@ -17,7 +17,7 @@ const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const [anchorElUser, setAnchorElUser] = useState(null);
     const searchInputRef = useRef(null);
-    const [tabValue, setTabValue] = useState();
+    const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -177,7 +177,8 @@ const Header = () => {
                 {isLargeScreen ? null : (
                     <Tabs 
                         value={tabValue} 
-                        TabIndicatorProps={{style: {backgroundColor: "#fdd835", height: 4}}}
+                        indicatorColor=''
+                        // TabIndicatorProps={{style: {backgroundColor: "#fdd835", height: 4}}}
                         onChange={(event, newValue) => setTabValue(newValue)}
                     >
                         {productTabs.map(tab => (

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import './styles/SearchResults.css';
+import './SearchResults.css';
 import { useLocation } from 'react-router-dom';
-import { getProductsBySearch } from '../utils/Apis';
-import ProductCards from '../ProductsData/ProductCards';
+import { getProductsBySearch } from '../../utils/Apis';
+import ProductCards from '../../ProductsData/ProductCards';
 import { Grid, Typography, Pagination } from '@mui/material';
 
 const SearchResults = () => {

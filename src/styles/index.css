@@ -15,7 +15,8 @@ body {
   background: transparent;
   line-height: 1;
   background-color: #fff;
-  overflow-y: overlay;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: initial;
   width: auto;
   top: initial;
@@ -24,6 +25,22 @@ body {
   vertical-align: baseline;
 }
 ::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 5px;
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #acacac; /* Color of the scrollbar handle */
+  border-radius: 5px; /* Border radius of the scrollbar handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a4e5ff; /* Color of the scrollbar handle on hover */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Color of the scrollbar track */
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles/WishList.css';
+import './WishList.css';
 import { Breadcrumbs, Button, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../utils/AuthProvider';
+import { useAuth } from '../../utils/AuthProvider';
 import WishListItems from './WishListItems';
 
 const WishList = () => {

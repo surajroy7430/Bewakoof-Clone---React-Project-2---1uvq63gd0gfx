@@ -7,19 +7,19 @@ import Footer from '../src/components/Footer/Footer.jsx';
 import Home from './components/Pages/HomePagesComp/Home';
 import Login from '../src/components/Authentication/Login.jsx';
 import SignUp from '../src/components/Authentication/Signup.jsx';
-import WishList from './components/ProductPages/WishList';
-import Cart from './components/ProductPages/Cart';
-import Success from './components/ProductPages/Success';
+import WishList from './components/ProductPages/Wishlist/WishList';
+import Cart from './components/ProductPages/Cart/Cart';
 import ErrorPage from './components/Pages/ErrorPage';
-import ProfilePage from './components/Pages/ProfilePage';
-import MyOrders from './components/ProductPages/MyOrders';
+import ProfilePage from './components/Pages/ProfilePages/ProfilePage';
+import MyOrders from './components/ProductPages/CheckOut/MyOrders';
 import MensClothing from './components/ProductsData/MensClothing';
 import WomensClothing from './components/ProductsData/WomensClothing';
 import MobileCovers from './components/ProductsData/MobileCovers';
-import SearchResults from './components/ProductPages/SearchResults';
-import SingleProductPage from './components/ProductPages/SingleProductPage';
+import SearchResults from './components/ProductPages/SearchResults/SearchResults';
+import SingleProductPage from './components/ProductPages/SingleProduct/SingleProductPage';
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
+import Checkout from './components/ProductPages/CheckOut/CheckoutPage';
 
 function App() {
   const { user } = useAuth();
@@ -41,6 +41,7 @@ function App() {
       <Header />
       <ToastContainer autoClose={1000} />
 
+      <div id='app'>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
@@ -55,9 +56,10 @@ function App() {
         <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />
         <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />
         <Route path='/cart' element={user ? <Cart /> : <Navigate to='/login' />} />
-        <Route path='/cart/success' element={<Success />} />
+        <Route path='/checkout' element={<Checkout />} />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
+      </div>
 
       <Footer />
     </div>

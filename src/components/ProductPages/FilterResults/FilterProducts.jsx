@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react'
-import ProductCards from '../ProductsData/ProductCards';
+import ProductCards from '../../ProductsData/ProductCards';
 import { useLocation } from 'react-router-dom';
-import { getProductsByFilter } from '../utils/Apis';
+import { getProductsByFilter } from '../../utils/Apis';
 
 const FilterProducts = () => {
   const location = useLocation();

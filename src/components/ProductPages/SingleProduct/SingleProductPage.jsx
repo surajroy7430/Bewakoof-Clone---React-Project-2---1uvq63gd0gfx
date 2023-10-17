@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getProductsDetails } from '../utils/Apis';
+import { getProductsDetails } from '../../utils/Apis';
 import SingleProductDetails from './SingleProductDetails';
 import { useParams } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';

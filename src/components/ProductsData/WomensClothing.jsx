@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles/Products.css'
-import { Breadcrumbs, Button, Grid, IconButton, Menu, MenuItem, Pagination, Typography } from '@mui/material';
+import { Breadcrumbs, Button, Grid, Menu, MenuItem, Pagination, Typography } from '@mui/material';
 import { getProductsData } from '../utils/Apis';
 import ProductCards from './ProductCards';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,7 @@ const WomensClothing = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null); // Added state for Menu anchor
+  const [selectedOption, setSelectedOption] = useState(null);
   const limit = 500;
 
   useEffect(() => {
@@ -44,8 +45,9 @@ const WomensClothing = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSortClose = (option) => {
+  const handleSortClose = (option, optionText) => {
     setAnchorEl(null);
+    setSelectedOption(optionText);
     // Implement sorting logic based on the selected option
     if (option === 'price-low-to-high') {
         // Sort products array by price: low to high
@@ -78,17 +80,21 @@ const WomensClothing = () => {
           </div>
 
           {products && 
-          (<div className='sortButtonContainer' style={{ marginLeft: '50px' }}>
+          (<div className='sortButtonContainer' style={{ marginLeft: '50px', marginTop: '15px' }}>
                 <Button variant='outlined' onClick={handleSortClick}>
-                    Sort By <ArrowDropDown />
+                    Sort By {selectedOption || null} <ArrowDropDown />
                 </Button>
                 <Menu
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={() => handleSortClose(null)}
                 >
-                    <MenuItem onClick={() => handleSortClose('price-low-to-high')}>Price: Low to High</MenuItem>
-                    <MenuItem onClick={() => handleSortClose('price-high-to-low')}>Price: High to Low</MenuItem>
+                    <MenuItem 
+                      onClick={() => handleSortClose('price-low-to-high', 'Price: Low to High')}>Price: Low to High
+                    </MenuItem>
+                    <MenuItem 
+                      onClick={() => handleSortClose('price-high-to-low', 'Price: High to Low')}>Price: High to Low
+                    </MenuItem>
                 </Menu>
           </div>)}
 
