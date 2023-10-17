@@ -133,6 +133,7 @@ button.description_button strong {
     font-size: 13px;
     margin-bottom: 2rem;
     color: rgb(115, 115, 115);
+    text-align: justify;
 }
 @media (max-width: 1199px) {
     .displayImage {

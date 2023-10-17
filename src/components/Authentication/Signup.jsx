@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles/LoginAndSignup.css'
 import { Avatar, Box, Button, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { registerUser } from '../utils/Apis';
 
@@ -68,7 +68,6 @@ const SignUp = () => {
 
   return (
     <Box sx={{marginTop: '150px'}}>
-        {/* <ToastContainer /> */}
         <Box sx={{display: 'flex'}}>
             <Box className='form-container'>
                 <Avatar className='avatar' />

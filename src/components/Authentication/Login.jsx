@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../utils/AuthProvider';
 import { signInUser } from '../utils/Apis';
@@ -65,7 +65,6 @@ const Login = () => {
 
     return (
         <Box sx={{marginTop: '150px'}}>
-            {/* <ToastContainer /> */}
             <Box sx={{display: 'flex'}}>
                 <Box className='form-container'>
                     <Avatar className='avatar' />

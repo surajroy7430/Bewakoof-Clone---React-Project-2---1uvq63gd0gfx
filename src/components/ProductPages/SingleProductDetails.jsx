@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
 import { addProductToCart } from '../utils/Apis';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useAuth } from '../utils/AuthProvider';
 import { addProductToWishlist } from '../utils/Apis';
 
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
   // console.log('images', images);
-  const { isLoggedIn, wishlist, addToWish, cart, addToCart } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,24 +31,20 @@ const SingleProductDetails = ({ product }) => {
 
   const handleAddToWishList = async() => {
     // console.log('prdoct', _id);
-    // const productInCart = cart.find((item) => item._id === productId);
     const authToken = localStorage.getItem('authToken');
     // console.log('authToken', authToken);
 
     if (!isLoggedIn) {
       toast.error('Please login first');
       return;
-    }
-    // if (productInCart) {
-    //   toast.warn('Product already exists in the cart!');
-    // } 
+    } 
     else {
       try {
         // Call the API function to add the product to the cart
-        const updatedProduct = await addProductToWishlist(_id, authToken); // Assuming quantity is 1, adjust as per your requirements
-        // Update the cart state with the updated product from the API response
-        addToWish(updatedProduct);
-        toast('Product added to the wishlist!');
+        await addProductToWishlist(_id, authToken); 
+        toast('Product added to the wishlist!', {
+          position: 'top-left'
+        });
       } catch (error) {
         // Handle API errors here
         console.error(error);
@@ -63,16 +59,18 @@ const SingleProductDetails = ({ product }) => {
     // console.log('authToken', authToken);
 
     if (!isLoggedIn) {
-      toast.error('Please login first');
+      toast.error('Please login first', {
+        position: 'top-left'
+      });
       return;
     }
     else {
       try {
         // Call the API function to add the product to the cart
-        const updatedProduct = await addProductToCart(_id, 1, authToken); // Assuming quantity is 1, adjust as per your requirements
-        // Update the cart state with the updated product from the API response
-        addToCart(updatedProduct);
-        toast('Product added to the cart!');
+        await addProductToCart(_id, 1, authToken); // Assuming quantity is 1
+        toast('Product added to the cart!', {
+          position: 'top-left'
+        });
       } catch (error) {
         // Handle API errors here
         console.error('error', error);
@@ -84,7 +82,6 @@ const SingleProductDetails = ({ product }) => {
   return (
     <>     
       <div className='breadcrumbs'>
-        {/* <ToastContainer /> */}
         <Grid item>
           <Breadcrumbs>
             <Link to='/'>Home</Link>
@@ -142,7 +139,7 @@ const SingleProductDetails = ({ product }) => {
               </Button>
               {isDescriptionVisible && (
                 <Typography variant="body1" dangerouslySetInnerHTML={{ __html: description }} className='descriptionDetails' />
-            )}
+              )}
             </div>
 
             <div className='reviewsHolder'>

@@ -7,11 +7,9 @@ import { Grid, Typography, Pagination } from '@mui/material';
 
 const SearchResults = () => {
   const location = useLocation();
-  // const {searchTerm} = useParams()
   const queryParams = new URLSearchParams(location.search);
   const searchTerm = queryParams.get('name');
   const [searchResults, setSearchResults] = useState([]);
-  const [page, setPage] = useState(1);
   const limit = 500;
 
   useEffect(() => {

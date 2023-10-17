@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "../src/styles/App.css";
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from './components/utils/AuthProvider';
@@ -23,10 +23,23 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate an asynchronous authentication check
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="App">
       <Header />
-      <ToastContainer autoClose={1500} />
+      <ToastContainer autoClose={1000} />
 
       <Routes>
         <Route path='/' element={<Home />} />

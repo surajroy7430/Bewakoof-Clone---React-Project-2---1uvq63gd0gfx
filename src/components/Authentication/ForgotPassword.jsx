@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import './styles/LoginAndSignup.css';
 import { forgotPassword } from '../utils/Apis';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ForgotPassword = () => {
@@ -32,7 +32,6 @@ const ForgotPassword = () => {
 
     return (
         <Box sx={{marginTop: '150px'}}>
-            {/* <ToastContainer /> */}
             <Box sx={{display: 'flex'}}>
                 <Box className='form-container'>
                     <Avatar className='avatar' />

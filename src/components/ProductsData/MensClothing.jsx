@@ -12,18 +12,19 @@ const MensClothing = () => {
     const [isLoading, setIsLoading] = useState(true);
     const limit = 500;
 
-    const fetchData = async(page) => {
-      try {
-        const mensProducts = await getProductsData(page, limit, 'Men');
-        setProducts(mensProducts);
-        // console.log('mensProducts', mensProducts);
-      } catch (error) {
-        console.log("Error: ", error);
-      }
-    }
     useEffect(() => {
-        fetchData(page);
-    }, [page]);
+      const fetchData = async(page) => {
+        try {
+          const mensProducts = await getProductsData(page, limit, 'Men');
+          setProducts(mensProducts);
+          // console.log('mensProducts', mensProducts);
+        } catch (error) {
+          console.log("Error: ", error);
+        }
+      }
+
+      fetchData(page);
+    }, [page])
 
     const handlePageChange = (event, newPage) => {
       setPage(newPage);

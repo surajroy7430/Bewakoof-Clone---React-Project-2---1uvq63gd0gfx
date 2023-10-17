@@ -3,7 +3,6 @@ import './styles/WishList.css';
 import { Breadcrumbs, Button, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils/AuthProvider';
-import CartItems from './CartItems';
 import WishListItems from './WishListItems';
 
 const WishList = () => {
@@ -44,10 +43,10 @@ const WishList = () => {
             </Grid>
           </div>
             <Grid container spacing={2}>
-                {wishlist && wishlist.map((items, i) => (
+                {wishlist && wishlist.map((item, i) => (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={i + 1}>
                     <WishListItems  
-                      products={items.products} 
+                      products={item.products} 
                       className='cartCardWrapper' 
                     />
                   </Grid>

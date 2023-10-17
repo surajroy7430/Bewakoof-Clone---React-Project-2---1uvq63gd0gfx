@@ -30,6 +30,7 @@ const SingleProductPage = () => {
 
     fetchProductDetails();
   }, [productId]);
+  
   return (
     <div>
       {isLoading ? (

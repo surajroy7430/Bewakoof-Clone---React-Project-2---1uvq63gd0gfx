@@ -119,7 +119,7 @@ export const addProductToCart = async (productId, quantity, authToken) => {
         // console.log(response.data.data.items);
         console.log('cart API Patch', response.data.data);
         // console.log(response.data);
-        return response.data.data;
+        return response.data.data.items;
     } catch (error) {
         throw error;
     }
@@ -133,7 +133,7 @@ export const getCartProducts = async (authToken) => {
         // console.log(response.data.data.items);
         console.log( 'cart API Get', response.data.data);
         // console.log(response.data);
-        return response.data.data;
+        return response.data.data.items;
     } catch (error) {
         throw error;
     }
@@ -176,8 +176,8 @@ export const getWishListProducts = async (authToken) => {
             getAuthHeaderConfig(authToken)
         );
 
-        console.log('wishlist API get', response.data.data);
-        return response.data.data;
+        // console.log('wishlist API get', response.data.data);
+        return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
     }

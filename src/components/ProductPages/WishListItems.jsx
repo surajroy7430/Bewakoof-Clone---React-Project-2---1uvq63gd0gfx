@@ -4,26 +4,24 @@ import './styles/WishList.css'
 import { useNavigate } from 'react-router-dom';
 import { addProductToCart } from '../utils/Apis';
 import { toast } from 'react-toastify';
-import { useAuth } from '../utils/AuthProvider';
 
 const WishListItems = ({ products }) => {
     const { _id, displayImage, brand, name, price} = products;
-    const { addToCart } = useAuth();
     const navigate = useNavigate();
 
     const showProductDetails = () => {
         navigate(`/product/${_id}`);
     }
     const handleAddToCart = async() => {
-        console.log('prdoct', _id);
+        // console.log('prdoct', _id);
         const authToken = localStorage.getItem('authToken');
         // console.log('authToken', authToken);
         try {
             // Call the API function to add the product to the cart
-            const updatedProduct = await addProductToCart(_id, 1, authToken); // Assuming quantity is 1, adjust as per your requirements
-            // Update the cart state with the updated product from the API response
-            addToCart(updatedProduct);
-            toast('Product added to the cart!');
+            await addProductToCart(_id, 1, authToken); // Assuming quantity is 1
+            toast('Product added to the cart!', {
+                position: 'top-left'
+            });
         } catch (error) {
             // Handle API errors here
             console.error('error', error);
@@ -62,4 +60,4 @@ const WishListItems = ({ products }) => {
   )
 }
 
-export default WishListItems
+export default WishListItems;

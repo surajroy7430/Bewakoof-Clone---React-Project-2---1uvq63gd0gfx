@@ -6,7 +6,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([])
     const [wishlist, setWishList] = useState([])
     const authToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('userInfo');
@@ -27,7 +27,7 @@ export const AuthProvider = ({children}) => {
             try {
                 const cartItems = await getCartProducts(authToken);
                 setCart(cartItems);
-                console.log("cartItems", cartItems.items);
+                console.log("cartItems", cartItems);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
@@ -38,8 +38,8 @@ export const AuthProvider = ({children}) => {
         const fetchWishlistItems = async () => {
             try {
                 const wishlistItems = await getWishListProducts(authToken);
-                setWishList(wishlistItems.items);
-                console.log("wishlistItems", wishlistItems.items);
+                setWishList(wishlistItems);
+                console.log("wishlistItems", wishlistItems);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
@@ -64,25 +64,6 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem('userInfo');
     }
 
-    const addToWish = (product) => {
-        const updatedWish = [...wishlist, product];
-        setWishList(updatedWish);
-    };
-    
-    const removeFromWish = (productId) => {
-        const updatedWish = wishlist.filter((item) => item.productId !== productId);
-        setWishList(updatedWish);
-    };
-
-    const addToCart = (product) => {
-        console.log('addtocart', cart);
-        const updatedCart = [...cart, product];
-        setCart(updatedCart);
-    };
-    
-    const removeFromCart = (productId) => {
-        setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
-    };
   return (
     <AuthContext.Provider 
         value={{
@@ -91,11 +72,7 @@ export const AuthProvider = ({children}) => {
             loginUser, 
             logout, 
             wishlist, 
-            addToWish, 
-            removeFromWish, 
-            cart, 
-            addToCart, 
-            removeFromCart
+            cart,  
         }}
     >
         {children}
