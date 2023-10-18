@@ -1,7 +1,8 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
 import React from 'react'
 import './Cart.css'
 import { useNavigate } from 'react-router-dom';
+import { Close } from '@mui/icons-material';
 
 const CartItems = ({ product, quantity }) => {
     const { _id, displayImage, brand, name, price} = product;

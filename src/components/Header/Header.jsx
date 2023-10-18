@@ -27,7 +27,6 @@ const Header = () => {
     // Check if cart or cart.items is undefined before accessing its properties
     const cartItemCount = cart && cart.items ? cart.items.length : 0;
 
-
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
     }

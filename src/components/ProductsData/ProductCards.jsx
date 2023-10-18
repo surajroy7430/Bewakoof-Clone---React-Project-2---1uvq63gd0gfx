@@ -10,7 +10,9 @@ import { useAuth } from '../utils/AuthProvider';
 
 const ProductCards = (props) => {
     const {_id, name, displayImage, price, brand} = props;
+    // console.log('___id', _id);
     const { isLoggedIn, wishlist } = useAuth();
+    const isProductInWishlist =  wishlist && wishlist.some(item => item.products._id === _id);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -90,7 +92,7 @@ const ProductCards = (props) => {
                             onClick={handleAddToWishList}
                             
                         >
-                            <FavoriteBorder style={{color: wishlist.find(item => item._id === _id) ? 'red' : 'black'}} />
+                            <FavoriteBorder style={{color: isProductInWishlist ? 'red' : 'black'}} />
                         </IconButton>
                     </>
                 )}

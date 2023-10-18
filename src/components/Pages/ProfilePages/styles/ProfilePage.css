@@ -9,8 +9,15 @@ hr.profileDivider {
     border-style: inset;
     border-width: 0;
 }
+hr.profileOptionsDivider {
+    color: #979797;
+    width: 100%;
+    max-width: 400px;
+}
 .accountOptions {
-    width: 33%;
+    width: 50%;
+    margin: 30px;
+    white-space: nowrap;
 }
 .accountOptions a {
     text-decoration: none;

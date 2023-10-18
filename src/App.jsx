@@ -20,6 +20,7 @@ import SingleProductPage from './components/ProductPages/SingleProduct/SinglePro
 import ForgotPassword from './components/Authentication/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
 import Checkout from './components/ProductPages/CheckOut/CheckoutPage';
+import MyProfile from './components/Pages/ProfilePages/MyProfile';
 
 function App() {
   const { user } = useAuth();
@@ -54,6 +55,7 @@ function App() {
         <Route path='/product/:productId' element={<SingleProductPage />} />
         <Route path='/myaccount' element={user ? <ProfilePage /> : <Navigate to='/login' />} />
         <Route path='/myaccount/orders' element={user ? <MyOrders /> : <Navigate to='/login' />} />
+        <Route path='/myaccount/profile' element={user ? <MyProfile /> : <Navigate to='/login' />} />
         <Route path='/wishlist' element={user ? <WishList /> : <Navigate to='/login' />} />
         <Route path='/cart' element={user ? <Cart /> : <Navigate to='/login' />} />
         <Route path='/checkout' element={<Checkout />} />

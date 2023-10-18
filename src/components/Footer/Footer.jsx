@@ -13,7 +13,6 @@ import {
 } from '@mui/icons-material';
 import { Col, Container, Form, Image, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-// import Bewakoof from '../../'
 
 const Footer = () => {
     return (
@@ -31,7 +30,7 @@ const Footer = () => {
                 <section>
                     <Row>
                         <Col sm={6} md={3} className='footerMenu'>
-                            <heading>Customer Service</heading>
+                            <h6>Customer Service</h6>
                             <ListGroup>
                                 <ul>
                                     <li className='li'><Link>Contact Us</Link></li>
@@ -42,7 +41,7 @@ const Footer = () => {
                             </ListGroup>
                         </Col>
                         <Col sm={6} md={3} className='footerMenu'>
-                            <heading>Company</heading>
+                            <h6>Company</h6>
                             <ListGroup>
                                 <ul>
                                     <li className='li'><Link>About Us</Link></li>
@@ -54,7 +53,7 @@ const Footer = () => {
                             </ListGroup>
                         </Col>
                         <Col sm={6} md={3} className='footerMenuSocial'>
-                            <heading>Connect With Us</heading>
+                            <h6>Connect With Us</h6>
                             <ListGroup>
                                 <ul className='socialIcons'>
                                     <li className='fb-insta'>
@@ -90,10 +89,10 @@ const Footer = () => {
                         </Col>
 
                         <Col sm={6} md={3} className='footerMenuSearch'>
-                            <heading style={{paddingBottom: '1rem'}}>Keep up to date</heading>
+                            <h6 style={{paddingBottom: '1rem'}}>Keep up to date</h6>
                             <ListGroup>
                                 <ul>
-                                    <Form inline>
+                                    <Form inline='true'>
                                         <InputGroup>
                                             <input type='email' required placeholder='Enter Email Id' />
                                             <button type="submit">SUBSCRIBE</button>
@@ -128,7 +127,7 @@ const Footer = () => {
                             </ListGroup>
                         </Col>
                         <Col sm={6} md={3}>
-                            <heading>Download the app</heading>
+                            <h6>Download the app</h6>
                             <ListGroup>
                                 <ul>
                                     <Link 
@@ -163,7 +162,7 @@ const Footer = () => {
                         </Col>
                         <Col sm={12} md={6} style={{padding: '8px 10px'}} className='securePayment'>
                             <ListGroup>
-                                <heading>100% secure payment</heading>
+                                <h6>100% secure payment</h6>
                                 <ul>
                                     <Image 
                                         width='350px'

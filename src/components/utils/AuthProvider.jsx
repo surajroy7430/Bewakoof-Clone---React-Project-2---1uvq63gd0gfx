@@ -27,7 +27,7 @@ export const AuthProvider = ({children}) => {
             try {
                 const cartItems = await getCartProducts(authToken);
                 setCart(cartItems);
-                console.log("cartItems", cartItems);
+                // console.log("cartItems", cartItems);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }
@@ -39,7 +39,7 @@ export const AuthProvider = ({children}) => {
             try {
                 const wishlistItems = await getWishListProducts(authToken);
                 setWishList(wishlistItems);
-                console.log("wishlistItems", wishlistItems);
+                // console.log("wishlistItems", wishlistItems);
             } catch (error) {
                 console.error('Error fetching cart items:', error);
             }

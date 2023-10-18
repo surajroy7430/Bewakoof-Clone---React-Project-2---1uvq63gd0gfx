@@ -38,25 +38,34 @@ div.productNameWrapper {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+div.breadcrumbsAndOrderButton {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+}
 div.cartBreadcrumbs {
+    margin-top: 100px;
     margin-left: 50px;
 }
 div.cartBreadcrumbs a {
     text-decoration: none;
     color: #000;
 }
+
 div.orderButtonWrapper {
-    margin-right: 50px;
+    margin-right: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
-}
-div.breadcrumbsAndOrderButton {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
-    white-space: nowrap;
+    gap: 30px;
+    position: fixed;
+    z-index: 1;
+    top: 65px;
+    right: 0;
+    background-color: #fff;
+    padding: 20px 10px;
+    border-radius: 5px;
 }
 button.orderNowButton {
     background-color: rgb(66, 162, 162);
@@ -70,6 +79,11 @@ button.orderNowButton:hover {
 p.subTotal {
     font-size: 20px;
 }
+@media (max-width: 1199px) {
+    div.orderButtonWrapper {
+        top: 66px;
+    }
+}
 @media (max-width: 699px) {
     div.breadcrumbsAndOrderButton {
         flex-direction: column;
@@ -78,6 +92,9 @@ p.subTotal {
     }
     div.orderButtonWrapper {
         margin-left: 50px;
+        position: inherit;
+        padding: 0;
+        z-index: 0;
     }
 }
 @media (max-width: 399px) {

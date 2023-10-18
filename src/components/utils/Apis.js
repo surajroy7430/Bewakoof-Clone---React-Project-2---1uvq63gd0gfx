@@ -116,9 +116,7 @@ export const addProductToCart = async (productId, quantity, authToken) => {
             },
             getAuthHeaderConfig(authToken)
         );
-        // console.log(response.data.data.items);
-        console.log('cart API Patch', response.data.data);
-        // console.log(response.data);
+        // console.log('cart API Patch', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error;
@@ -130,9 +128,7 @@ export const getCartProducts = async (authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/cart`,
             getAuthHeaderConfig(authToken)
         );
-        // console.log(response.data.data.items);
-        console.log( 'cart API Get', response.data.data);
-        // console.log(response.data);
+        // console.log( 'cart API Get', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error;
@@ -144,9 +140,7 @@ export const deleteProductFromCart = async (productId, authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        // console.log(response.data.data.items);
-        console.log( 'cart API Get', response.data.data);
-        // console.log(response.data);
+        console.log( 'cart API Delete', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error.response.data.message;
@@ -180,6 +174,25 @@ export const getWishListProducts = async (authToken) => {
         return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
+    }
+};
+
+export const placeOrder = async (productId, quantity, address, authToken) => {
+    try {
+        const response = await axios.post(
+            `${BASE_DOMAIN}/api/v1/ecommerce/order`,
+            {
+                productId: productId,
+                quantity: quantity,
+                addressType: 'HOME',
+                address: address,
+            },
+            getAuthHeaderConfig(authToken)
+        );
+        console.log('Order API POST', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error;
     }
 };
 
