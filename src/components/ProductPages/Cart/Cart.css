@@ -64,7 +64,7 @@ div.orderButtonWrapper {
     top: 65px;
     right: 0;
     background-color: #fff;
-    padding: 20px 10px;
+    padding: 15px 10px;
     border-radius: 5px;
 }
 button.orderNowButton {
@@ -78,6 +78,16 @@ button.orderNowButton:hover {
 }
 p.subTotal {
     font-size: 20px;
+}
+
+button.removeFromCartButton {
+    color: #555657;
+    background-color: transparent;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+button.removeFromCartButton:hover {
+    background-color: #fff8db;
 }
 @media (max-width: 1199px) {
     div.orderButtonWrapper {

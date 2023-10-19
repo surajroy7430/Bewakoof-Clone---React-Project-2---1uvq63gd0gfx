@@ -71,8 +71,8 @@ const Home = () => {
           <div className='missed-container'>
             <Typography variant='h5' textAlign='center'>TO HOT TO BE MISSED</Typography>
             <Image 
-              src='https://images.bewakoof.com/uploads/grid/app/DESKTOP-mid-size-hygiene-revamp-B3999-1696669434.jpg'
-              alt='DESKTOP-mid-size-hygiene-revamp'
+              src='https://images.bewakoof.com/uploads/grid/app/desktop-mid-size-hygiene-revamp-parachute--1--1697523796.jpg'
+              alt='DESKTOP-mid-size-hygiene-revamp-parachute'
               style={{width: isSM ? '100%' : '50%'}}
             />
             <Image 

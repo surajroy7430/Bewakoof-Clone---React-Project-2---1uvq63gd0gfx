@@ -41,7 +41,7 @@ export const AuthProvider = ({children}) => {
                 setWishList(wishlistItems);
                 // console.log("wishlistItems", wishlistItems);
             } catch (error) {
-                console.error('Error fetching cart items:', error);
+                console.error('Error fetching wishlist items:', error);
             }
         };
     

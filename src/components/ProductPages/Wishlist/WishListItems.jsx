@@ -1,8 +1,11 @@
-import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Button, ButtonGroup, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
 import './WishList.css'
 import { useNavigate } from 'react-router-dom';
-import { addProductToCart } from '../../utils/Apis';
+import { 
+    addProductToCart, 
+    deleteOneProductFromWishlist 
+} from '../../utils/Apis';
 import { toast } from 'react-toastify';
 
 const WishListItems = ({ products }) => {
@@ -28,6 +31,17 @@ const WishListItems = ({ products }) => {
             // toast.error('Failed to add product to cart. Please try again later.');
         }
     }
+
+    const removeFromWishlist = async () => {
+        const authToken = localStorage.getItem('authToken');
+        try {
+            await deleteOneProductFromWishlist(_id, authToken);
+            toast.info('Deleted');
+        } catch (error) {
+            toast.error(error);
+            console.error('error: ', error);
+        }
+    }
     
   return (
     <Card className='cartsCard'>
@@ -49,13 +63,22 @@ const WishListItems = ({ products }) => {
             </Typography>
             
         </CardContent>
-        <Button 
-            variant='text' 
-            fullWidth 
-            className='addToCartButton'
-            onClick={handleAddToCart}
-        >
-            Add To Cart</Button>
+        <ButtonGroup fullWidth>
+            <Button 
+                variant='text'
+                className='addToCartButton'
+                onClick={handleAddToCart}
+            >
+                Add To Cart
+            </Button>
+            <Button 
+                variant='text'
+                className='removefromWishlistButton'
+                onClick={removeFromWishlist}
+            >
+                Remove
+            </Button>
+        </ButtonGroup>
     </Card>
   )
 }

@@ -48,7 +48,6 @@ const CarouselComp = () => {
     >
         <div>
             <img 
-                className='d-block w-100' 
                 src='https://images.bewakoof.com/uploads/grid/app/1x1-static-resort-01--1--1697112502.jpg' 
                 alt='first_slide'
                 style={{cursor: 'pointer', width: '100%'}} 
@@ -73,7 +72,7 @@ const CarouselComp = () => {
         </div>
         <div>
             <img 
-                src='https://images.bewakoof.com/uploads/grid/app/newbanner-1x1-SweatsHoods-common-prrinted--1--1696841595.jpg' 
+                src='https://images.bewakoof.com/uploads/grid/app/1x1-static-naruto-Graphic-1-1697689879.jpg' 
                 alt='fourth_slide'
                 style={{cursor: 'pointer', width: '100%'}}
                 onClick={toProducts}

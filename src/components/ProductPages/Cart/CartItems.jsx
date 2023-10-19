@@ -1,8 +1,9 @@
-import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
 import React from 'react'
 import './Cart.css'
 import { useNavigate } from 'react-router-dom';
-import { Close } from '@mui/icons-material';
+import { toast } from 'react-toastify';
+import { deleteOneProductFromCart } from '../../utils/Apis';
 
 const CartItems = ({ product, quantity }) => {
     const { _id, displayImage, brand, name, price} = product;
@@ -11,6 +12,18 @@ const CartItems = ({ product, quantity }) => {
     const showProductDetails = () => {
         navigate(`/product/${_id}`);
     }
+
+    const removeFromCart = async () => {
+        const authToken = localStorage.getItem('authToken');
+        try {
+            await deleteOneProductFromCart(_id, authToken);
+            toast.info('Deleted');
+        } catch (error) {
+            toast.error(error);
+            console.error('error: ', error);
+        }
+    }
+
   return (
     <Card className='cartsCard'>
         <CardMedia
@@ -38,6 +51,14 @@ const CartItems = ({ product, quantity }) => {
                 </Typography>
             ) : null}
         </CardContent>
+        <Button 
+            variant='text' 
+            fullWidth 
+            className='removeFromCartButton'
+            onClick={removeFromCart}
+        >
+            Remove
+        </Button>
     </Card>
   )
 }

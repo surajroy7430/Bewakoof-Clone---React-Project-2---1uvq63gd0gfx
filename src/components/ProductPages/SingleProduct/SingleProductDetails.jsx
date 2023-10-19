@@ -12,7 +12,8 @@ import { addProductToWishlist } from '../../utils/Apis';
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
   // console.log('images', images);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, wishlist } = useAuth();
+  const isProductInWishlist =  wishlist && wishlist.find(item => item.products._id === _id);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -127,7 +128,8 @@ const SingleProductDetails = ({ product }) => {
               </Button>
 
               <Button variant="outlined" className='add_to_wishlist' onClick={handleAddToWishList}>
-                <FavoriteOutlined /> WISHLIST
+                <FavoriteOutlined style={{color: isProductInWishlist ? 'red' : 'rgb(148, 148, 148)'}} />&nbsp;
+                {isProductInWishlist ? 'WISHLISTED' : 'WISHLIST'}
               </Button>
             </div>
 

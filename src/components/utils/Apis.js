@@ -100,6 +100,7 @@ export const getProductsByFilter = async (filterTerm, title, limit) => {
       `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter={"${title}":"${filterTerm}"}&limit=${limit}`, 
       configById
     );
+    console.log('filter DATA', response.data.data);
     return response.data.data;
   } catch (error) {
     throw error.response.data.message;
@@ -131,16 +132,16 @@ export const getCartProducts = async (authToken) => {
         // console.log( 'cart API Get', response.data.data);
         return response.data.data;
     } catch (error) {
-        throw error;
+        throw error.response.data.message;
     }
 }
-export const deleteProductFromCart = async (productId, authToken) => {
+export const deleteOneProductFromCart = async (productId, authToken) => {
     try {
         const response = await axios.delete(
             `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        console.log( 'cart API Delete', response.data.data);
+        // console.log( 'cart API Delete', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error.response.data.message;
@@ -157,7 +158,7 @@ export const addProductToWishlist = async (productId, authToken) => {
             getAuthHeaderConfig(authToken)
         );
 
-        console.log('wishlist API Patch', response.data.data.items);
+        // console.log('wishlist API Patch', response.data.data.items);
         return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
@@ -176,6 +177,30 @@ export const getWishListProducts = async (authToken) => {
         throw error.response.data.message;
     }
 };
+export const deleteOneProductFromWishlist = async (productId, authToken) => {
+    try {
+        const response = await axios.delete(
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
+            getAuthHeaderConfig(authToken)
+        );
+        // console.log( 'wishlist API Delete', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+}
+export const deleteAllProductsFromWishlist = async (authToken) => {
+    try {
+        const response = await axios.delete(
+            `${BASE_DOMAIN}/api/v1/ecommerce/wishlist`,
+            getAuthHeaderConfig(authToken)
+        );
+        // console.log( 'wishlist API Delete', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+}
 
 export const placeOrder = async (productId, quantity, address, authToken) => {
     try {
