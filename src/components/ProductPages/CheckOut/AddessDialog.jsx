@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 
 const AddressDialog = ({ open, onClose, onSave }) => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
     const [street, setStreet] = useState('');
     const [city, setCity] = useState('');
@@ -24,8 +22,6 @@ const AddressDialog = ({ open, onClose, onSave }) => {
 
     const handleSave = () => {
         onSave({
-            name,
-            email,
             mobile,
             street,
             city,
@@ -41,20 +37,6 @@ const AddressDialog = ({ open, onClose, onSave }) => {
         <DialogTitle>Add Address</DialogTitle>
         <DialogContent>
             <TextField
-                label="Name"
-                fullWidth
-                margin="normal"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-                label="Email"
-                fullWidth
-                margin="normal"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
                 label="Mobile Number"
                 fullWidth
                 margin="normal"
@@ -64,28 +46,36 @@ const AddressDialog = ({ open, onClose, onSave }) => {
             <TextField
                 label="Street"
                 fullWidth
+                type='text'
                 margin="normal"
+                required
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
             />
             <TextField
                 label="City"
+                type='text'
                 fullWidth
                 margin="normal"
+                required
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
             />
             <TextField
                 label="State"
+                type='text'
                 fullWidth
                 margin="normal"
+                required
                 value={state}
                 onChange={(e) => setState(e.target.value)}
             />
             <TextField
                 label="Country"
+                type='text'
                 fullWidth
                 margin="normal"
+                required
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
             />
@@ -93,6 +83,7 @@ const AddressDialog = ({ open, onClose, onSave }) => {
                 label="Zip Code"
                 fullWidth
                 margin="normal"
+                required
                 value={zipCode}
                 onChange={handleZipCodeChange}
             />
@@ -105,8 +96,6 @@ const AddressDialog = ({ open, onClose, onSave }) => {
                 onClick={handleSave} 
                 color="primary"
                 disabled={
-                    name.length === 0 ||
-                    email.length === 0 ||
                     mobile.length === 9 ||
                     street.length === 0 ||
                     city.length === 0 ||

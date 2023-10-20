@@ -21,7 +21,7 @@ const ProfilePage = () => {
               fontSize: '35px', 
               fontWeight: '600',
         }}>My Account</Typography>
-        <Divider orientation='horizontal' variant='middle' flexItem className='profileDivider' />
+        <Divider orientation='horizontal' className='profileDivider' />
 
         <Box sx={{display: 'flex', flexDirection: 'column', marginTop: '50px', marginBottom: '20px'}}>
           <Box className='accountOptions'>

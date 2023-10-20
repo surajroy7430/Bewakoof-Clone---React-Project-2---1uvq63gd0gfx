@@ -1,0 +1,36 @@
+button.addressButton, 
+button.changeAddressButton,
+div.addressWrapper,
+button.paymentButton,
+button.placeOrderButton {
+    white-space: nowrap;
+}
+p.checkoutItemId,
+p.checkoutItemName {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+button.paymentButton,
+button.placeOrderButton,
+.stripePayment {
+    width: 40%;
+}
+button.paymentButton {
+    color: #42a2a2;
+    border-color: #42a2a2;
+}
+button.paymentButton:hover {
+    color: #42a2a2;
+    border-color: #42a2a2;
+}
+@media (max-width: 599px) {
+    button.paymentButton,
+    button.placeOrderButton {
+        width: 50%;
+        font-size: 11px;
+        overflow: hidden;
+    }
+}

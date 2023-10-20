@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <small>Loading...</small>
   }
 
   return (
