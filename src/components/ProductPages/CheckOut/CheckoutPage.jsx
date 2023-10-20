@@ -21,10 +21,11 @@ const Checkout = () => {
   const productQuantity = cartAPI && cartAPI.map(item => item.quantity);
   const productItems = cartAPI && cartAPI.map((item) => ({
     productId: item.product._id,
-    quantity: item.quantity
+    quantity: item.quantity,
+    addressType: 'HOME',
+    address: address
   }));
   console.log(productItems);
-  const type = 'HOME';
 
   // console.log( 'cartAPI place order', cartAPI.map((item) => item._id));
   const handleSaveAddress = (newAddress) => {
@@ -47,11 +48,7 @@ const Checkout = () => {
 
   const handlePlaceOrder = async () => {
     try {
-      const response = await placeOrder(
-        productItems,
-        address,
-        authToken
-      )
+      const response = await placeOrder(productItems ,authToken)
 
       console.log('order placed', response);
     } catch (error) {
