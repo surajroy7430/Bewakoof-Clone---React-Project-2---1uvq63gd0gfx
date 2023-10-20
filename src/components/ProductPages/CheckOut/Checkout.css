@@ -1,3 +1,14 @@
+hr.checkoutDivider {
+    width: 100%;
+    max-width: 130px;
+    background: #fdd835;
+    height: 2px;
+    margin: 15px 0 50px;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    border-style: inset;
+    border-width: 0;
+}
 button.addressButton, 
 button.changeAddressButton,
 div.addressWrapper,

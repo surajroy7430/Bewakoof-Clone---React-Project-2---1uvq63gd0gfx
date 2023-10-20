@@ -202,19 +202,40 @@ export const deleteAllProductsFromWishlist = async (authToken) => {
     }
 }
 
-export const placeOrder = async (productId, quantity, address, authToken) => {
+export const placeOrder = async (orderData, authToken) => {
     try {
         const response = await axios.post(
-            `${BASE_DOMAIN}/api/v1/ecommerce/order`,
-            {
-                productId: productId,
-                quantity: quantity,
-                addressType: "HOME",
-                address: address,
-            },
+            `${BASE_DOMAIN}/api/v1/ecommerce/order`, 
+            orderData,
             getAuthHeaderConfig(authToken)
         );
         console.log('Order API POST', response.data.data);
+        return response.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+};
+export const getPlacedOrders = async (authToken) => {
+    try {
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/order`,
+            getAuthHeaderConfig(authToken)
+        );
+
+        console.log('get placed orders', response.data.data);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
+};
+export const getOnePlacedOrderDetail = async (orderId, authToken) => {
+    try {
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/order/${orderId}`,
+            getAuthHeaderConfig(authToken)
+        );
+
+        console.log('placed order detail', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error.response.data.message;

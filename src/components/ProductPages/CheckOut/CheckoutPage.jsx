@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
 import './Checkout.css';
-import { placeOrder } from '../../utils/Apis';
+import { deleteOneProductFromCart, placeOrder } from '../../utils/Apis';
 import { useAuth } from '../../utils/AuthProvider';
 import { Box, Button, Container, Divider, Grid, MenuItem, Menu, Paper, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import AddressDialog from './AddessDialog';
 import StripeCheckout from 'react-stripe-checkout';
+import { toast } from 'react-toastify';
 
 const Checkout = () => {
   const { user, cart } = useAuth();
   const cartAPI = cart.items;
+  const { _id } = cartAPI && cartAPI[0].product
 
   const [address, setAddress] = useState(user.address || {});
-  const authToken = localStorage.getItem("authToken");
   // console.info(user)
   const [dialogOpen, setDialogOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('COD');
   const [anchorEl, setAnchorEl] = useState(null);
-  const productIds = cartAPI && cartAPI.map(item => item.product._id);
-  const productQuantity = cartAPI && cartAPI.map(item => item.quantity);
-  const productItems = cartAPI && cartAPI.map((item) => ({
-    productId: item.product._id,
-    quantity: item.quantity,
+
+  const orderData = {
+    productId:  cartAPI && cartAPI[0].product._id,
+    quantity:  cartAPI && cartAPI[0].quantity,
     addressType: 'HOME',
     address: address
-  }));
-  console.log(productItems);
+  }
+  // console.log(orderData)
 
-  // console.log( 'cartAPI place order', cartAPI.map((item) => item._id));
   const handleSaveAddress = (newAddress) => {
     // const updatedAddress = [...user.address, newAddress];
     setAddress(newAddress);
@@ -40,31 +39,28 @@ const Checkout = () => {
     setAnchorEl(null);
     setPaymentMethod(method);
   };
-  // console.log('qunatity',cart.quantity);
-  // console.log('_id',cartAPI.map((item) => item.product._id));
-  // console.log('_id', user.address);
-  // console.log('_id',authToken);
-  
 
-  const handlePlaceOrder = async () => {
+  const removeFromCart = async () => {
+    const authToken = localStorage.getItem('authToken');
     try {
-      const response = await placeOrder(productItems ,authToken)
-
-      console.log('order placed', response);
+      await deleteOneProductFromCart(_id, authToken);
     } catch (error) {
-      console.error('placeorder', error);
+      console.error(null);
     }
   }
-  const handlePayWithCard = async (token) => {
+  
+  const handlePlaceOrder = async (token) => {
+    const authToken = localStorage.getItem('authToken');
     try {
-      const response = await placeOrder(
-        productItems,
-        address,
-        authToken,
-        token.id)
-        console.log('place order', response);
+      const response = await placeOrder(orderData, authToken, token.id)
+
+      console.log('order placed', response);
+      toast(response.message);
+      // console.log(response.message);
+      removeFromCart();
     } catch (error) {
-      console.error('placeorder', error);
+      // console.error('placeorder', error);
+      toast.error('Address is Required');
     }
   }
 
@@ -74,12 +70,12 @@ const Checkout = () => {
         <Typography variant='h3' sx={{fontSize: '35px', fontWeight: '600',}}>
           Checkout
         </Typography>
-        <Divider orientation='horizontal' className='profileDivider' />
+        <Divider orientation='horizontal' className='checkoutDivider' />
         
         <Grid container spacing={6} justifyContent='center' mt>
           <Grid item xs={12} md={9} lg={5}>
-            {cartAPI && cartAPI.map((item) => (
-                <Card elevation={5} style={{ padding: 10, marginBottom: 20 }}>
+            {cartAPI && cartAPI.map((item, i) => (
+                <Card key={i+1} elevation={5} style={{ padding: 10, marginBottom: 20 }}>
                   <Grid container>
                     <Grid item xs={4}>
                       <CardMedia
@@ -157,7 +153,7 @@ const Checkout = () => {
               </h4>
               <CardContent style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <div>
-                  <b>Total Price: </b>₹{cart.totalPrice}
+                  <b>Total Price: </b>₹{cartAPI && cartAPI[0].product.price*cartAPI[0].quantity}
                 </div>
                 <Button 
                   variant='outlined' 
@@ -192,8 +188,8 @@ const Checkout = () => {
                 ) : paymentMethod === 'Card' ? (
                   <StripeCheckout
                     stripeKey="pk_live_51O2uQoSDri24Myy1TYDG1Rzm2x8CCJOSlG0oqGprnUOSrdUpqgyreIkJXH9SevgqjwgOWc0kXiycgq0UMw0f460r006stDAD7M"
-                    token={handlePayWithCard}
-                    amount={cart.totalPrice * 100} // Amount in cents
+                    token={handlePlaceOrder}
+                    amount={(cartAPI && cartAPI[0].product.price*cartAPI[0].quantity) * 100} // Amount in cents
                     currency="INR"
                     name="BEWAKOOF"
                     description="Payment for your Order"

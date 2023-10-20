@@ -17,11 +17,11 @@ export const getHeaderWithProjectIDAndBody = () => {
     };
 };
 
-export const getAuthHeaderConfig = (authToken) => {
+export const getAuthHeaderConfig = (token) => {
     return {
         headers: {
             projectID: PROJECT_ID,
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `Bearer ${token}`,
         },
     };
 };
