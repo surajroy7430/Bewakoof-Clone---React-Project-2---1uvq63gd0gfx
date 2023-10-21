@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
                 setCart(cartItems);
                 // console.log("cartItems", cartItems);
             } catch (error) {
-                console.error('Error fetching cart items:', error);
+                console.error(error);
             }
         };
         fetchCartItems();
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
                 setWishList(wishlistItems);
                 // console.log("wishlistItems", wishlistItems);
             } catch (error) {
-                console.error('Error fetching wishlist items:', error);
+                console.error(error);
             }
         };
         fetchWishlistItems();
@@ -50,9 +50,9 @@ export const AuthProvider = ({ children }) => {
             try {
                 const placedItems = await getPlacedOrders(authToken);
                 setOrders(placedItems);
-                console.log("placed Items", placedItems);
+                // console.log("placed Items", placedItems);
             } catch (error) {
-                console.error('Error fetching placed orders items:', error);
+                console.error(error);
             }
         };
         fetchPlacedOrders();

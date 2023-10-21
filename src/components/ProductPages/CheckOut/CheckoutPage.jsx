@@ -7,6 +7,7 @@ import { ArrowDropDown } from '@mui/icons-material';
 import AddressDialog from './AddessDialog';
 import StripeCheckout from 'react-stripe-checkout';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const { user, cart } = useAuth();
@@ -19,6 +20,8 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState('COD');
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const navigate = useNavigate();
+
   const orderData = {
     productId:  cartAPI && cartAPI[0].product._id,
     quantity:  cartAPI && cartAPI[0].quantity,
@@ -26,6 +29,10 @@ const Checkout = () => {
     address: address
   }
   // console.log(orderData)
+
+  const showProductDetails = () => {
+    navigate(`/product/${_id}`);
+  }
 
   const handleSaveAddress = (newAddress) => {
     // const updatedAddress = [...user.address, newAddress];
@@ -51,16 +58,24 @@ const Checkout = () => {
   
   const handlePlaceOrder = async (token) => {
     const authToken = localStorage.getItem('authToken');
-    try {
-      const response = await placeOrder(orderData, authToken, token.id)
-
-      console.log('order placed', response);
-      toast(response.message);
-      // console.log(response.message);
-      removeFromCart();
-    } catch (error) {
-      // console.error('placeorder', error);
+    
+    if(!address) {
       toast.error('Address is Required');
+      return
+    } else {
+      try {
+        const response = await placeOrder(orderData, authToken, token.id)
+
+        console.log('order placed', response);
+        toast(response.message);
+        // console.log(response.message);
+        removeFromCart();
+        navigate('/myaccount/orders');
+
+        window.location.reload();
+      } catch (error) {
+        console.error('placeorder', error);
+      }
     }
   }
 
@@ -82,7 +97,8 @@ const Checkout = () => {
                         component='img'
                         image={item.product.displayImage}
                         alt={item.product.name}
-                        style={{ height: '200px' }}
+                        style={{ height: '200px', cursor: 'pointer' }}
+                        onClick={showProductDetails}
                       />
                     </Grid>
                     <Grid item xs={8}>
@@ -94,7 +110,10 @@ const Checkout = () => {
                           <b>Name: </b>{item.product.name}
                         </Typography>
                         <Typography className='checkoutItemPrice'>
-                          <b>Price: </b>₹{item.product.price*item.quantity}
+                          <b>Price: </b>₹{item.product.price}
+                        </Typography>
+                        <Typography className='checkoutItemQuantity'>
+                          <b>Quantity: </b>{item.quantity}
                         </Typography>
                       </CardContent>
                     </Grid>
@@ -152,8 +171,9 @@ const Checkout = () => {
                 PRICE SUMMARY
               </h4>
               <CardContent style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <div>
-                  <b>Total Price: </b>₹{cartAPI && cartAPI[0].product.price*cartAPI[0].quantity}
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <b>Total Price for Product 1: </b>
+                  <b>₹{cartAPI && cartAPI[0].product.price*cartAPI[0].quantity}</b>
                 </div>
                 <Button 
                   variant='outlined' 

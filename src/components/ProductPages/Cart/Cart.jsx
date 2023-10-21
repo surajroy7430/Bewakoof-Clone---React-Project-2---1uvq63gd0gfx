@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Cart.css'
 import { Breadcrumbs, Button, Grid, Typography } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
@@ -18,7 +18,6 @@ const Cart = () => {
           <img
             src='	https://images.bewakoof.com/images/doodles/empty-cart-page-doodle.png'
             alt='empty_cart' 
-            loading='lazy' 
             width='170px'
           />
           <Typography className='empty_title'>Nothing in the bag</Typography>

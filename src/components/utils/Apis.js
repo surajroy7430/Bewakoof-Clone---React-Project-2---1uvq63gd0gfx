@@ -15,7 +15,7 @@ export const getProductsData = async(page, limit, gender) => {
         
         return response.data.data.filter(product => product.gender === gender);
     } catch (error) {
-        console.error("Error fetching products: ", error);
+        // console.error("Error fetching products: ", error);
         throw error.response.data.message;
     }
 }
@@ -235,42 +235,46 @@ export const getOnePlacedOrderDetail = async (orderId, authToken) => {
             getAuthHeaderConfig(authToken)
         );
 
-        console.log('placed order detail', response.data.data);
+        // console.log('placed order detail', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error.response.data.message;
     }
 };
 
-export const getProductReviews = async (productId) => {
-    try {
-        const response = await axios.get(
-            `${BASE_DOMAIN}/api/v1/ecommerce/review/${productId}`, configById
-        );
-        return response.data.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const addReview = async (productId, reviewData) => {
+export const addProductReview = async (productId, reviewData, authToken) => {
     try {
         const response = await axios.post(
             `${BASE_DOMAIN}/api/v1/ecommerce/review/${productId}`, 
-            reviewData, configById
+            reviewData, 
+            getAuthHeaderConfig(authToken)
         );
         return response.data.data;
     } catch (error) {
-        throw error;
+        throw error.response.data.message;
     }
 };
 
-export const deleteReview = async (reviewId) => {
+export const getProductReviews = async (productId, authToken) => {
     try {
-        await axios.delete(`${BASE_DOMAIN}/api/v1/ecommerce/review/${reviewId}`, 
-            configById
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/review/${productId}`, 
+            getAuthHeaderConfig(authToken)
         );
+        return response.data.data;
     } catch (error) {
-        throw error;
+        throw error.response.data.message;
+    }
+};
+
+export const deleteProductReview = async (reviewId, authToken) => {
+    try {
+        const response = await axios.delete(
+            `${BASE_DOMAIN}/api/v1/ecommerce/review/${reviewId}`, 
+            getAuthHeaderConfig(authToken)
+        );
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
     }
 };

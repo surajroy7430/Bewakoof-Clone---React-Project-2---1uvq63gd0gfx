@@ -46,6 +46,8 @@ const ProductCards = (props) => {
                 toast('Product added to the wishlist!', {
                     position: 'top-left'
                 });
+                
+                window.location.reload();
             } catch (error) {
                 // Handle API errors here
                 console.error(error);

@@ -22,15 +22,16 @@ const OrderDetailsAPI = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
-        const ordersDetails = await getOnePlacedOrderDetail(orderId);
+        const ordersDetails = await getOnePlacedOrderDetail(orderId, authToken);
         setOrders(ordersDetails);
+        console.log('ordersDetails', ordersDetails);
       } catch (error) {
         console.error('Error fetching order details:', error);
       }
     };
 
     fetchOrderDetails();
-  }, [orderId]);
+  }, [orderId, authToken]);
   
   return (
     <div>

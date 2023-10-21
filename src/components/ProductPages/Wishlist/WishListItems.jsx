@@ -25,6 +25,8 @@ const WishListItems = ({ products }) => {
             toast('Product added to the cart!', {
                 position: 'top-left'
             });
+
+            window.location.reload();
         } catch (error) {
             // Handle API errors here
             console.error('error', error);
@@ -37,6 +39,8 @@ const WishListItems = ({ products }) => {
         try {
             await deleteOneProductFromWishlist(_id, authToken);
             toast.info('Deleted');
+
+            window.location.reload();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);

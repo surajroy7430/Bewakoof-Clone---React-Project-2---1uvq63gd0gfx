@@ -15,6 +15,8 @@ const WishList = () => {
     try {
         await deleteAllProductsFromWishlist(authToken);
         toast.info('Deleted All');
+
+        window.location.reload();
     } catch (error) {
         toast.error(error);
         console.error('error: ', error);
@@ -28,7 +30,6 @@ const WishList = () => {
           <img
             src='https://images.bewakoof.com/web/wishlistEmpty.svg'
             alt='empty_wishlist' 
-            loading='lazy' 
             width='150px'
           />
           <Typography className='empty_title'>Hey! Your wishlist is empty.</Typography>

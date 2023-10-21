@@ -1,10 +1,10 @@
-import { Box, Card, CardContent, CardMedia, Container, Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Button, Card, CardContent, CardMedia, Container, Divider, Grid, Typography, useMediaQuery, useTheme } from '@mui/material'
 import React from 'react';
 import './MyOrders.css';
 import { useAuth } from '../../utils/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const MyOrders = (props) => {
+const MyOrders = () => {
   const { orders } = useAuth();
   // console.log('_id', _id);
 
@@ -33,10 +33,26 @@ const MyOrders = (props) => {
   });
   // console.log('formattedOrders', formattedOrders);
 
-  const showOrderDetails = () => {
-    // navigate(`/order/${_id}`);
-  }
-
+  if(!orders || orders.length === 0) {
+    return (
+      <div id='empty_order'>
+        <div className='empty_order_container'>
+          <img
+            src='	https://images.bewakoof.com/images/doodles/empty-cart-page-doodle.png'
+            alt='empty_order' 
+            width='170px'
+          />
+          <Typography className='empty_title'>Nothing in the Orders</Typography>
+          <Button 
+            className='empty_order_button'
+            variant='contained'
+            LinkComponent={Link}
+            to='/mens-clothing'
+          >Continue Shopping</Button>
+        </div>
+      </div>
+    )
+  } else {
   return (
     <Box sx={{ flexGrow: 1, marginTop: '80px' }}>
       <Container maxWidth='lg'>
@@ -55,14 +71,16 @@ const MyOrders = (props) => {
                         component='img'
                         image={item.order.items[0].product.displayImage}
                         alt={item.order.items[0].product.name}
-                        style={{ height: isSm ? '200px' : '300px', cursor: 'pointer' }}
-                        onClick={showOrderDetails}
+                        style={{ height: isSm ? '250px' : '300px' }}
                       />
                     </Grid>
                     <Grid item xs={8}>
                       <CardContent>
                         <Typography className='orderId'>
-                        <b>Order Id: </b>#{item.order._id}
+                        <b>ORDER#: </b>{item.order._id}
+                        </Typography>
+                        <Typography className='orderDate'>
+                          <b>Order Date: </b>{item.createdAt}
                         </Typography>
                         <Typography className='orderItemName'>
                           <b>Name: </b>{item.order.items[0].product.name}
@@ -70,9 +88,12 @@ const MyOrders = (props) => {
                         <Typography className='orderItemPrice'>
                           <b>Price: </b>₹{item.order.totalPrice}
                         </Typography>
-                        <Typography className='orderDate'>
-                          <b>Order At: </b>{item.createdAt}
-                        </Typography>
+                        <Button 
+                          variant='outlined' 
+                          onClick={() => navigate(`/myaccount/order/${item.order._id}`)}
+                        >
+                          ORDER INFO
+                        </Button>
                       </CardContent>
                     </Grid>
                   </Grid>
@@ -83,6 +104,7 @@ const MyOrders = (props) => {
       </Container>
     </Box>
   )
+  }          
 }
 
 export default MyOrders

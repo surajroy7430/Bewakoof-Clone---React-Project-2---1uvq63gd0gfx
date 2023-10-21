@@ -41,7 +41,7 @@ const SignUp = () => {
         const emailRegex = /^[\w-]+(\.[\w-]+)*@gmail\.com$/;
 
         let newErrors = {
-            name: userInfo.name.length < 5,
+            name: userInfo.name.length < 2,
             email: !userInfo.email.match(emailRegex),
             password: !userInfo.password.match(passwordRegex),
             confirmPassword: userInfo.password !== userInfo.confirmPassword,
@@ -87,7 +87,7 @@ const SignUp = () => {
                         value={userInfo.name}
                         onChange={handleInputChange}
                         error={errors.name}
-                        helperText={errors.name && 'Name must be at least 5 characters'}
+                        helperText={errors.name && 'Name must be at least 2 characters'}
                     />
                     <TextField
                         fullWidth

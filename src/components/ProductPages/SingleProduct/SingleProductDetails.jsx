@@ -4,18 +4,22 @@ import './SingleProduct.css'
 import { Link } from 'react-router-dom';
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
-import { addProductToCart } from '../../utils/Apis';
+import { addProductReview, addProductToCart, getProductReviews } from '../../utils/Apis';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../utils/AuthProvider';
 import { addProductToWishlist } from '../../utils/Apis';
+import ReviewDialog from './Review/ReviewDialog';
 
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
   // console.log('images', images);
   const { isLoggedIn, wishlist } = useAuth();
   const isProductInWishlist =  wishlist && wishlist.find(item => item.products._id === _id);
+  const authToken = localStorage.getItem("authToken");
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isReviewDialogOpen, setReviewDialogOpen] = useState(false);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -36,7 +40,9 @@ const SingleProductDetails = ({ product }) => {
     // console.log('authToken', authToken);
 
     if (!isLoggedIn) {
-      toast.error('Please login first');
+      toast.error('Please login first', {
+        position: 'top-left'
+      });
       return;
     } 
     else {
@@ -46,6 +52,8 @@ const SingleProductDetails = ({ product }) => {
         toast('Product added to the wishlist!', {
           position: 'top-left'
         });
+
+        window.location.reload();
       } catch (error) {
         // Handle API errors here
         console.error(error);
@@ -72,6 +80,8 @@ const SingleProductDetails = ({ product }) => {
         toast('Product added to the cart!', {
           position: 'top-left'
         });
+
+        window.location.reload();
       } catch (error) {
         // Handle API errors here
         console.error('error', error);
@@ -79,6 +89,65 @@ const SingleProductDetails = ({ product }) => {
       }
     }
   }
+
+  const handleOpenReviewDialog = () => {
+    if (!isLoggedIn) {
+      toast.error('Please login first', {
+        position: 'top-left'
+      });
+      return;
+    }
+    else {
+      setReviewDialogOpen(true);
+    }
+  };
+
+  const handleCloseReviewDialog = () => {
+    setReviewDialogOpen(false);
+  };
+
+  const handleReviewSubmit = async (reviewData) => {
+    try {
+      await addNewProductReview(reviewData);
+      handleCloseReviewDialog(); // Close the dialog after successful submission
+    } catch (error) {
+      console.error(error);
+      // Handle error when adding review fails
+    }
+  };
+
+  const addNewProductReview = async (reviewData) => {
+    try {
+      // Call the API function to add the product review
+      await addProductReview(_id, reviewData, authToken);
+      // Assuming you want to refresh the reviews after adding a new one
+      const updatedReviews = await getProductReviews(_id, authToken);
+      setReviews(updatedReviews);
+      toast('Review added successfully!');
+
+      // window.location.reload();
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to add review. Please try again later.');
+    }
+  };
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const productReviews = await getProductReviews(_id, authToken);
+        console.log(_id);
+        setReviews(productReviews);
+        // toast.success('Success')
+      } catch (error) {
+        console.error(error);
+        console.log(_id);
+        // Handle error fetching reviews
+      }
+    };
+
+    fetchReviews();
+  }, [_id, authToken]);
 
   return (
     <>     
@@ -146,8 +215,10 @@ const SingleProductDetails = ({ product }) => {
 
             <div className='reviewsHolder'>
               <Typography>Product Reviews</Typography>
-              <Button variant='outlined' className='rateButton'>RATE</Button>
+              <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button>
             </div>
+            <ReviewDialog open={isReviewDialogOpen} onClose={handleCloseReviewDialog} onSubmit={handleReviewSubmit} />
+            <div>{reviews}</div>
           </Grid>
         </Grid>
         )}

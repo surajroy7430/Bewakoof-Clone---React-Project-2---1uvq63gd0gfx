@@ -18,6 +18,8 @@ const CartItems = ({ product, quantity }) => {
         try {
             await deleteOneProductFromCart(_id, authToken);
             toast.info('Deleted');
+
+            window.location.reload();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);
