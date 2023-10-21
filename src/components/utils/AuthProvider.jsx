@@ -1,13 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getCartProducts, getWishListProducts } from './Apis';
+import { getCartProducts, getPlacedOrders, getWishListProducts } from './Apis';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [cart, setCart] = useState([])
     const [wishlist, setWishList] = useState([])
+    const [orders, setOrders] = useState([])
     const authToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('userInfo');
 
@@ -32,7 +33,6 @@ export const AuthProvider = ({children}) => {
                 console.error('Error fetching cart items:', error);
             }
         };
-    
         fetchCartItems();
 
         const fetchWishlistItems = async () => {
@@ -44,8 +44,19 @@ export const AuthProvider = ({children}) => {
                 console.error('Error fetching wishlist items:', error);
             }
         };
-    
         fetchWishlistItems();
+
+        const fetchPlacedOrders = async () => {
+            try {
+                const placedItems = await getPlacedOrders(authToken);
+                setOrders(placedItems);
+                console.log("placed Items", placedItems);
+            } catch (error) {
+                console.error('Error fetching placed orders items:', error);
+            }
+        };
+        fetchPlacedOrders();
+
     }, [authToken])
 
     const loginUser = (userdata) => {
@@ -72,7 +83,8 @@ export const AuthProvider = ({children}) => {
             loginUser, 
             logout, 
             wishlist, 
-            cart,  
+            cart,
+            orders
         }}
     >
         {children}

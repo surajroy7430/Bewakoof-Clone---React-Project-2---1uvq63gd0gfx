@@ -209,7 +209,7 @@ export const placeOrder = async (orderData, authToken) => {
             orderData,
             getAuthHeaderConfig(authToken)
         );
-        console.log('Order API POST', response.data.data);
+        // console.log('Order API POST', response.data.data);
         return response.data;
     } catch (error) {
         throw error.response.data.message;
@@ -222,7 +222,7 @@ export const getPlacedOrders = async (authToken) => {
             getAuthHeaderConfig(authToken)
         );
 
-        console.log('get placed orders', response.data.data);
+        // console.log('get placed orders', response.data.data);
         return response.data.data;
     } catch (error) {
         throw error.response.data.message;
