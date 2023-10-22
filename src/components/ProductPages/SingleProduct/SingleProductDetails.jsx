@@ -136,12 +136,12 @@ const SingleProductDetails = ({ product }) => {
     const fetchReviews = async () => {
       try {
         const productReviews = await getProductReviews(_id, authToken);
-        console.log(_id);
+        // console.log(_id);
         setReviews(productReviews);
         // toast.success('Success')
       } catch (error) {
         console.error(error);
-        console.log(_id);
+        // console.log(_id);
         // Handle error fetching reviews
       }
     };

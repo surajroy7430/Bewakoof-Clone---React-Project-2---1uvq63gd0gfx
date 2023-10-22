@@ -93,7 +93,7 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
               </h4>
               <CardContent>
                 <div className="orderPaymentWrapper">
-                    <b>Cart Total </b>
+                    <b>Amount Paid </b>
                     <strong>₹ {totalPrice}</strong>
                 </div>
               </CardContent>

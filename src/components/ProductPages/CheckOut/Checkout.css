@@ -45,3 +45,16 @@ button.paymentButton:hover {
         overflow: hidden;
     }
 }
+
+div.confirmedOrderWrapper {
+    margin-top: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div.confirmedOrder {
+    text-align: center;
+    padding: 40px 60px;
+}

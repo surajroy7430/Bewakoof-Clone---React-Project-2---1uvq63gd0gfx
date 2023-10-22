@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import './Checkout.css';
 import { deleteOneProductFromCart, placeOrder } from '../../utils/Apis';
 import { useAuth } from '../../utils/AuthProvider';
-import { Box, Button, Container, Divider, Grid, MenuItem, Menu, Paper, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import { Box, Button, Container, Divider, Grid, MenuItem, Menu, Typography, Card, CardMedia, CardContent } from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import AddressDialog from './AddessDialog';
 import StripeCheckout from 'react-stripe-checkout';
@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const Checkout = () => {
   const { user, cart } = useAuth();
   const cartAPI = cart.items;
+  console.log('cartAPI', cartAPI);
   const { _id } = cartAPI && cartAPI[0].product
 
   const [address, setAddress] = useState(user.address || {});
@@ -52,7 +53,7 @@ const Checkout = () => {
     try {
       await deleteOneProductFromCart(_id, authToken);
     } catch (error) {
-      console.error(null);
+      console.error(error);
     }
   }
   
@@ -70,7 +71,7 @@ const Checkout = () => {
         toast(response.message);
         // console.log(response.message);
         removeFromCart();
-        navigate('/myaccount/orders');
+        navigate('/orderconfirmed');
 
         window.location.reload();
       } catch (error) {
@@ -149,7 +150,7 @@ const Checkout = () => {
                     style={{backgroundColor: '#42a2a2'}}
                     className='addressButton'
                   >
-                    Add Address
+                    Add Address*
                   </Button>
                 )}
 
