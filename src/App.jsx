@@ -11,9 +11,11 @@ function App() {
 
   // Simulate an asynchronous authentication check
   useEffect(() => {
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
+
+    return () => clearTimeout(timeOut);
   }, []);
 
   if (isLoading) {

@@ -12,8 +12,13 @@ import { useNavigate } from 'react-router-dom';
 const Checkout = () => {
   const { user, cart } = useAuth();
   const cartAPI = cart.items;
-  console.log('cartAPI', cartAPI);
-  const { _id } = cartAPI && cartAPI[0].product
+
+  if (!cartAPI || cartAPI.length === 0) {
+    // Handle the case where cartAPI is undefined or empty
+    return <div>No items in the cart</div>;
+  }
+
+  const { _id } = cartAPI[0].product;
 
   const [address, setAddress] = useState(user.address || {});
   // console.info(user)

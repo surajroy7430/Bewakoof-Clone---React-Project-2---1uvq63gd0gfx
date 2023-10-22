@@ -15,9 +15,11 @@ const Home = () => {
   const isSM = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       setIsLoading(false);
     }, 500)
+
+    return () => clearTimeout(timeOut);
   }, []);
 
   const navigate = useNavigate();

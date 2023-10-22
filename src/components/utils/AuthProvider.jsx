@@ -93,5 +93,13 @@ export const AuthProvider = ({ children }) => {
 }
 
 export const useAuth = () => {
-    return useContext(AuthContext);
+    // Use the useContext hook to access the AuthContext value
+    const context = useContext(AuthContext);
+
+    // Throw an error if the hook is used outside of the AuthProvider
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
+    }
+
+    return context;
 }
