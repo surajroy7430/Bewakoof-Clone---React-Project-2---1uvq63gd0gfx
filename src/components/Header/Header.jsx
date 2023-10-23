@@ -21,7 +21,6 @@ const Header = () => {
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-    const isExtraSmall = useMediaQuery('(max-width:400px)');
     const navigate = useNavigate();
 
     // Check if cart or cart.items is undefined before accessing its properties
@@ -192,38 +191,24 @@ const Header = () => {
                     </Tabs>
                 )}
                 <div className='searchAndMenuWrapper'>
-                    {isSmallScreen ? ( null
-                        // <>
-                        //     <Button>
-                        //         <SearchOutlined style={{color: '#000'}} />
-                        //     </Button>
-                        //     <StyledInputBase 
-                        //         className='openedSearchInput'
-                        //         placeholder='Search...' 
-                        //         inputProps={{ 'aria-label': 'search' }} 
-                        //         sx={{color: '#979797'}}
-                        //     />
-                        // </>
-                    ) : (
-                        <Search>
-                            <Button onClick={handleSearch}>
-                                <SearchIconWrapper>
-                                    <SearchOutlined style={{color: '#979797'}} />
-                                </SearchIconWrapper>
-                            </Button>
-                            <StyledInputBase 
-                                placeholder='Search...' 
-                                inputProps={{ 'aria-label': 'search' }} 
-                                inputRef={searchInputRef} 
-                                sx={{color: '#979797'}}
-                            />
-                        </Search>
-                    )}
+                    <Search>
+                        <Button onClick={handleSearch}>
+                            <SearchIconWrapper>
+                                <SearchOutlined style={{color: '#979797'}} />
+                            </SearchIconWrapper>
+                        </Button>
+                        <StyledInputBase 
+                            placeholder='Search...' 
+                            inputProps={{ 'aria-label': 'search' }} 
+                            inputRef={searchInputRef} 
+                            sx={{color: '#979797'}}
+                        />
+                    </Search>
                     
                     {isLargeScreen ? null : (
                         <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
                     )}
-                    {isExtraSmall ? null : (
+                    {isSmallScreen ? null : (
                         <>
                             <Button 
                                 LinkComponent={Link} 

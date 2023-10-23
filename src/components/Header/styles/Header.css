@@ -35,5 +35,8 @@ div.openedSearchInput {
     }
 }
 @media (max-width: 599px) {
-    
+    div.searchAndMenuWrapper {
+        margin-left: 15px;
+        margin-right: 5px;
+    }
 }

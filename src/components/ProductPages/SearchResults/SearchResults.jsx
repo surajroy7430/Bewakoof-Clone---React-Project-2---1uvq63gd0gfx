@@ -30,7 +30,7 @@ const SearchResults = () => {
 
   return (
     <>
-      <Typography variant='h5' style={{marginTop: '100px', marginLeft: '50px', fontWeight: 600}}>
+      <Typography variant='h5' style={{marginTop: '100px', marginLeft: '50px', fontWeight: 600}} className='serarchResults'>
         Search Result For : "{searchTerm}" <span style={{color: 'gray'}}>({searchResults.length})</span>
       </Typography>
       <Grid container spacing={2}>
