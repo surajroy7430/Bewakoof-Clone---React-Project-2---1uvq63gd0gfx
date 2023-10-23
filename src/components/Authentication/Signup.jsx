@@ -41,7 +41,7 @@ const SignUp = () => {
         const emailRegex = /^[\w-]+(\.[\w-]+)*@gmail\.com$/;
 
         let newErrors = {
-            name: userInfo.name.length < 2,
+            name: userInfo.name.length < 3,
             email: !userInfo.email.match(emailRegex),
             password: !userInfo.password.match(passwordRegex),
             confirmPassword: userInfo.password !== userInfo.confirmPassword,
@@ -55,6 +55,7 @@ const SignUp = () => {
 
         try {
             await registerUser(userInfo, navigate);
+            toast.success('Congratulations, your account is created');
             setUserInfo({
                 name: '',
                 email: '',
@@ -87,7 +88,7 @@ const SignUp = () => {
                         value={userInfo.name}
                         onChange={handleInputChange}
                         error={errors.name}
-                        helperText={errors.name && 'Name must be at least 2 characters'}
+                        helperText={errors.name && 'Name must be at least 3 characters'}
                     />
                     <TextField
                         fullWidth

@@ -38,11 +38,11 @@ const MyOrders = () => {
       <div id='empty_order'>
         <div className='empty_order_container'>
           <img
-            src='	https://images.bewakoof.com/images/doodles/empty-cart-page-doodle.png'
+            src='https://images.bewakoof.com/sizeguide/no-orders.png'
             alt='empty_order' 
             width='170px'
           />
-          <Typography className='empty_title'>Nothing in the Orders</Typography>
+          <Typography className='empty_order_title'>You haven't placed any orders till now.</Typography>
           <Button 
             className='empty_order_button'
             variant='contained'

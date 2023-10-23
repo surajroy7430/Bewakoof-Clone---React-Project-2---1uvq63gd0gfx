@@ -1,11 +1,22 @@
 import { Box, Button, Card, CardContent, Container, Divider, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useAuth } from '../../utils/AuthProvider'
+import { deleteAccount } from '../../utils/Apis';
+import { toast } from 'react-toastify';
 
 const MyProfile = () => {
   const { user, logout } = useAuth();
+  const authToken = localStorage.getItem("authToken");
 
-  const deleteUser = () => {}
+  const deleteUser = async() => {
+    try {
+      await deleteAccount(authToken); 
+      logout(); // Log the user out after successfully deleting the account
+      toast.success('Account Deleted');
+    } catch (error) {
+      toast.error('Something went wrong!, try again later');
+    }
+  }
 
   return (
     <Box sx={{ flexGrow: 1, marginTop: '80px' }}>
