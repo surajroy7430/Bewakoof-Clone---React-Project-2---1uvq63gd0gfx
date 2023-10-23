@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getCartProducts, getPlacedOrders, getWishListProducts } from './Apis';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -11,6 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [orders, setOrders] = useState([])
     const authToken = localStorage.getItem('authToken');
     const storedUser = localStorage.getItem('userInfo');
+
+    const navigate = useNavigate();
 
     // Check if the user is already logged in on component mount
     useEffect(() => {
@@ -73,6 +76,7 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.removeItem('authToken');
         localStorage.removeItem('userInfo');
+        navigate('/login');
     }
 
   return (

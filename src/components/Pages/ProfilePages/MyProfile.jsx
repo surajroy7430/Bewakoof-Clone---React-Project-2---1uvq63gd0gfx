@@ -1,9 +1,12 @@
-import { Box,  Container, Divider, TextField, Typography } from '@mui/material'
+import { Box, Button, Card, CardContent, Container, Divider, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useAuth } from '../../utils/AuthProvider'
 
 const MyProfile = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const deleteUser = () => {}
+
   return (
     <Box sx={{ flexGrow: 1, marginTop: '80px' }}>
       <Container maxWidth='lg'>
@@ -19,7 +22,8 @@ const MyProfile = () => {
             name='name'
             value={user.name}
             disabled
-          /><br/>
+            style={{marginRight: '20px'}}
+          />
           <TextField 
             margin="normal"
             id="email"
@@ -28,6 +32,22 @@ const MyProfile = () => {
             disabled
           />
         </div>
+
+        <Card variant="outlined" sx={{ borderColor: 'red', maxWidth: 500 }}>
+          <CardContent>
+            <Typography variant="h4" component="div" gutterBottom>
+              Delete Account
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Permanently delete your Account. This action is not reversible, so please continue with caution.
+            </Typography>
+          </CardContent>
+          <div style={{ padding: '14px', borderTop: '1px solid red' }}>
+            <Button variant="contained" color="error" onClick={deleteUser}>
+              Delete Account
+            </Button>
+          </div>
+        </Card>
       </Container>
     </Box>
   )

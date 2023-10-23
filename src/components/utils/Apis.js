@@ -278,3 +278,15 @@ export const deleteProductReview = async (reviewId, authToken) => {
         throw error.response.data.message;
     }
 };
+
+export const deleteAccount = async (authToken) => {
+    try {
+        const response = await axios.delete(`${BASE_DOMAIN}/api/v1/user/deleteMe`, 
+            getAuthHeaderConfig(authToken)
+        )
+  
+        return response.data;
+        } catch (error) {
+            throw error.response.data.message;
+    }
+};

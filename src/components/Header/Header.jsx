@@ -36,7 +36,7 @@ const Header = () => {
     const handleLogout = () => {
         logout();
         handleClose();
-        navigate('/login');
+        // navigate('/login');
     }
      
     const handleSearch = async () => {
