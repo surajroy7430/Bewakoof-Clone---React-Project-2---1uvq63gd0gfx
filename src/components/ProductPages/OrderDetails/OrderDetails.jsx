@@ -15,7 +15,7 @@ const OrderDetails = ({ orders }) => {
         city, country, state, street, zipCode
       } = {}, 
       type
-    }, 
+    }= {}, 
     items 
 } = orders;
 
@@ -43,12 +43,11 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
       <Grid container spacing={2}>
           <Grid item xs={12} md={7}>
             <Card variant="outlined" style={{ padding: 10, display: 'flex' }}>
-              {/* <Grid Container> */}
                 <Grid item xs={4}>
                   <CardMedia
                     component='img'
-                    image={items[0].product.displayImage}
-                    alt={items[0].product.name}
+                    image={items && items[0].product.displayImage}
+                    alt={items && items[0].product.name}
                     style={{ height: isSm ? '200px' : '300px' }}
                   />
                 </Grid>
@@ -58,14 +57,13 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
                       {status}...
                     </Typography>
                     <Typography className='orderedItemName'>
-                      {items[0].product.name}
+                      {items && items[0].product.name}
                     </Typography>
                     <Typography className='orderedItemPrice'>
-                      ₹{items[0].product.price}
+                      ₹{items && items[0].product.price}
                     </Typography>
                   </CardContent>
                 </Grid>
-              {/* </Grid> */}
             </Card>
           </Grid>
 
@@ -93,7 +91,7 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
               </h4>
               <CardContent>
                 <div className="orderPaymentWrapper">
-                    <b>Amount Paid </b>
+                    <b>Total Amount </b>
                     <strong>₹ {totalPrice}</strong>
                 </div>
               </CardContent>

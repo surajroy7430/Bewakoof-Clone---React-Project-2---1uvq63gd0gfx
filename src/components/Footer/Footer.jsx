@@ -92,12 +92,8 @@ const Footer = () => {
                             <h6 style={{paddingBottom: '1rem'}}>Keep up to date</h6>
                             <ListGroup>
                                 <ul>
-                                    <Form inline='true'>
-                                        <InputGroup>
-                                            <input type='email' required placeholder='Enter Email Id' />
-                                            <button type="submit">SUBSCRIBE</button>
-                                        </InputGroup>
-                                    </Form>
+                                    <input type='email' required placeholder='Enter Email Id' />
+                                    <button>SUBSCRIBE</button>
                                 </ul>
                             </ListGroup>
                         </Col>

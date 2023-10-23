@@ -80,7 +80,7 @@ const Checkout = () => {
 
         window.location.reload();
       } catch (error) {
-        console.error('placeorder', error);
+        toast.error('Address is Required')
       }
     }
   }

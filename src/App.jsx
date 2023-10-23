@@ -24,10 +24,10 @@ function App() {
 
   return (
     <div className="App">
-        <Header />
-        <ToastContainer autoClose={1200} />
-        <RouterComp user={user} />
-        <Footer />
+      <Header />
+      <ToastContainer autoClose={1200} />
+      <RouterComp user={user} />
+      <Footer />
     </div>
   )
 }

@@ -5,6 +5,7 @@ const BASE_DOMAIN = 'https://academics.newtonschool.co';
 const configById = getHeaderWithProjectId();
 const configByIdAndBody = getHeaderWithProjectIDAndBody();
 
+{/* products data */}
 export const getProductsData = async(page, limit, gender) => {
     try {
         const response = await axios.get(
@@ -20,6 +21,7 @@ export const getProductsData = async(page, limit, gender) => {
     }
 }
 
+{/* single products details */}
 export const getProductsDetails = async (productId) => {
     try {
         const response = await axios.get(
@@ -33,6 +35,7 @@ export const getProductsDetails = async (productId) => {
     }
 }
 
+{/* User */}
 export const registerUser = async (userInfo, navigate) => {
     userInfo.appType = 'ecommerce';
     try {
@@ -82,6 +85,7 @@ export const forgotPassword = async (email) => {
     }
 };
 
+{/* Search the product */}
 export const getProductsBySearch = async (searchTerm, title, limit) => {
   try {
     const response = await axios.get(
@@ -107,7 +111,7 @@ export const getProductsByFilter = async (filterTerm, title, limit) => {
   }
 };
 
-
+{/* Cart */}
 export const addProductToCart = async (productId, quantity, authToken) => {
     try {
         const response = await axios.patch(
@@ -148,6 +152,7 @@ export const deleteOneProductFromCart = async (productId, authToken) => {
     }
 }
 
+{/* Wishlist */}
 export const addProductToWishlist = async (productId, authToken) => {
     try {
         const response = await axios.patch(
@@ -202,6 +207,7 @@ export const deleteAllProductsFromWishlist = async (authToken) => {
     }
 }
 
+{/* Checkout */}
 export const placeOrder = async (orderData, authToken) => {
     try {
         const response = await axios.post(
@@ -215,6 +221,7 @@ export const placeOrder = async (orderData, authToken) => {
         throw error.response.data.message;
     }
 };
+{/* ordered items */}
 export const getPlacedOrders = async (authToken) => {
     try {
         const response = await axios.get(
@@ -228,6 +235,7 @@ export const getPlacedOrders = async (authToken) => {
         throw error.response.data.message;
     }
 };
+
 export const getOnePlacedOrderDetail = async (orderId, authToken) => {
     try {
         const response = await axios.get(
@@ -242,6 +250,8 @@ export const getOnePlacedOrderDetail = async (orderId, authToken) => {
     }
 };
 
+
+{/* Reviews */}
 export const addProductReview = async (productId, reviewData, authToken) => {
     try {
         const response = await axios.post(
@@ -279,6 +289,7 @@ export const deleteProductReview = async (reviewId, authToken) => {
     }
 };
 
+{/* delete User */}
 export const deleteAccount = async (authToken) => {
     try {
         const response = await axios.delete(`${BASE_DOMAIN}/api/v1/user/deleteMe`, 
