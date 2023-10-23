@@ -48,13 +48,13 @@ const Home = () => {
           <div className='designs-of-the-week'>
             <Typography variant='h5' textAlign='center'>Designs of the Week</Typography>
             <Image 
-              src='https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-Men-1696916713.jpg'
+              src='https://images.bewakoof.com/uploads/grid/app/Revised-DOTW-Split-banner-Desktop-Menn--2--1697963845.jpg'
               alt='shop-for-mens'
               style={{cursor: 'pointer', width: '50%'}}
               onClick={toMensProducts}
             />
             <Image 
-              src='https://images.bewakoof.com/uploads/grid/app/DOTW-Split-banner-Desktop-Women-1696916708.jpg'
+              src='https://images.bewakoof.com/uploads/grid/app/Revised-DOTW-Split-banner-Desktop-Women--1--1697963845.jpg'
               alt='shop-for-womens'
               style={{cursor: 'pointer', width: '50%'}}
               onClick={toWomensProducts}
