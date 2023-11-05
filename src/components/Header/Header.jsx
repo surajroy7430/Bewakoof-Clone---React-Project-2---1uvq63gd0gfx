@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './styles/Header.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { 
@@ -15,6 +15,8 @@ import { getProductsBySearch } from '../utils/Apis';
 
 const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
+    const cartLength = localStorage.getItem('cartLength') || 0;
+    // const [cartLength, setCartLength] = useState(localStorage.getItem('cartLength') || 0);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const searchInputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
@@ -24,7 +26,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     // Check if cart or cart.items is undefined before accessing its properties
-    const cartItemCount = cart && cart.items ? cart.items.length : 0;
+    // const cartItemCount = cart && cart.items ? cartLength : 0;
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -225,7 +227,7 @@ const Header = () => {
                                 to='/cart'
                             >
                                 { isLoggedIn && user ? (
-                                    <Badge badgeContent={cartItemCount} color='error'>
+                                    <Badge badgeContent={cartLength} color='error'>
                                         <ShoppingBag style={{color: 'black'}} />
                                     </Badge>
                                 ) : (

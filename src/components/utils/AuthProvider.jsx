@@ -31,7 +31,8 @@ export const AuthProvider = ({ children }) => {
             try {
                 const cartItems = await getCartProducts(authToken);
                 setCart(cartItems);
-                // console.log("cartItems", cartItems);
+                localStorage.setItem('cartLength', cart.items.length);
+                // console.log("cartItems", cartItems.items.length);
             } catch (error) {
                 console.error(error);
             }
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }) => {
             try {
                 const wishlistItems = await getWishListProducts(authToken);
                 setWishList(wishlistItems);
+                localStorage.setItem('wishlistLength', wishlist.items.length);
                 // console.log("wishlistItems", wishlistItems);
             } catch (error) {
                 console.error(error);
@@ -69,6 +71,8 @@ export const AuthProvider = ({ children }) => {
         // Store the authentication token and user info in localStorage
         localStorage.setItem('authToken', userdata.token);
         localStorage.setItem('userInfo', JSON.stringify(userdata.data));
+        localStorage.setItem('cartLength', cart.items.length);
+        localStorage.setItem('wishlistLength', wishlist.items.length);
     }
     const logout = () => {
         setUser(null);
@@ -76,6 +80,8 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.removeItem('authToken');
         localStorage.removeItem('userInfo');
+        localStorage.removeItem('cartLength');
+        localStorage.removeItem('wishlistLength');
         navigate('/login');
     }
 

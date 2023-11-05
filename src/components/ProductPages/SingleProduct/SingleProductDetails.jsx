@@ -11,9 +11,9 @@ import { addProductToWishlist } from '../../utils/Apis';
 import ReviewDialog from './Review/ReviewDialog';
 
 const SingleProductDetails = ({ product }) => {
-  const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product;
+  const { _id, displayImage, images, description, name, price, fabric, brand, subCategory, color, gender } = product || {};
   // console.log('images', images);
-  const { isLoggedIn, wishlist } = useAuth();
+  const { isLoggedIn, wishlist, cart } = useAuth();
   const isProductInWishlist =  wishlist && wishlist.find(item => item.products._id === _id);
   const authToken = localStorage.getItem("authToken");
 
@@ -218,7 +218,7 @@ const SingleProductDetails = ({ product }) => {
               <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button>
             </div>
             <ReviewDialog open={isReviewDialogOpen} onClose={handleCloseReviewDialog} onSubmit={handleReviewSubmit} />
-            <div>{reviews}</div>
+            {/* <div>{reviews}</div> */}
           </Grid>
         </Grid>
         )}

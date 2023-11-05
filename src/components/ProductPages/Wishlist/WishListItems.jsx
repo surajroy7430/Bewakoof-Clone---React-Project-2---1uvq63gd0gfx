@@ -26,7 +26,7 @@ const WishListItems = ({ products }) => {
                 position: 'top-left'
             });
 
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             // Handle API errors here
             console.error('error', error);
@@ -40,7 +40,7 @@ const WishListItems = ({ products }) => {
             await deleteOneProductFromWishlist(_id, authToken);
             toast.info('Deleted');
 
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);
