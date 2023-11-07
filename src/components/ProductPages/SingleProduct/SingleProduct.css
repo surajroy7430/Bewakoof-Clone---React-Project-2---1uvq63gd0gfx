@@ -59,10 +59,35 @@ div.productWrapper {
     font-weight: 600;
     color: rgb(79, 83, 98);
     margin-top: 15px;
+    margin-bottom: 16px;
 }
 .productDetails .productColor strong {
     color: #2d2d2d;
     font-size: 20px;
+}
+.productDetails .productTags {
+    text-transform: uppercase;
+    background-color: rgba(82, 82, 82, 0.8);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 3px 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+button.sizeButton {
+    width: 48px;
+    height: 48px;
+    color: #000;
+    margin: 5px 9px 5px 0;
+    border: 1px solid #000;
+    border-radius: 5px;
+    line-height: 45px;
+}
+button.sizeButton.active {
+    border: 1px solid #42a2a2;
+    background-color: #000;
+    color: #fff;
 }
 .addToCartandWishButton {
     display: flex;
@@ -103,7 +128,32 @@ button.add_to_wishlist:hover {
     box-shadow: none;
     background-color: transparent;
 }
-
+.trustContainerWrapper {
+    padding: 15px;
+    width: 75%;
+}
+.trustContainer {
+    display: flex;
+    justify-content: space-between;
+}
+.trustBadgeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.trustBadgeContainer img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+    color: #8f98a9;
+}
+.trustBadgeTitle {
+    font-size: 10px;
+    line-height: 12px;
+    text-align: center;
+    color: #8f98a9;
+    width: 79px;
+}
 .description-wrapper {
     width: 85%;
 }

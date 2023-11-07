@@ -121,7 +121,9 @@ export const addProductToCart = async (productId, quantity, authToken) => {
             },
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('cartLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('cartLength', response.data.data.items.length);
+        }
 
         // console.log('cart API Patch', response.data.data);
         return response.data.data;
@@ -135,7 +137,9 @@ export const getCartProducts = async (authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/cart`,
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('cartLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('cartLength', response.data.data.items.length);
+        }
 
         // console.log( 'cart API Get', response.data.data);
         return response.data.data;
@@ -149,7 +153,9 @@ export const deleteOneProductFromCart = async (productId, authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('cartLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('cartLength', response.data.data.items.length);
+        }
         // console.log( 'cart API Delete', response.data.data);
         return response.data.data;
     } catch (error) {
@@ -167,7 +173,9 @@ export const addProductToWishlist = async (productId, authToken) => {
             },
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('wishlistLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
+        }
 
         // console.log('wishlist API Patch', response.data.data.items);
         return response.data.data.items;
@@ -181,7 +189,9 @@ export const getWishListProducts = async (authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/wishlist`,
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('wishlistLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
+        }
 
         // console.log('wishlist API get', response.data.data);
         return response.data.data.items;
@@ -195,7 +205,9 @@ export const deleteOneProductFromWishlist = async (productId, authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('wishlistLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
+        }
 
         // console.log( 'wishlist API Delete', response.data.data);
         return response.data.data;
@@ -209,7 +221,9 @@ export const deleteAllProductsFromWishlist = async (authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/wishlist`,
             getAuthHeaderConfig(authToken)
         );
-        localStorage.setItem('wishlistLength', response.data.data.items.length);
+        if(response.data.status == 'success') {
+            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
+        }
 
         // console.log( 'wishlist API Delete', response.data.data);
         return response.data.data;

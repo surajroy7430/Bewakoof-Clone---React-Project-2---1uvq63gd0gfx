@@ -15,8 +15,8 @@ import { getProductsBySearch } from '../utils/Apis';
 
 const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
-    const cartLength = localStorage.getItem('cartLength') || 0;
-    // const [cartLength, setCartLength] = useState(localStorage.getItem('cartLength') || 0);
+    const cartLength = sessionStorage.getItem('cartLength') || 0;
+    // const [cartLength, setCartLength] = useState(sessionStorage.getItem('cartLength') || 0);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const searchInputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
@@ -40,7 +40,9 @@ const Header = () => {
         // navigate('/login');
     }
      
-    const handleSearch = async () => {
+    const handleSearch = async (e) => {
+        e.preventDefault();
+
         const searchTerm = searchInputRef.current.value.toLowerCase();
         if(searchTerm) {
             try {
@@ -71,10 +73,10 @@ const Header = () => {
         display: 'flex',
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        border: '1px solid #979797',
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: alpha(theme.palette.common.white, 0.2)
+        backgroundColor: alpha(theme.palette.common.black, 0.1),
+        '&:focus-within': {
+            backgroundColor: alpha(theme.palette.common.white, 0.2),
+            border: '1px solid #979797'
         },
         width: '100%',
         [theme.breakpoints.up('sm')]: {
@@ -94,8 +96,8 @@ const Header = () => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: '#979797',
         '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            paddingLeft: `calc(1em + ${theme.spacing(0.2)})`,
+            padding: theme.spacing(1.2, 1, 1.2, 6),
+            paddingRight: `calc(1em + ${theme.spacing(0.2)})`,
             transition: theme.transitions.create('width'),
             width: '100%',
             [theme.breakpoints.up('md')]: {
@@ -193,19 +195,19 @@ const Header = () => {
                     </Tabs>
                 )}
                 <div className='searchAndMenuWrapper'>
-                    <Search>
-                        <Button onClick={handleSearch}>
+                    <form onSubmit={handleSearch}>
+                        <Search>
                             <SearchIconWrapper>
                                 <SearchOutlined style={{color: '#979797'}} />
                             </SearchIconWrapper>
-                        </Button>
-                        <StyledInputBase 
-                            placeholder='Search...' 
-                            inputProps={{ 'aria-label': 'search' }} 
-                            inputRef={searchInputRef} 
-                            sx={{color: '#979797'}}
-                        />
-                    </Search>
+                            <StyledInputBase 
+                                placeholder='Search by product, category or collection' 
+                                inputProps={{ 'aria-label': 'search' }} 
+                                inputRef={searchInputRef} 
+                                sx={{color: '#979797'}}
+                            />
+                        </Search>
+                    </form>
                     
                     {isLargeScreen ? null : (
                         <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
