@@ -22,6 +22,8 @@ const WishListItems = ({ products }) => {
         try {
             // Call the API function to add the product to the cart
             await addProductToCart(_id, 1, authToken); // Assuming quantity is 1
+            await deleteOneProductFromWishlist(_id, authToken);
+
             toast('Product added to the cart!', {
                 position: 'top-left'
             });

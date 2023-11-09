@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
-  const { user, cart } = useAuth();
+  const { user, cart, updateAddress } = useAuth();
   const cartAPI = cart.items;
 
   if (!cartAPI || cartAPI.length === 0) {
@@ -41,7 +41,7 @@ const Checkout = () => {
   }
 
   const handleSaveAddress = (newAddress) => {
-    // const updatedAddress = [...user.address, newAddress];
+    updateAddress(newAddress);
     setAddress(newAddress);
   };
 
@@ -64,8 +64,9 @@ const Checkout = () => {
   
   const handlePlaceOrder = async (token) => {
     const authToken = localStorage.getItem('authToken');
+    // console.log('user.address:', user.address);
     
-    if(!address) {
+    if(!updateAddress) {
       toast.error('Address is Required');
       return
     } else {
@@ -78,9 +79,10 @@ const Checkout = () => {
         removeFromCart();
         navigate('/orderconfirmed');
 
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
-        toast.error('Address is Required')
+        // console.log(error);
+        toast.error(error);
       }
     }
   }
@@ -125,7 +127,6 @@ const Checkout = () => {
                     </Grid>
                   </Grid>
                 </Card>
-
             ))}
           </Grid>
           
@@ -136,32 +137,26 @@ const Checkout = () => {
               </h4>
 
               <CardContent>
-                {address.street && (
-                  <div className='addressWrapper'>
+                {user.address && user.address.map((add, index) => (
+                  <div key={index}>
                     <Typography>
                       {user.name}<br/>
                       {user.email}<br/>
-                      {address.mobile}<br/>
-                      {address.street}, {address.city}<br/>
-                      {address.state}, {address.country}, {address.zipCode}<br/>
+                      {add.mobile}<br/>
+                      {add.street}, {add.city}<br/>
+                      {add.state}, {add.country}, {add.zipCode}
                     </Typography>
                   </div>
-                )}
+                ))}
 
-                {!address.street && (
+                {!(user.address && user.address.length > 0) && (
                   <Button 
                     variant='contained' 
                     onClick={() => setDialogOpen(true)} 
                     style={{backgroundColor: '#42a2a2'}}
                     className='addressButton'
                   >
-                    Add Address*
-                  </Button>
-                )}
-
-                {address.street && (
-                  <Button variant='outlined' onClick={() => setDialogOpen(true)} className='changeAddressButton'>
-                    Change Address
+                    Add Address
                   </Button>
                 )}
 

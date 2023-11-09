@@ -26,13 +26,22 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
+    const updateAddress = (newAddress) => {
+        // Update the user object with the new address
+        const updatedUser = { ...user, address: [...user.address, newAddress] };
+        setUser(updatedUser);
+    
+        // Update the user info in localStorage
+        localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+    };
+
     useEffect(() => {
         const fetchCartItems = async () => {
             try {
                 const cartItems = await getCartProducts(authToken);
                 setCart(cartItems);
                 sessionStorage.setItem('cartLength', cartItems.items.length);
-                // console.log("cartItems", cartItems.items.length);
+                // console.log("cartItems", cartItems.items);
             } catch (error) {
                 console.error(error);
             }
@@ -94,7 +103,8 @@ export const AuthProvider = ({ children }) => {
             logout, 
             wishlist, 
             cart,
-            orders
+            orders, 
+            updateAddress
         }}
     >
         {children}

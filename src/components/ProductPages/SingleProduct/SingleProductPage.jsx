@@ -23,6 +23,7 @@ const SingleProductPage = () => {
       try {
         const productDetails = await getProductsDetails(productId);
         setProduct(productDetails);
+        console.log('productDetails', productDetails);
       } catch (error) {
         console.error('Error fetching product details:', error);
       }

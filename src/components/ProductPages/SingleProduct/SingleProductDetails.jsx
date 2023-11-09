@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../../utils/AuthProvider';
 import { addProductToWishlist } from '../../utils/Apis';
 import ReviewDialog from './Review/ReviewDialog';
+import ErrorPage from '../../Pages/ErrorPage';
 
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, 
@@ -163,123 +164,128 @@ const SingleProductDetails = ({ product }) => {
     fetchReviews();
   }, [_id, authToken]);
 
-  return (
-    <>     
-      <div className='breadcrumbs'>
-        <Grid item>
-          <Breadcrumbs>
-            <Link to='/'>Home</Link>
-            <Typography>{gender}'s Clothing</Typography>
-            <Typography>{gender}'s {subCategory}</Typography>
-            <Typography>{name}</Typography>
-          </Breadcrumbs>
-        </Grid>
-      </div>
-      <Box p={2}>
-        {isLoading ? (
-          <div className='fadeLoader'>
-            <FadeLoader  color="#303231" height={50} margin={30} radius={2} width={7} />
-          </div>
-        ) : (
-        <Grid container spacing={2} className='productWrapper'>
-          <Grid item xs={12} md={12} lg={6} className='galleryImages'>
-            <Box className='imageGallery'>
-              {images?.slice(-5).map((image, index) => (
-                <img 
-                  key={index} 
-                  src={image} 
-                  alt={`product-image-${index+1}`} 
-                />
-              ))}
-            </Box>
-            <img src={displayImage} alt={name} className='displayImage' />
+  if(!_id) {
+    return <ErrorPage />
+  } 
+  else {
+    return (
+      <>     
+        <div className='breadcrumbs'>
+          <Grid item>
+            <Breadcrumbs>
+              <Link to='/'>Home</Link>
+              <Typography>{gender}'s Clothing</Typography>
+              <Typography>{gender}'s {subCategory}</Typography>
+              <Typography>{name}</Typography>
+            </Breadcrumbs>
           </Grid>
+        </div>
+        <Box p={2}>
+          {isLoading ? (
+            <div className='fadeLoader'>
+              <FadeLoader  color="#303231" height={50} margin={30} radius={2} width={7} />
+            </div>
+          ) : (
+          <Grid container spacing={2} className='productWrapper'>
+            <Grid item xs={12} md={12} lg={6} className='galleryImages'>
+              <Box className='imageGallery'>
+                {images?.slice(-5).map((image, index) => (
+                  <img 
+                    key={index} 
+                    src={image} 
+                    alt={`product-image-${index+1}`} 
+                  />
+                ))}
+              </Box>
+              <img src={displayImage} alt={name} className='displayImage' />
+            </Grid>
 
-          <Grid item xs={12} md={12} lg={6} className='productDetails'>
-            <Typography variant="body1" className='brandName'>{brand}</Typography>
-            <Typography variant="h6" className='productName'>{name}</Typography>
-            <Typography className='productPrice'>
-              <span>₹</span>{price}
-            </Typography>
-            <Typography variant="body2" className='priceTag'>inclusive of all taxes</Typography>
-            <Typography variant="h6" className='fabricType'>{fabric}</Typography>
-            <Typography variant="body1" className='productColor'>
-              COLOUR: <strong>{color}</strong>
-            </Typography>
-            <Typography variant="div" className='productTags'>
-              <strong>{sellerTag}</strong>
-            </Typography>
-            
-            <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
-            <Typography variant='body2' style={{width: '60%'}}>TriBe members get an extra discount of ₹20 and FREE shipping.</Typography>
-            <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
+            <Grid item xs={12} md={12} lg={6} className='productDetails'>
+              <Typography variant="body1" className='brandName'>{brand}</Typography>
+              <Typography variant="h6" className='productName'>{name}</Typography>
+              <Typography className='productPrice'>
+                <span>₹</span>{price}
+              </Typography>
+              <Typography variant="body2" className='priceTag'>inclusive of all taxes</Typography>
+              <Typography variant="h6" className='fabricType'>{fabric}</Typography>
+              <Typography variant="body1" className='productColor'>
+                COLOUR: <strong>{color}</strong>
+              </Typography>
+              <Typography variant="div" className='productTags'>
+                <strong>{sellerTag}</strong>
+              </Typography>
+                
+              <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
+              <Typography variant='body2' style={{width: '60%'}}>TriBe members get an extra discount of ₹20 and FREE shipping.</Typography>
+              <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
 
-            <Typography><strong>SELECT SIZE</strong></Typography>
-            <div>
-              {size && size.map((sz, i) => (
-                <Button 
-                  key={i+1} 
-                  variant='outlined'
-                  className={`sizeButton ${selectedSize === sz ? 'active' : ''}`}
-                  onClick={() => selectSize(sz)}
-                  >
-                  {sz}
+              <Typography><strong>SELECT SIZE</strong></Typography>
+              <div>
+                {size && size.map((sz, i) => (
+                  <Button 
+                    key={i+1} 
+                    variant='outlined'
+                    className={`sizeButton ${selectedSize === sz ? 'active' : ''}`}
+                    onClick={() => selectSize(sz)}
+                    >
+                    {sz}
+                  </Button>
+                ))}
+              </div>
+              <div className='addToCartandWishButton'>
+                <Button variant="contained" className='add_to_cart' onClick={handleAddToCart}>
+                  <LocalMall /> ADD TO BAG
                 </Button>
-              ))}
-            </div>
-            <div className='addToCartandWishButton'>
-              <Button variant="contained" className='add_to_cart' onClick={handleAddToCart}>
-                <LocalMall /> ADD TO BAG
-              </Button>
 
-              <Button variant="outlined" className='add_to_wishlist' onClick={handleAddToWishList}>
-                <FavoriteOutlined style={{color: isProductInWishlist ? 'red' : 'rgb(148, 148, 148)'}} />&nbsp;
-                {isProductInWishlist ? 'WISHLISTED' : 'WISHLIST'}
-              </Button>
-            </div>
+                <Button variant="outlined" className='add_to_wishlist' onClick={handleAddToWishList}>
+                  <FavoriteOutlined style={{color: isProductInWishlist ? 'red' : 'rgb(148, 148, 148)'}} />&nbsp;
+                  {isProductInWishlist ? 'WISHLISTED' : 'WISHLIST'}
+                </Button>
+              </div>
 
-            <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
+              <Divider style={{background: '#eee', width: '75%', height: '3px', border: 'none', margin: '15px 0'}} />
 
-            <div className="trustContainerWrapper">
-              <div className='trustContainer'>
-                <div className='trustBadgeContainer'>
-                  <img src='https://images.bewakoof.com/web/trust-cart.svg' alt='offer' />
-                  <span className="trustBadgeTitle">100% SECURE PAYMENTS</span>
-                </div>
-                <div className='trustBadgeContainer'>
-                  <img src='https://images.bewakoof.com/web/Easy-Returns.svg' alt='offer' />
-                  <span className="trustBadgeTitle">EASY RETURNS &amp; INSTANT REFUNDS</span>
-                </div>
-                <div className='trustBadgeContainer'>
-                  <img src='	https://images.bewakoof.com/web/Globe.svg' alt='offer' />
-                  <span className="trustBadgeTitle">SHIPPING GLOBALLY</span>
+              <div className="trustContainerWrapper">
+                <div className='trustContainer'>
+                  <div className='trustBadgeContainer'>
+                    <img src='https://images.bewakoof.com/web/trust-cart.svg' alt='offer' />
+                    <span className="trustBadgeTitle">100% SECURE PAYMENTS</span>
+                  </div>
+                  <div className='trustBadgeContainer'>
+                    <img src='https://images.bewakoof.com/web/Easy-Returns.svg' alt='offer' />
+                    <span className="trustBadgeTitle">EASY RETURNS &amp; INSTANT REFUNDS</span>
+                  </div>
+                  <div className='trustBadgeContainer'>
+                    <img src='	https://images.bewakoof.com/web/Globe.svg' alt='offer' />
+                    <span className="trustBadgeTitle">SHIPPING GLOBALLY</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className='description-wrapper'>
-              <Button variant="text" onClick={toggleDescription} className='description_button'>
-                <DescriptionOutlined />
-                <strong>Product Description</strong>
-                <span>{isDescriptionVisible ? '-' : '+'}</span>
-              </Button>
-              {isDescriptionVisible && (
-                <Typography variant="body1" dangerouslySetInnerHTML={{ __html: description }} className='descriptionDetails' />
-              )}
-            </div>
+              <div className='description-wrapper'>
+                <Button variant="text" onClick={toggleDescription} className='description_button'>
+                  <DescriptionOutlined />
+                  <strong>Product Description</strong>
+                  <span>{isDescriptionVisible ? '-' : '+'}</span>
+                </Button>
+                {isDescriptionVisible && (
+                  <Typography variant="body1" dangerouslySetInnerHTML={{ __html: description }} className='descriptionDetails' />
+                )}
+              </div>
 
-            <div className='reviewsHolder'>
-              <Typography>Product Reviews</Typography>
-              <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button>
-            </div>
-            <ReviewDialog open={isReviewDialogOpen} onClose={handleCloseReviewDialog} onSubmit={handleReviewSubmit} />
-            {/* <div>{reviews}</div> */}
+              <div className='reviewsHolder'>
+                <Typography>Product Reviews</Typography>
+                <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button>
+              </div>
+              <ReviewDialog open={isReviewDialogOpen} onClose={handleCloseReviewDialog} onSubmit={handleReviewSubmit} />
+              {/* <div>{reviews}</div> */}
+            </Grid>
           </Grid>
-        </Grid>
-        )}
-      </Box>  
-    </>
-  )
+          )}
+        </Box>  
+      </>
+    )
+  }
 }
 
 export default SingleProductDetails

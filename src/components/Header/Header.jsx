@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import './styles/Header.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { 
@@ -6,19 +6,17 @@ import {
     InputBase, Menu, MenuItem, Tabs, Tab, Toolbar, 
     alpha, styled, useMediaQuery, useTheme 
 } from '@mui/material';
-import { Favorite, PersonOutline, SearchOutlined, ShoppingBag } from '@mui/icons-material'
+import { Favorite, PersonOutline, ShoppingBag } from '@mui/icons-material'
 import { useAuth } from '../utils/AuthProvider'
 import DrawerMenu from './DrawerMenu';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getProductsBySearch } from '../utils/Apis';
+import SearchInput from './SearchInput';
 
 const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const cartLength = sessionStorage.getItem('cartLength') || 0;
     // const [cartLength, setCartLength] = useState(sessionStorage.getItem('cartLength') || 0);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const searchInputRef = useRef(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
     const isLargeScreen = useMediaQuery(theme.breakpoints.down('lg'));
@@ -39,72 +37,12 @@ const Header = () => {
         handleClose();
         // navigate('/login');
     }
-     
-    const handleSearch = async (e) => {
-        e.preventDefault();
-
-        const searchTerm = searchInputRef.current.value.toLowerCase();
-        if(searchTerm) {
-            try {
-                const products = await getProductsBySearch(searchTerm, 'name');
-                // console.log('products', products);
-                if(products.length === 0) {
-                    toast.warn('No products found');
-                }
-                else {
-                    navigate(`/search/?name=${searchTerm}`);
-                }
-            } catch (error) {
-                toast.warn(error);
-            }
-        }
-        else {
-            toast.warn('Please enter a search term.');
-        }
-    }
 
     const productTabs = [
         {id: 1, name: 'MEN', link: '/mens-clothing'},
         {id: 2, name: 'WOMEN', link: '/womens-clothing'},
         {id: 3, name: 'MOBILE COVERS', link: '/mobile-covers'},
     ];
-    
-    const Search = styled('div')(({ theme }) => ({
-        display: 'flex',
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.black, 0.1),
-        '&:focus-within': {
-            backgroundColor: alpha(theme.palette.common.white, 0.2),
-            border: '1px solid #979797'
-        },
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto',
-        },
-    }));
-    const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }));
-
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: '#979797',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1.2, 1, 1.2, 6),
-            paddingRight: `calc(1em + ${theme.spacing(0.2)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
-            [theme.breakpoints.up('md')]: {
-                width: '20ch',
-            },
-        },
-    }));
 
     const fullScreenTabs = (
         <>
@@ -195,19 +133,7 @@ const Header = () => {
                     </Tabs>
                 )}
                 <div className='searchAndMenuWrapper'>
-                    <form onSubmit={handleSearch}>
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchOutlined style={{color: '#979797'}} />
-                            </SearchIconWrapper>
-                            <StyledInputBase 
-                                placeholder='Search by product, category or collection' 
-                                inputProps={{ 'aria-label': 'search' }} 
-                                inputRef={searchInputRef} 
-                                sx={{color: '#979797'}}
-                            />
-                        </Search>
-                    </form>
+                    <SearchInput />
                     
                     {isLargeScreen ? null : (
                         <Divider orientation='vertical' variant='middle' flexItem style={{padding: '10px', color: '#979797'}} />
