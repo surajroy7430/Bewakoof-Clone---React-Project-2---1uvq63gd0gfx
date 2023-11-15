@@ -1,6 +1,16 @@
-import { Grid, Card, CardContent, Typography, Box, CardMedia, Chip, useTheme, useMediaQuery } from '@mui/material'
-import React from 'react'
-import './MyOrders.css'
+import React from 'react';
+import './MyOrders.css';
+import { 
+  Grid, 
+  Card, 
+  CardContent, 
+  Typography, 
+  Box, 
+  CardMedia, 
+  Chip, 
+  useTheme, 
+  useMediaQuery 
+} from '@mui/material';
 import { useAuth } from '../../utils/AuthProvider';
 
 const OrderDetails = ({ orders }) => {

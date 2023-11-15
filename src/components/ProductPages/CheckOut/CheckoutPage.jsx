@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import './Checkout.css';
 import { deleteOneProductFromCart, placeOrder } from '../../utils/Apis';
 import { useAuth } from '../../utils/AuthProvider';
-import { Box, Button, Container, Divider, Grid, MenuItem, Menu, Typography, Card, CardMedia, CardContent } from '@mui/material';
+import { 
+  Box, 
+  Button, 
+  Container, 
+  Divider, 
+  Grid, 
+  MenuItem, 
+  Menu, 
+  Typography, 
+  Card, 
+  CardMedia, 
+  CardContent 
+} from '@mui/material';
 import { ArrowDropDown } from '@mui/icons-material';
 import AddressDialog from './AddessDialog';
 import StripeCheckout from 'react-stripe-checkout';
@@ -79,7 +91,7 @@ const Checkout = () => {
         removeFromCart();
         navigate('/orderconfirmed');
 
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         // console.log(error);
         toast.error(error);

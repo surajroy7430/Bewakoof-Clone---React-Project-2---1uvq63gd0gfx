@@ -10,12 +10,10 @@ import {
     InputAdornment,
     IconButton,
     Box,
-    Divider
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../utils/AuthProvider';
 import { signInUser } from '../utils/Apis';
 

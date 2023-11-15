@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Box, InputBase, styled, alpha } from '@mui/material';
 import { SearchOutlined } from '@mui/icons-material';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { getProductsBySearch } from '../utils/Apis';
 import { useNavigate } from 'react-router-dom';
 

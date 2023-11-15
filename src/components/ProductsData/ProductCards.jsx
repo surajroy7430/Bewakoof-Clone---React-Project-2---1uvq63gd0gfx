@@ -4,13 +4,12 @@ import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/mater
 import { FavoriteBorder } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { Loader } from '../Loader/Loader';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addProductToWishlist } from '../utils/Apis';
 import { useAuth } from '../utils/AuthProvider';
 
 const ProductCards = (props) => {
     const {_id, name, displayImage, price, brand} = props;
-    // console.log('___id', _id);
     const { isLoggedIn, wishlist } = useAuth();
     const isProductInWishlist = wishlist && wishlist.some(item => item.products._id === _id);
     const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +28,6 @@ const ProductCards = (props) => {
     }
 
     const handleAddToWishList = async() => {
-        // console.log('prdoct', _id);
         const authToken = localStorage.getItem('authToken');
         // console.log('authToken', authToken);
     
@@ -47,7 +45,7 @@ const ProductCards = (props) => {
                     position: 'top-left'
                 });
                 
-                // window.location.reload();
+                window.location.reload();
             } catch (error) {
                 // Handle API errors here
                 console.error(error);
@@ -84,20 +82,20 @@ const ProductCards = (props) => {
                 )}
                 
                 <div className='priceWrapper'>
-                {isLoading ? (
-                    <Loader width={150} height={25} />
-                ) : (
-                    <>
-                        <strong>₹{price}</strong>
-                        <IconButton 
-                            aria-label='add to wishlist' 
-                            onClick={handleAddToWishList}
-                            
-                        >
-                            <FavoriteBorder style={{color: isProductInWishlist ? 'red' : 'black'}} />
-                        </IconButton>
-                    </>
-                )}
+                    {isLoading ? (
+                        <Loader width={150} height={25} />
+                    ) : (
+                        <>
+                            <strong>₹{price}</strong>
+                            <IconButton 
+                                aria-label='add to wishlist' 
+                                onClick={handleAddToWishList}
+
+                            >
+                                <FavoriteBorder style={{color: isProductInWishlist ? 'red' : 'black'}} />
+                            </IconButton>
+                        </>
+                    )}
                 </div>
             </CardContent>
         </Card>

@@ -11,7 +11,7 @@ import {
     Pinterest, 
     Twitter 
 } from '@mui/icons-material';
-import { Col, Container, Form, Image, InputGroup, ListGroup, Row } from 'react-bootstrap';
+import { Col, Container, Image, ListGroup, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
+import '../styles/Home.css';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Home.css'
 import { Grid, Paper } from '@mui/material';
 
 const WomensCategories = () => {

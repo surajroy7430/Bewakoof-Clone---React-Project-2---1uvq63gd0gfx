@@ -1,11 +1,8 @@
-import { Button, ButtonGroup, Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
-import './WishList.css'
+import React from 'react';
+import './WishList.css';
 import { useNavigate } from 'react-router-dom';
-import { 
-    addProductToCart, 
-    deleteOneProductFromWishlist 
-} from '../../utils/Apis';
+import { Button, ButtonGroup, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { addProductToCart, deleteOneProductFromWishlist } from '../../utils/Apis';
 import { toast } from 'react-toastify';
 
 const WishListItems = ({ products }) => {
@@ -28,7 +25,7 @@ const WishListItems = ({ products }) => {
                 position: 'top-left'
             });
 
-            // window.location.reload();
+            window.location.reload();
         } catch (error) {
             // Handle API errors here
             console.error('error', error);
@@ -42,7 +39,7 @@ const WishListItems = ({ products }) => {
             await deleteOneProductFromWishlist(_id, authToken);
             toast.info('Deleted');
 
-            // window.location.reload();
+            window.location.reload();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);

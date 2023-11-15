@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './components/utils/AuthProvider';
+import RouterComp from './components/RouterComponent/RouterComp';
 import Header from '../src/components/Header/Header.jsx';
 import Footer from '../src/components/Footer/Footer.jsx';
 import { ToastContainer } from 'react-toastify';
-import RouterComp from './components/RouterComponent/RouterComp';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { user } = useAuth();

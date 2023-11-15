@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import './styles/Home.css';
-import CarouselComp from './CarouselComp'
-import { Container, Image } from 'react-bootstrap'
-import { Typography, useMediaQuery, useTheme } from '@mui/material'
-import { FadeLoader } from 'react-spinners'
-import Add1 from './Adds/Add1'
-import MensCategories from './Adds/MensCategories'
-import WomensCategories from './Adds/WomensCategories'
-import { useNavigate } from 'react-router-dom'
+import CarouselComp from './CarouselComp';
+import { Container, Image } from 'react-bootstrap';
+import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { FadeLoader } from 'react-spinners';
+import Add1 from './Adds/Add1';
+import MensCategories from './Adds/MensCategories';
+import WomensCategories from './Adds/WomensCategories';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,8 +29,6 @@ const Home = () => {
   const toWomensProducts = () => {
     navigate('/womens-clothing');
   }
-  
-  
 
   return (
     <div style={{marginTop: '100px'}}>

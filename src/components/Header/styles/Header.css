@@ -8,6 +8,11 @@ div.headerDiv {
     display: flex;
     justify-content: space-between;
 }
+
+a.active {
+    border-bottom: 4px solid #fdd835;
+}
+
 div.searchAndMenuWrapper {
     display: flex;
     margin-right: 100px;

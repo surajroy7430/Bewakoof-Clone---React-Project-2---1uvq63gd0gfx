@@ -1,10 +1,10 @@
-import { Box, Breadcrumbs, Button, Divider, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import './SingleProduct.css'
 import { Link } from 'react-router-dom';
+import { Box, Breadcrumbs, Button, Divider, Grid, Typography } from '@mui/material'
 import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
-import { FadeLoader } from 'react-spinners';
 import { addProductReview, addProductToCart, getProductReviews } from '../../utils/Apis';
+import { FadeLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../utils/AuthProvider';
 import { addProductToWishlist } from '../../utils/Apis';
@@ -62,7 +62,7 @@ const SingleProductDetails = ({ product }) => {
           position: 'top-left'
         });
 
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         // Handle API errors here
         console.error(error);
@@ -96,7 +96,7 @@ const SingleProductDetails = ({ product }) => {
           position: 'top-left'
         });
 
-        // window.location.reload();
+        window.location.reload();
       } catch (error) {
         // Handle API errors here
         console.error('error', error);
@@ -165,7 +165,11 @@ const SingleProductDetails = ({ product }) => {
   }, [_id, authToken]);
 
   if(!_id) {
-    return <ErrorPage />
+    return (
+      <strong style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+        Something went wrong
+      </strong>
+    )
   } 
   else {
     return (

@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import './styles/Header.css'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import './styles/Header.css';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { 
-    AppBar, Badge, Box, Button, Divider,   
-    InputBase, Menu, MenuItem, Tabs, Tab, Toolbar, 
-    alpha, styled, useMediaQuery, useTheme 
+    AppBar, Badge, Box, Button, Divider, 
+    Menu, MenuItem, Tabs, Tab, Toolbar, 
+    useMediaQuery, useTheme 
 } from '@mui/material';
-import { Favorite, PersonOutline, ShoppingBag } from '@mui/icons-material'
-import { useAuth } from '../utils/AuthProvider'
+import { Favorite, PersonOutline, ShoppingBag } from '@mui/icons-material';
+import { useAuth } from '../utils/AuthProvider';
 import DrawerMenu from './DrawerMenu';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchInput from './SearchInput';
@@ -15,7 +15,6 @@ import SearchInput from './SearchInput';
 const Header = () => {
     const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
     const cartLength = sessionStorage.getItem('cartLength') || 0;
-    // const [cartLength, setCartLength] = useState(sessionStorage.getItem('cartLength') || 0);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
@@ -124,7 +123,7 @@ const Header = () => {
                         {productTabs.map(tab => (
                             <Tab 
                                 key={tab.id}
-                                LinkComponent={Link} 
+                                LinkComponent={NavLink} 
                                 to={tab.link}
                                 label={tab.name} 
                                 style={{color: 'black', fontWeight: '600'}}

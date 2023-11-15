@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Box, Button, Container, Typography, useMediaQuery } from '@mui/material'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Box, Button, Container, Typography, useMediaQuery } from '@mui/material';
 import { Home } from '@mui/icons-material';
 
 const ErrorPage = () => {

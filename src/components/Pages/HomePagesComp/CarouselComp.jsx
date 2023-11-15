@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
+import './styles/Home.css';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
-import { useNavigate } from 'react-router-dom'
-import './styles/Home.css'
 
 const CarouselComp = () => {
     const navigate = useNavigate();

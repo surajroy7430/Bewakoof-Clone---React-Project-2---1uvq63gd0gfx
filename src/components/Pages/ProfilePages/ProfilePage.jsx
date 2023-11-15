@@ -7,19 +7,19 @@ import { NavigateNext } from '@mui/icons-material';
 const ProfilePage = () => {
   return (
     <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '80px',
-            padding: '0 20px',
-        }}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '80px',
+        padding: '0 20px',
+      }}
     >
       <Container>
         <Typography 
           variant='h3' 
           sx={{
-              fontSize: '35px', 
-              fontWeight: '600',
+            fontSize: '35px', 
+            fontWeight: '600',
         }}>My Account</Typography>
         <Divider orientation='horizontal' className='profileDivider' />
 
@@ -54,7 +54,6 @@ const ProfilePage = () => {
           </Box>
         </Box>
         <Divider orientation='horizontal' style={{marginBottom: '300px'}} className='profileOptionsDivider' />
-
       </Container>
     </Box>
   )

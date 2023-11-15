@@ -1,7 +1,6 @@
-import { Typography } from '@mui/material';
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Grid, Paper } from '@mui/material';
+import React from 'react';
+import { Typography, Grid, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const Add1 = () => {
     const navigate = useNavigate();

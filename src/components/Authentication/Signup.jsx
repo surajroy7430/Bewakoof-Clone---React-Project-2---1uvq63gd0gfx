@@ -3,7 +3,6 @@ import './styles/LoginAndSignup.css'
 import { Avatar, Box, Button, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { registerUser } from '../utils/Apis';
 
 const SignUp = () => {
