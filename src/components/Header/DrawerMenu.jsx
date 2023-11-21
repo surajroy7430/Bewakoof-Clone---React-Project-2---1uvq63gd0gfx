@@ -18,8 +18,9 @@ const DrawerMenu = () => {
     const [openDrawer, setOpenDrawer] = useState(false);
     const navigate = useNavigate();
 
-    const handleDrawerClose = () => {
+    const handleDrawerClose = (path) => {
         setOpenDrawer(false);
+        window.location.replace(path);
     }
     const handleDrawerToLogin = () => {
         setOpenDrawer(false);
@@ -32,10 +33,9 @@ const DrawerMenu = () => {
         {id: 3, name: 'Mobile Covers', link: '/mobile-covers'},
     ];
     const accountListRoutes = [
-        {id: 1, name: 'My Account', link: '/myaccount'},
-        {id: 2, name: 'My Orders', link: '/myaccount/orders'},
-        {id: 3, name: 'My Wishlist', link: '/wishlist'},
-        {id: 4, name: 'My Cart', link: '/cart'},
+        {id: 1, name: 'My Orders', link: '/myaccount/orders'},
+        {id: 2, name: 'My Wishlist', link: '/wishlist'},
+        {id: 3, name: 'My Cart', link: '/cart'},
     ];
     const contactUs = [
         {id: 1, name: 'help & Support'},
@@ -116,19 +116,30 @@ const DrawerMenu = () => {
                                 </Typography>
                             </ListItemText>
                         </ListItem>
+                        <ListItem disableGutters>
+                            <ListItemButton 
+                                LinkComponent={Link} 
+                                to='/myaccount'
+                                onClick={() => setOpenDrawer(false)}
+                            >
+                                <ListItemText disableTypography>
+                                    My Account
+                                </ListItemText>
+                            </ListItemButton>
+                        </ListItem>
                         {accountListRoutes.map(tab => (
                             <ListItem disableGutters key={tab.id}>
                                 <ListItemButton 
                                     LinkComponent={Link} 
                                     to={tab.link}
-                                    onClick={handleDrawerClose}
+                                    onClick={() => handleDrawerClose(tab.link)}
                                 >
                                     <ListItemText disableTypography>
                                         {tab.name}
                                     </ListItemText>
                                 </ListItemButton>
                             </ListItem>
-                        ))};
+                        ))}
                         <ListItem disableGutters>
                             <ListItemButton
                                 divider 

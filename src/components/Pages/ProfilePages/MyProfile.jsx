@@ -31,18 +31,74 @@ const MyProfile = () => {
             margin="normal"
             id="name"
             name='name'
+            label="Name"
             value={user.name}
             disabled
-            style={{marginRight: '20px'}}
+            style={{marginRight: '20px', width: '350px'}}
           />
           <TextField 
             margin="normal"
             id="email"
             name='email'
+            label="Email Address"
             value={user.email}
             disabled
+            style={{width: '350px'}}
           />
         </div>
+
+        {user.address[0] ? (
+          <div>
+            <div>
+              <TextField
+                margin="normal"
+                label="Mobile"
+                value={user.address[0].mobile}
+                style={{marginRight: '20px', width: '350px'}}
+                disabled
+              />
+              <TextField
+                margin="normal"
+                label="Street"
+                value={user.address[0].street}
+                disabled
+                style={{width: '350px'}}
+              />
+            </div>
+            <div>
+              <TextField
+                margin="normal"
+                label="City"
+                value={user.address[0].city}
+                disabled
+                style={{marginRight: '20px', width: '350px'}}
+              />
+              <TextField
+                margin="normal"
+                label="State"
+                value={user.address[0].state}
+                disabled
+                style={{width: '350px'}}
+              />
+            </div>
+            <div style={{marginBottom: '30px'}}>
+              <TextField
+                margin="normal"
+                label="Country"
+                value={user.address[0].country}
+                disabled
+                style={{marginRight: '20px', width: '350px'}}
+              />
+              <TextField
+                margin="normal"
+                label="Zip Code"
+                value={user.address[0].zipCode}
+                disabled
+                style={{width: '350px'}}
+              />
+            </div>
+          </div>
+        ) : null}
 
         <Card variant="outlined" sx={{ borderColor: 'red', maxWidth: 500 }}>
           <CardContent>

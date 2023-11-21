@@ -45,7 +45,7 @@ const ProductCards = (props) => {
                     position: 'top-left'
                 });
                 
-                window.location.reload();
+                // window.location.reload();
             } catch (error) {
                 // Handle API errors here
                 console.error(error);

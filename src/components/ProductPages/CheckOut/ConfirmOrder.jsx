@@ -6,6 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const ConfirmOrder = () => {
   const navigate = useNavigate();
 
+  const showOrderdetails = () => {
+    navigate('/myaccount/orders');
+    window.location.replace('/myaccount/orders');
+  };
+
   return (
     <Box className='confirmedOrderWrapper'>
       <Paper className='confirmedOrder' elevation={2}>
@@ -27,7 +32,7 @@ const ConfirmOrder = () => {
 
         <Button 
           variant='contained' 
-          onClick={() => navigate('/myaccount/orders')}
+          onClick={showOrderdetails}
           style={{backgroundColor: 'springgreen', fontWeight: 600, marginTop: '20px'}}
         >
           CHECK STATUS</Button>

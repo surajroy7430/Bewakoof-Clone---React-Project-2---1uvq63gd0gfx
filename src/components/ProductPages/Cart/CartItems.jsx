@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteOneProductFromCart } from '../../utils/Apis';
 
-const CartItems = ({ product, quantity }) => {
-    const { _id, displayImage, brand, name, price} = product;
+const CartItems = ({ product, quantity, size }) => {
+    const { _id, displayImage, brand, name, price } = product;
     const navigate = useNavigate();
 
     const showProductDetails = () => {
@@ -41,6 +41,9 @@ const CartItems = ({ product, quantity }) => {
                 <Typography className='brandName'>{brand}</Typography>
                 <small className='productName'>{name}</small>
             </div>
+            <Typography variant="body2" color="text.secondary">
+                <b>Size</b>: {size}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
                 <b>Quantity</b>: {quantity}
             </Typography>

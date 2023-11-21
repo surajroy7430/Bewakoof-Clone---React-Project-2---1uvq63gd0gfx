@@ -6,12 +6,13 @@ import { addProductToCart, deleteOneProductFromWishlist } from '../../utils/Apis
 import { toast } from 'react-toastify';
 
 const WishListItems = ({ products }) => {
-    const { _id, displayImage, brand, name, price} = products;
+    const { _id, displayImage, brand, name, price } = products;
     const navigate = useNavigate();
 
     const showProductDetails = () => {
         navigate(`/product/${_id}`);
     }
+
     const handleAddToCart = async() => {
         // console.log('prdoct', _id);
         const authToken = localStorage.getItem('authToken');
@@ -25,7 +26,7 @@ const WishListItems = ({ products }) => {
                 position: 'top-left'
             });
 
-            window.location.reload();
+            // window.location.reload();
         } catch (error) {
             // Handle API errors here
             console.error('error', error);

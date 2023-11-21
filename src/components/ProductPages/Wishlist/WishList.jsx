@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 
 const WishList = () => {
   const { wishlist, user } = useAuth();
+  // console.log('wishlist', wishlist);
 
   const removeAllProducts = async () => {
     const authToken = localStorage.getItem('authToken');

@@ -23,7 +23,7 @@ const RouterComp = ({ user }) => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/login' element={!user ? <Login /> : <Navigate to='/login' />} />
+      <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/forgotpassword' element={<ForgotPassword />} />
       <Route path='/mens-clothing' element={<MensClothing />} />

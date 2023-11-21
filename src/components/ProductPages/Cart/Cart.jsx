@@ -8,10 +8,11 @@ import CartItems from './CartItems'
 const Cart = () => {
   const { cart } = useAuth();
   const cartAPI = cart.items;
-  // console.log(cartAPI);
+  // console.log('cart', cart);
+  // console.log('cartAPI', cartAPI);
   const navigate = useNavigate();
 
-  if(!cartAPI || cartAPI.length === 0) {
+  if(!cartAPI || cartAPI.length == 0) {
     return (
       <div id='empty_cart'>
         <div className='empty_cart_container'>
@@ -59,6 +60,7 @@ const Cart = () => {
                   <CartItems  
                     product={item.product} 
                     quantity={item.quantity} 
+                    size={item.size}
                     className='cartCardWrapper' 
                   />
                 </Grid>

@@ -27,7 +27,8 @@ const Checkout = () => {
 
   if (!cartAPI || cartAPI.length === 0) {
     // Handle the case where cartAPI is undefined or empty
-    return <div>No items in the cart</div>;
+    toast.error('No items in the cart');
+    return
   }
 
   const { _id } = cartAPI[0].product;
@@ -44,7 +45,7 @@ const Checkout = () => {
     productId:  cartAPI && cartAPI[0].product._id,
     quantity:  cartAPI && cartAPI[0].quantity,
     addressType: 'HOME',
-    address: address
+    ...(user.address[0] && { address: user.address[0] })
   }
   // console.log(orderData)
 
@@ -85,16 +86,16 @@ const Checkout = () => {
       try {
         const response = await placeOrder(orderData, authToken, token.id)
 
-        console.log('order placed', response);
+        // console.log('order placed', response);
         toast(response.message);
         // console.log(response.message);
         removeFromCart();
         navigate('/orderconfirmed');
 
-        window.location.reload();
+        // window.location.reload();
       } catch (error) {
         // console.log(error);
-        toast.error(error);
+        toast.error('An error occurred while placing the order');
       }
     }
   }
@@ -131,6 +132,9 @@ const Checkout = () => {
                         </Typography>
                         <Typography className='checkoutItemPrice'>
                           <b>Price: </b>₹{item.product.price}
+                        </Typography>
+                        <Typography className='checkoutItemPrice'>
+                          <b>Size: </b>{item.size}
                         </Typography>
                         <Typography className='checkoutItemQuantity'>
                           <b>Quantity: </b>{item.quantity}

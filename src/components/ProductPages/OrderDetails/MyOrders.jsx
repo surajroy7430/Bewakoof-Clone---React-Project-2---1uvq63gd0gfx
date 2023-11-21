@@ -91,11 +91,11 @@ const MyOrders = () => {
                           <Typography className='orderId'>
                           <b>ORDER#: </b>{item.order._id}
                           </Typography>
-                          <Typography className='orderDate'>
-                            <b>Order Date: </b>{item.createdAt}
-                          </Typography>
                           <Typography className='orderItemName'>
                             <b>Name: </b>{item.order.items[0].product.name}
+                          </Typography>
+                          <Typography className='orderDate'>
+                            <b>Order Date: </b>{item.createdAt}
                           </Typography>
                           <Typography className='orderItemPrice'>
                             <b>Price: </b>₹{item.order.totalPrice}

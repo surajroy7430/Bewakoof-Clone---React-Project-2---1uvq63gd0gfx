@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     const updateAddress = (newAddress) => {
         // Update the user object with the new address
-        const updatedUser = { ...user, address: [...user.address, newAddress] };
+        const updatedUser = { ...user, addressType: 'HOME', address: [...user.address, newAddress] };
         setUser(updatedUser);
     
         // Update the user info in localStorage
@@ -39,8 +39,9 @@ export const AuthProvider = ({ children }) => {
         const fetchCartItems = async () => {
             try {
                 const cartItems = await getCartProducts(authToken);
-                setCart(cartItems);
-                sessionStorage.setItem('cartLength', cartItems.items.length);
+                if(cartItems) {
+                    setCart(cartItems);
+                }
                 // console.log("cartItems", cartItems.items);
             } catch (error) {
                 console.error(error);
@@ -51,8 +52,9 @@ export const AuthProvider = ({ children }) => {
         const fetchWishlistItems = async () => {
             try {
                 const wishlistItems = await getWishListProducts(authToken);
-                setWishList(wishlistItems);
-                sessionStorage.setItem('wishlistLength', wishlistItems.items.length);
+                if(wishlistItems) {
+                    setWishList(wishlistItems);
+                }
                 // console.log("wishlistItems", wishlistItems);
             } catch (error) {
                 console.error(error);
@@ -63,7 +65,9 @@ export const AuthProvider = ({ children }) => {
         const fetchPlacedOrders = async () => {
             try {
                 const placedItems = await getPlacedOrders(authToken);
-                setOrders(placedItems);
+                if(placedItems) {
+                    setOrders(placedItems);
+                }
                 // console.log("placed Items", placedItems);
             } catch (error) {
                 console.error(error);
@@ -71,7 +75,7 @@ export const AuthProvider = ({ children }) => {
         };
         fetchPlacedOrders();
 
-    }, [authToken])
+    }, [authToken, setCart, setWishList, setOrders])
 
     const loginUser = (userdata) => {
         setUser(userdata.data);
@@ -80,8 +84,10 @@ export const AuthProvider = ({ children }) => {
         // Store the authentication token and user info in localStorage
         localStorage.setItem('authToken', userdata.token);
         localStorage.setItem('userInfo', JSON.stringify(userdata.data));
-        sessionStorage.setItem('cartLength', cart.items.length);
-        sessionStorage.setItem('wishlistLength', wishlist.items.length);
+        fetchCartItems();
+        fetchWishlistItems();
+        // sessionStorage.setItem('cartLength', cart.items.length);
+        // sessionStorage.setItem('wishlistLength', wishlist.items.length);
     }
     const logout = () => {
         setUser(null);
@@ -94,19 +100,19 @@ export const AuthProvider = ({ children }) => {
         navigate('/login');
     }
 
+    const value = {
+        user, 
+        isLoggedIn, 
+        loginUser, 
+        logout, 
+        wishlist, 
+        cart,
+        orders, 
+        updateAddress
+    }
+
   return (
-    <AuthContext.Provider 
-        value={{
-            user, 
-            isLoggedIn, 
-            loginUser, 
-            logout, 
-            wishlist, 
-            cart,
-            orders, 
-            updateAddress
-        }}
-    >
+    <AuthContext.Provider value={value}>
         {children}
     </AuthContext.Provider>
   )

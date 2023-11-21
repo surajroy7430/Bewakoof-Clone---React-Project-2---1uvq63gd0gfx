@@ -34,9 +34,32 @@ const SingleProductDetails = ({ product }) => {
     return () => clearTimeout(timeOut);
   }, []);
 
+  const sizeMapping = {
+    'XS': 'XS',
+    'S': 'S',
+    'M': 'M',
+    'L': 'L',
+    'XL': 'XL',
+    'XXL': 'XXL',
+  };
+  const sortedSizes = Object.keys(sizeMapping).sort((a, b) => {
+    // Assign numerical values to sizes for sorting
+    const sizeOrder = {
+      'XS': 1,
+      'S': 2,
+      'M': 3,
+      'L': 4,
+      'XL': 5,
+      'XXL': 6,
+    };
+
+    return sizeOrder[a] - sizeOrder[b];
+  });
+  const isSizeAvailable = (sz) => size && size.includes(sz);
+
   const selectSize = (size) => {
     setSelectedSize(size);
-  };  
+  };
 
   const [isDescriptionVisible, setDescriptionVisible] = useState(false);
   const toggleDescription = () => {
@@ -91,7 +114,7 @@ const SingleProductDetails = ({ product }) => {
     else {
       try {
         // Call the API function to add the product to the cart
-        await addProductToCart(_id, 1, authToken); // Assuming quantity is 1
+        await addProductToCart(_id, 1, authToken, selectedSize); // Assuming quantity is 1
         toast('Product added to the cart!', {
           position: 'top-left'
         });
@@ -164,14 +187,7 @@ const SingleProductDetails = ({ product }) => {
     fetchReviews();
   }, [_id, authToken]);
 
-  if(!_id) {
-    return (
-      <strong style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-        Something went wrong
-      </strong>
-    )
-  } 
-  else {
+  if(_id) {
     return (
       <>     
         <div className='breadcrumbs'>
@@ -225,14 +241,15 @@ const SingleProductDetails = ({ product }) => {
 
               <Typography><strong>SELECT SIZE</strong></Typography>
               <div>
-                {size && size.map((sz, i) => (
+                {size && sortedSizes.map((sz, i) => (
                   <Button 
                     key={i+1} 
                     variant='outlined'
                     className={`sizeButton ${selectedSize === sz ? 'active' : ''}`}
                     onClick={() => selectSize(sz)}
-                    >
-                    {sz}
+                    disabled={!isSizeAvailable(sz)}
+                  >
+                    {sizeMapping[sz] || sz}
                   </Button>
                 ))}
               </div>
@@ -290,6 +307,13 @@ const SingleProductDetails = ({ product }) => {
       </>
     )
   }
+  // else if(!_id) {
+  //   return (
+  //     <strong style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+  //       Something went wrong
+  //     </strong>
+  //   )
+  // }
 }
 
 export default SingleProductDetails

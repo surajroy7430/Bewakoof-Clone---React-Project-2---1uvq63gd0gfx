@@ -23,7 +23,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     // Check if cart or cart.items is undefined before accessing its properties
-    // const cartItemCount = cart && cart.items ? cartLength : 0;
+    // const cartLength = cart && cart.items ? cartLength : 0;
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -60,8 +60,16 @@ const Header = () => {
                             <i style={{color: 'rgba(0,0,0,.5)'}}>Hi, {user.name}</i>
                         </MenuItem>
                         <MenuItem component={Link} to='/myaccount'>My Account</MenuItem>
-                        <MenuItem component={Link} to='/wishlist'>My Wishlist</MenuItem>
-                        <MenuItem component={Link} to='/myaccount/orders'>My Orders</MenuItem>
+                        <MenuItem 
+                            component={Link} 
+                            to='/wishlist'
+                            onClick={() => window.location.replace('/wishlist')}
+                        >My Wishlist</MenuItem>
+                        <MenuItem 
+                            component={Link} 
+                            to='/myaccount/orders'
+                            onClick={() => window.location.replace('/myaccount/orders')}
+                        >My Orders</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
                 </>
@@ -142,6 +150,7 @@ const Header = () => {
                             <Button 
                                 LinkComponent={Link} 
                                 to='/wishlist'
+                                onClick={() => window.location.replace('/wishlist')}
                             >
                                 { isLoggedIn && user ? (
                                     <Favorite style={{color: wishlist.length > 0 ? 'red' : 'black'}} />
@@ -152,6 +161,7 @@ const Header = () => {
                             <Button
                                 LinkComponent={Link} 
                                 to='/cart'
+                                onClick={() => window.location.replace('/cart')}
                             >
                                 { isLoggedIn && user ? (
                                     <Badge badgeContent={cartLength} color='error'>

@@ -25,7 +25,7 @@ const ProfilePage = () => {
 
         <Box sx={{display: 'flex', flexDirection: 'column', marginTop: '50px', marginBottom: '20px'}}>
           <Box className='accountOptions'>
-            <Link to='/myaccount/orders'>
+            <Link to='/myaccount/orders' onClick={() => window.location.replace('/myaccount/orders')}>
               <Typography className='myAccOptionsTitle'>My Orders <NavigateNext /></Typography>
               <Typography style={{color: '#868686', opacity: '0.5'}}>
                 <small>View, modify and track orders</small>
@@ -35,7 +35,7 @@ const ProfilePage = () => {
           <Divider orientation='horizontal' className='profileOptionsDivider' />
 
           <Box className='accountOptions'>
-            <Link to='/wishlist'>
+            <Link to='/wishlist' onClick={() => window.location.replace('/wishlist')}>
               <Typography className='myAccOptionsTitle'>My Wishlist <NavigateNext /></Typography>
               <Typography style={{color: '#868686', opacity: '0.5'}}>
                 <small>See Wishlist</small>

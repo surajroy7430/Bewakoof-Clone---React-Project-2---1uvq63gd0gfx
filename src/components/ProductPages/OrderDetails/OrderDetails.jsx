@@ -64,13 +64,16 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
                 <Grid item xs={8}>
                   <CardContent>
                     <Typography className='orderedStatus'>
-                      {status}...
+                      {status}
                     </Typography>
                     <Typography className='orderedItemName'>
                       {items && items[0].product.name}
                     </Typography>
                     <Typography className='orderedItemPrice'>
-                      ₹{items && items[0].product.price}
+                      Price: ₹{items && items[0].product.price}
+                    </Typography>
+                    <Typography className='orderedItemPrice'>
+                      Size: {items && items[0].size}
                     </Typography>
                   </CardContent>
                 </Grid>
@@ -101,8 +104,20 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
               </h4>
               <CardContent>
                 <div className="orderPaymentWrapper">
-                    <b>Total Amount </b>
-                    <strong>₹ {totalPrice}</strong>
+                    <Typography>Cart Total </Typography>
+                    <Typography><b>₹</b> {totalPrice}</Typography>
+                </div>
+                <div className="orderPaymentWrapper">
+                    <Typography>Delivery Fee </Typography>
+                    <Typography>FREE</Typography>
+                </div>
+                <div className="orderPaymentWrapper">
+                    <Typography>COD </Typography>
+                    <Typography>FREE</Typography>
+                </div>
+                <div className="orderPaymentWrapper">
+                    <Typography>Order Total </Typography>
+                    <Typography><b>₹</b> {totalPrice}</Typography>
                 </div>
               </CardContent>
             </Card>
