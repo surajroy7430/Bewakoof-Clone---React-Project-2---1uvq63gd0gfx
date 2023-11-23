@@ -5,7 +5,7 @@ import { deleteAccount } from '../../utils/Apis';
 import { toast } from 'react-toastify';
 
 const MyProfile = () => {
-  const { user, logout } = useAuth();
+  const { user, credential, logout } = useAuth();
   const authToken = localStorage.getItem("authToken");
 
   const deleteUser = async() => {
@@ -32,7 +32,7 @@ const MyProfile = () => {
             id="name"
             name='name'
             label="Name"
-            value={user.name}
+            value={credential ? credential.data.name : user.name}
             disabled
             style={{marginRight: '20px', width: '350px'}}
           />
@@ -41,13 +41,13 @@ const MyProfile = () => {
             id="email"
             name='email'
             label="Email Address"
-            value={user.email}
+            value={credential ? credential.data.email : user.email}
             disabled
             style={{width: '350px'}}
           />
         </div>
 
-        {user.address[0] ? (
+        {user && user.address[0] ? (
           <div>
             <div>
               <TextField
@@ -100,21 +100,23 @@ const MyProfile = () => {
           </div>
         ) : null}
 
-        <Card variant="outlined" sx={{ borderColor: 'red', maxWidth: 500 }}>
-          <CardContent>
-            <Typography variant="h4" component="div" gutterBottom>
-              Delete Account
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Permanently delete your Account. This action is not reversible, so please continue with caution.
-            </Typography>
-          </CardContent>
-          <div style={{ padding: '14px', borderTop: '1px solid red' }}>
-            <Button variant="contained" color="error" onClick={deleteUser}>
-              Delete Account
-            </Button>
-          </div>
-        </Card>
+        {user ? (
+          <Card variant="outlined" sx={{ borderColor: 'red', maxWidth: 500 }}>
+            <CardContent>
+              <Typography variant="h4" component="div" gutterBottom>
+                Delete Account
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Permanently delete your Account. This action is not reversible, so please continue with caution.
+              </Typography>
+            </CardContent>
+            <div style={{ padding: '14px', borderTop: '1px solid red' }}>
+              <Button variant="contained" color="error" onClick={deleteUser}>
+                Delete Account
+              </Button>
+            </div>
+          </Card>
+        ) : null}
       </Container>
     </Box>
   )

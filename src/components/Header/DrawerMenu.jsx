@@ -14,7 +14,7 @@ import { MenuSharp } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 
 const DrawerMenu = () => {
-    const { user, isLoggedIn, logout} = useAuth();
+    const { user, isLoggedIn, logout, credential } = useAuth();
     const [openDrawer, setOpenDrawer] = useState(false);
     const navigate = useNavigate();
 
@@ -55,11 +55,11 @@ const DrawerMenu = () => {
             onClose={handleDrawerClose} 
         >
             <List>
-                {isLoggedIn && user ? 
+                {(isLoggedIn && user) || credential ? 
                     <ListItem>
                         <ListItemText>
                             <Typography>
-                                <strong>Hi, {user.name}</strong>
+                                <strong>Hi, {user.name || credential.data.name}</strong>
                             </Typography>
                         </ListItemText>
                     </ListItem>

@@ -4,16 +4,16 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { 
     AppBar, Badge, Box, Button, Divider, 
     Menu, MenuItem, Tabs, Tab, Toolbar, 
-    useMediaQuery, useTheme 
+    useMediaQuery, useTheme, Avatar 
 } from '@mui/material';
 import { Favorite, PersonOutline, ShoppingBag } from '@mui/icons-material';
 import { useAuth } from '../utils/AuthProvider';
 import DrawerMenu from './DrawerMenu';
-import 'react-toastify/dist/ReactToastify.css';
 import SearchInput from './SearchInput';
+import { googleLogout } from '@react-oauth/google';
 
 const Header = () => {
-    const { user, isLoggedIn, logout, cart, wishlist } = useAuth();
+    const { user, isLoggedIn, credential, logout, cart, wishlist } = useAuth();
     const cartLength = sessionStorage.getItem('cartLength') || 0;
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [tabValue, setTabValue] = useState(0);
@@ -24,6 +24,7 @@ const Header = () => {
 
     // Check if cart or cart.items is undefined before accessing its properties
     // const cartLength = cart && cart.items ? cartLength : 0;
+    // console.log('credential', credential);
 
     const handleAvatarClick = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -32,9 +33,14 @@ const Header = () => {
         setAnchorElUser(null);
     }
     const handleLogout = () => {
-        logout();
-        handleClose();
-        // navigate('/login');
+        if(credential) {
+            googleLogout();
+            window.location.replace('/login');
+        } else {
+            logout();
+            handleClose();
+            // navigate('/login');
+        }
     }
 
     const productTabs = [
@@ -45,10 +51,15 @@ const Header = () => {
 
     const fullScreenTabs = (
         <>
-            {isLoggedIn && user ? (
+            {(isLoggedIn && user) || credential ? (
                 <>
                     <Button onClick={handleAvatarClick}>
-                        <PersonOutline style={{color: 'black', width: '35px', height: '35px'}} />
+                    {credential ? ( // Check if credential is available
+                        <Avatar src={credential.data.picture} alt="avatar" style={{ width: '35px', height: '35px' }} />
+                    ) : (
+                        <PersonOutline style={{ color: 'black', width: '35px', height: '35px' }} />
+                    )}
+                        {/* <PersonOutline style={{color: 'black', width: '35px', height: '35px'}} /> */}
                     </Button>
                     <Menu 
                         sx={{mt: '5px', zIndex: '2'}}
@@ -57,7 +68,9 @@ const Header = () => {
                         onClose={handleClose} 
                     >
                         <MenuItem style={{backgroundColor: 'rgba(0,0,0,.05)'}}>
-                            <i style={{color: 'rgba(0,0,0,.5)'}}>Hi, {user.name}</i>
+                            <i style={{color: 'rgba(0,0,0,.5)'}}>
+                                Hi, {credential ? credential.data.name : user.name}
+                            </i>
                         </MenuItem>
                         <MenuItem component={Link} to='/myaccount'>My Account</MenuItem>
                         <MenuItem 

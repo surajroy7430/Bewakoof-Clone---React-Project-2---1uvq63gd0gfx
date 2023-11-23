@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const { user } = useAuth();
+  const { user, credential } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate an asynchronous authentication check
@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Header />
       <ToastContainer autoClose={1200} />
-      <RouterComp user={user} />
+      <RouterComp user={user || credential} />
       <Footer />
     </div>
   )

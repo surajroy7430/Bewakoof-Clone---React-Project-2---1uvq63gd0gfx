@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './styles/LoginAndSignup.css';
+import { useGoogleLogin } from '@react-oauth/google';
 import { 
     Typography, 
     Avatar, 
@@ -10,15 +11,17 @@ import {
     InputAdornment,
     IconButton,
     Box,
+    Divider,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../utils/AuthProvider';
 import { signInUser } from '../utils/Apis';
+import axios from 'axios';
 
 const Login = () => {
-    const { loginUser } = useAuth();
+    const { loginUser, setCredentialData } = useAuth();
     const [userInfo, setUserInfo] = useState({
         email: '', 
         password: '',
@@ -44,10 +47,28 @@ const Login = () => {
         // Check if all fields are filled and update form validity
         // setFormValid(Object.values(userInfo).every((field) => field.trim() !== ''));
     }
+    const loginWithGoogle = useGoogleLogin({
+        onSuccess: async (response) => {
+            try {
+                const userInfo = await axios.get(
+                    "https://www.googleapis.com/oauth2/v3/userinfo",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${response.access_token}`
+                        }
+                    }
+                )
+                setCredentialData(userInfo);
+                console.log('Google User Info', userInfo);
+            } catch (error) {
+                console.error('Login Failed')
+            }
+        },
+    })
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        
+
         try {
             const userData = await signInUser(userInfo);
             loginUser(userData);
@@ -128,6 +149,14 @@ const Login = () => {
                                 <Link to='/signup'>SignUp</Link>
                             </p>
                         </div>
+
+                        {/* <Divider>OR</Divider>
+
+                        <div className='xgroup'>
+                            <Button onClick={() => loginWithGoogle()}>
+                                Sign in with Google
+                            </Button>
+                        </div> */}
                     </form>
                 </Box>
             </Box>

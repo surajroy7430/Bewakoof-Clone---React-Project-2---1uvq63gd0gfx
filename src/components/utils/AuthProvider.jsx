@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [credential, setCredential] = useState(null);
     const [cart, setCart] = useState([])
     const [wishlist, setWishList] = useState([])
     const [orders, setOrders] = useState([])
@@ -20,11 +21,14 @@ export const AuthProvider = ({ children }) => {
         if (authToken && storedUser) {
             setUser(JSON.parse(storedUser));
             setIsLoggedIn(true);
-
         } else {
             setIsLoggedIn(false);
         }
     }, []);
+
+    const setCredentialData = (data) => {
+        setCredential(data);
+    };
 
     const updateAddress = (newAddress) => {
         // Update the user object with the new address
@@ -86,6 +90,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('userInfo', JSON.stringify(userdata.data));
         fetchCartItems();
         fetchWishlistItems();
+        
         // sessionStorage.setItem('cartLength', cart.items.length);
         // sessionStorage.setItem('wishlistLength', wishlist.items.length);
     }
@@ -103,7 +108,9 @@ export const AuthProvider = ({ children }) => {
     const value = {
         user, 
         isLoggedIn, 
-        loginUser, 
+        loginUser,
+        credential, 
+        setCredentialData,
         logout, 
         wishlist, 
         cart,
