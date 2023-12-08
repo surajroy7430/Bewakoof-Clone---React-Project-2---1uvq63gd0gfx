@@ -27,7 +27,7 @@ const Checkout = () => {
 
   if (!cartAPI || cartAPI.length === 0) {
     // Handle the case where cartAPI is undefined or empty
-    toast.error('No items in the cart');
+    toast.error('Something Went Wrong');
     return
   }
 
@@ -38,6 +38,7 @@ const Checkout = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('COD');
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const navigate = useNavigate();
 
@@ -81,20 +82,26 @@ const Checkout = () => {
     
     if(!updateAddress) {
       toast.error('Address is Required');
+      setIsPlacingOrder(false);
       return
     } else {
       try {
+        setIsPlacingOrder(true);
         const response = await placeOrder(orderData, authToken, token.id)
 
         // console.log('order placed', response);
-        toast(response.message);
+        // toast(response.message);
         // console.log(response.message);
-        
+
         updateOrders();
         removeFromCart();
         updateCart();
-        navigate('/orderconfirmed');
+        setTimeout(() => {
+          setIsPlacingOrder(true);
+          window.location.replace('/orderconfirmed');
+        }, 500);
       } catch (error) {
+        setIsPlacingOrder(false);
         // console.log(error);
         toast.error('An error occurred while placing the order');
       }
@@ -221,7 +228,7 @@ const Checkout = () => {
                   style={{backgroundColor: '#42a2a2'}}
                   className='placeOrderButton'
                 >
-                  Place Order
+                  {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
                 </Button>
                 ) : paymentMethod === 'Card' ? (
                   <StripeCheckout

@@ -27,7 +27,7 @@ hr.clothingDivider {
     max-width: 130px;
     background: #fad323;
     height: 3px;
-    margin: 0px 30px;
+    margin: 5px 30px;
     -webkit-margin-before: 1em;
     -webkit-margin-after: 1em;
     border-style: inset;
@@ -63,14 +63,13 @@ div.priceWrapper {
     .sortButtonContainer {
         justify-content: center;
         align-items: center;
-        margin-right: 0;
     }
     div.clothingLength {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-left: 0;
+        margin-left: 10px;
         margin-top: 70px;
         margin-bottom: 10px;
         font-size: small;
