@@ -26,8 +26,8 @@ const RouterComp = ({ user }) => {
       <Route path='/login' element={!user ? <Login /> : <Navigate to='/' />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/forgotpassword' element={<ForgotPassword />} />
-      <Route path='/mens-clothing' element={<MensClothing />} />
-      <Route path='/womens-clothing' element={<WomensClothing />} />
+      <Route path='/men-clothing' element={<MensClothing />} />
+      <Route path='/women-clothing' element={<WomensClothing />} />
       <Route path='/mobile-covers' element={<MobileCovers />} />
       <Route path="/search" element={<SearchResults />} />
       <Route path='/product/:productId' element={<SingleProductPage />} />

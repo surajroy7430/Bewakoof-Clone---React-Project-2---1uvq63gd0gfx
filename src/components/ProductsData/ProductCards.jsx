@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './styles/Products.css';
 import { Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { FavoriteBorder } from '@mui/icons-material';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 import { Loader } from '../Loader/Loader';
 import { useNavigate } from 'react-router-dom';
-import { addProductToWishlist } from '../utils/Apis';
+import { addProductToWishlist, deleteOneProductFromWishlist } from '../utils/Apis';
 import { useAuth } from '../utils/AuthProvider';
 
 const ProductCards = (props) => {
     const {_id, name, displayImage, price, brand} = props;
-    const { isLoggedIn, wishlist } = useAuth();
+    const { isLoggedIn, wishlist, updateWishlist } = useAuth();
     const isProductInWishlist = wishlist && wishlist.some(item => item.products._id === _id);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ const ProductCards = (props) => {
                     position: 'top-left'
                 });
                 
-                // window.location.reload();
+                updateWishlist();
             } catch (error) {
                 // Handle API errors here
                 console.error(error);
@@ -53,6 +53,18 @@ const ProductCards = (props) => {
                     position: 'top-left'
                 });
             }
+        }
+    }
+    const removeFromWishlist = async () => {
+        const authToken = localStorage.getItem('authToken');
+        try {
+            await deleteOneProductFromWishlist(_id, authToken);
+            toast.info('Deleted');
+
+            updateWishlist();
+        } catch (error) {
+            toast.error(error);
+            // console.error('error: ', error);
         }
     }
 
@@ -64,8 +76,8 @@ const ProductCards = (props) => {
             ) : (
                 <CardMedia 
                     component='img'
-                    image={displayImage} 
-                    alt={name} 
+                    image={displayImage ? displayImage : 'https://images.bewakoof.com/t1080/women-the-flintstones-oversize-fit-graphic-printed-jogger-610863-1696420303-1.jpg'} 
+                    alt={name}
                     title={name}
                     style={{cursor: 'pointer'}}
                     onClick={showProductDetails}
@@ -89,10 +101,11 @@ const ProductCards = (props) => {
                             <strong>₹{price}</strong>
                             <IconButton 
                                 aria-label='add to wishlist' 
-                                onClick={handleAddToWishList}
-
+                                onClick={isProductInWishlist ? removeFromWishlist : handleAddToWishList}
                             >
-                                <FavoriteBorder style={{color: isProductInWishlist ? 'red' : 'black'}} />
+                                {isProductInWishlist ? <Favorite style={{color: '#f56767'}} /> : (
+                                    <FavoriteBorder style={{color: 'black'}} />
+                                )}
                             </IconButton>
                         </>
                     )}

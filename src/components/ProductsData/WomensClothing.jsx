@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import './styles/Products.css';
-import { Breadcrumbs, Button, Grid, Menu, MenuItem, Pagination, Typography } from '@mui/material';
+import { Breadcrumbs, Button, Divider, Grid, Menu, MenuItem, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { getProductsData } from '../utils/Apis';
 import ProductCards from './ProductCards';
 import { Link } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';
 import { ArrowDropDown } from '@mui/icons-material';
+import FilterOptions from '../ProductPages/FilterResults/FilterOptions';
 
 const WomensClothing = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [gender, setGender] = useState('Women');
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null); // Added state for Menu anchor
   const [selectedOption, setSelectedOption] = useState(null);
+  const theme = useTheme();
+  const isMD = useMediaQuery(theme.breakpoints.down('md'));
   const limit = 500;
 
   useEffect(() => {
     const fetchData = async(page) => {
       try {
-        const womensProducts = await getProductsData(page, limit, 'Women');
-        setProducts(womensProducts);
+        const womensProducts = await getProductsData(page, limit, gender);
+        setProducts((prevProducts) => [...prevProducts, ...womensProducts.slice(0, limit)]);
         // console.log('womensProducts', womensProducts);
       } catch (error) {
         console.log("Error: ", error);
@@ -27,11 +32,28 @@ const WomensClothing = () => {
     }
 
     fetchData(page);
-  }, [page]);
+  }, [page, gender]);
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  useEffect(() => {
+    if (
+      window.innerHeight + scrollPosition >=
+      (document.body.offsetHeight - 200) && (limit == 500)
+    ) {
+      // Load more products here
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, [scrollPosition]);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -68,21 +90,33 @@ const WomensClothing = () => {
         </div>
       ) : (
         <>
+          {!isMD && (
           <div className='breadcrumbs'>
             <Grid item>
               <Breadcrumbs>
                 <Link to='/'>Home</Link>
                 <Typography>
-                  Women's Clothing <span style={{color: 'gray'}}>({products.length})</span>
+                  Women Clothing
                 </Typography>
               </Breadcrumbs>
             </Grid>
           </div>
+          )}
+
+          <div className="clothingLength">
+            <div className="clothingLengthName">
+              <h2>Women's Clothing&nbsp;
+                <span style={{color: 'gray'}}>({products.length})</span>
+              </h2>
+            </div>
+            <Divider orientation='horizontal' className='clothingDivider' />
+          </div>
+          
 
           {products && (
-            <div className='sortButtonContainer' style={{ marginLeft: '50px', marginTop: '15px' }}>
+            <div className='sortButtonContainer'>
               <Button variant='outlined' onClick={handleSortClick}>
-                  Sort By {selectedOption || null} <ArrowDropDown />
+                  <span>Sort By&nbsp;</span> {selectedOption || 'Popular'} <ArrowDropDown />
               </Button>
               <Menu
                 anchorEl={anchorEl}
@@ -100,22 +134,24 @@ const WomensClothing = () => {
           )}
 
           <Grid container spacing={2}>
-            {products.map((cards) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={cards._id}>
-                <ProductCards {...cards} />
+            {/* Filter Options */}
+            {!isMD && (
+              <Grid item md={3}>
+                <FilterOptions products={products} setProducts={setProducts} gender={gender} />
               </Grid>
-            ))}
+            )}
+
+            {/* Product Cards */}
+            <Grid item xs={isMD ? 12 : 9}>
+              <Grid container>
+                {products.map((card) => (
+                  <Grid item xs={12} sm={6} md={4} key={card._id}>
+                    <ProductCards {...card} />
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
           </Grid>
-              
-          {/* <Pagination
-            count={Math.ceil(386 / limit)}
-            variant="outlined"
-            shape="rounded"
-            color="primary"
-            page={page}
-            onChange={handlePageChange}
-            style={{ marginTop: '20px' }}
-          /> */}
         </>
       )}
     </>

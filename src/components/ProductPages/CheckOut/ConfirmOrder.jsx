@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const ConfirmOrder = () => {
   const navigate = useNavigate();
 
-  const showOrderdetails = () => {
+  const showOrderDetails = () => {
     navigate('/myaccount/orders');
-    window.location.replace('/myaccount/orders');
   };
 
   return (
@@ -32,7 +31,7 @@ const ConfirmOrder = () => {
 
         <Button 
           variant='contained' 
-          onClick={showOrderdetails}
+          onClick={showOrderDetails}
           style={{backgroundColor: 'springgreen', fontWeight: 600, marginTop: '20px'}}
         >
           CHECK STATUS</Button>

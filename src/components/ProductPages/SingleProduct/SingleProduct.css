@@ -182,8 +182,28 @@ button.description_button strong {
 .description-wrapper .descriptionDetails {
     font-size: 13px;
     margin-bottom: 2rem;
-    color: rgb(115, 115, 115);
+    color: rgb(212, 212, 212);
     text-align: justify;
+}
+div.reviewsHolder {
+    max-width: 400px;
+}
+div.reviewsHolder > p {
+    border-bottom: 3px solid #fdd835;
+    margin-bottom: 15px;
+}
+.usersRatings {
+    display: flex;
+    margin-bottom: 15px;
+    border: 0.3px solid rgb(212, 212, 212);
+    border-radius: 4px;
+    padding: 5px;
+}
+.usersRatings p {
+    color: #999999;
+}
+div.ratingsUserAvatar {
+    margin-right: 7px;
 }
 @media (max-width: 1199px) {
     .displayImage {

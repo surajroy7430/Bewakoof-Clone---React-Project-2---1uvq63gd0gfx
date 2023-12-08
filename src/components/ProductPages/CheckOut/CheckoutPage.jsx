@@ -22,7 +22,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
-  const { user, cart, updateAddress } = useAuth();
+  const { user, cart, updateAddress, updateCart, updateOrders } = useAuth();
   const cartAPI = cart.items;
 
   if (!cartAPI || cartAPI.length === 0) {
@@ -89,10 +89,11 @@ const Checkout = () => {
         // console.log('order placed', response);
         toast(response.message);
         // console.log(response.message);
+        
+        updateOrders();
         removeFromCart();
+        updateCart();
         navigate('/orderconfirmed');
-
-        // window.location.reload();
       } catch (error) {
         // console.log(error);
         toast.error('An error occurred while placing the order');

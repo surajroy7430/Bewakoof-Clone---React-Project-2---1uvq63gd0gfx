@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { addProductToCart, deleteOneProductFromWishlist } from '../../utils/Apis';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../utils/AuthProvider';
 
 const WishListItems = ({ products }) => {
+    const { updateCart, updateWishlist } = useAuth();
     const { _id, displayImage, brand, name, price } = products;
     const navigate = useNavigate();
 
@@ -14,7 +16,6 @@ const WishListItems = ({ products }) => {
     }
 
     const handleAddToCart = async() => {
-        // console.log('prdoct', _id);
         const authToken = localStorage.getItem('authToken');
         // console.log('authToken', authToken);
         try {
@@ -25,8 +26,9 @@ const WishListItems = ({ products }) => {
             toast('Product added to the cart!', {
                 position: 'top-left'
             });
-
-            // window.location.reload();
+            
+            updateCart();
+            updateWishlist();
         } catch (error) {
             // Handle API errors here
             console.error('error', error);
@@ -40,7 +42,7 @@ const WishListItems = ({ products }) => {
             await deleteOneProductFromWishlist(_id, authToken);
             toast.info('Deleted');
 
-            window.location.reload();
+            updateWishlist();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);

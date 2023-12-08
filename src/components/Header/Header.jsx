@@ -14,7 +14,6 @@ import { googleLogout } from '@react-oauth/google';
 
 const Header = () => {
     const { user, isLoggedIn, credential, logout, cart, wishlist } = useAuth();
-    const cartLength = sessionStorage.getItem('cartLength') || 0;
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [tabValue, setTabValue] = useState(0);
     const theme = useTheme();
@@ -23,7 +22,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     // Check if cart or cart.items is undefined before accessing its properties
-    // const cartLength = cart && cart.items ? cartLength : 0;
+    const cartLength = cart && cart.items ? cart.items.length : 0;
     // console.log('credential', credential);
 
     const handleAvatarClick = (event) => {
@@ -44,8 +43,8 @@ const Header = () => {
     }
 
     const productTabs = [
-        {id: 1, name: 'MEN', link: '/mens-clothing'},
-        {id: 2, name: 'WOMEN', link: '/womens-clothing'},
+        {id: 1, name: 'MEN', link: '/men-clothing'},
+        {id: 2, name: 'WOMEN', link: '/women-clothing'},
         {id: 3, name: 'MOBILE COVERS', link: '/mobile-covers'},
     ];
 
@@ -76,12 +75,10 @@ const Header = () => {
                         <MenuItem 
                             component={Link} 
                             to='/wishlist'
-                            onClick={() => window.location.replace('/wishlist')}
                         >My Wishlist</MenuItem>
                         <MenuItem 
                             component={Link} 
                             to='/myaccount/orders'
-                            onClick={() => window.location.replace('/myaccount/orders')}
                         >My Orders</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
@@ -163,10 +160,9 @@ const Header = () => {
                             <Button 
                                 LinkComponent={Link} 
                                 to='/wishlist'
-                                onClick={() => window.location.replace('/wishlist')}
                             >
                                 { isLoggedIn && user ? (
-                                    <Favorite style={{color: wishlist.length > 0 ? 'red' : 'black'}} />
+                                    <Favorite style={{color: wishlist.length > 0 ? '#fdd835' : 'black'}} />
                                 ) : (
                                     <Favorite style={{color: 'black'}} />
                                 )}
@@ -174,10 +170,9 @@ const Header = () => {
                             <Button
                                 LinkComponent={Link} 
                                 to='/cart'
-                                onClick={() => window.location.replace('/cart')}
                             >
                                 { isLoggedIn && user ? (
-                                    <Badge badgeContent={cartLength} color='error'>
+                                    <Badge badgeContent={cartLength} color="error">
                                         <ShoppingBag style={{color: 'black'}} />
                                     </Badge>
                                 ) : (

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './SingleProduct.css'
 import { Link } from 'react-router-dom';
-import { Box, Breadcrumbs, Button, Divider, Grid, Typography } from '@mui/material'
-import { DescriptionOutlined, FavoriteOutlined, LocalMall } from '@mui/icons-material';
+import { Avatar, Box, Breadcrumbs, Button, Divider, FormControl, Grid, InputLabel, MenuItem, Rating, Select, Typography } from '@mui/material'
+import { DescriptionOutlined, FavoriteOutlined, LocalMall, Star } from '@mui/icons-material';
 import { addProductReview, addProductToCart, getProductReviews } from '../../utils/Apis';
 import { FadeLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../utils/AuthProvider';
 import { addProductToWishlist } from '../../utils/Apis';
 import ReviewDialog from './Review/ReviewDialog';
-import ErrorPage from '../../Pages/ErrorPage';
 
 const SingleProductDetails = ({ product }) => {
   const { _id, displayImage, images, description, 
@@ -17,7 +16,7 @@ const SingleProductDetails = ({ product }) => {
     size, color, gender, sellerTag
   } = product || {};
   // console.log('images', images);
-  const { isLoggedIn, wishlist, cart } = useAuth();
+  const { isLoggedIn, wishlist, cart, updateWishlist, updateCart } = useAuth();
   const isProductInWishlist =  wishlist && wishlist.find(item => item.products._id === _id);
   const authToken = localStorage.getItem("authToken");
 
@@ -66,8 +65,14 @@ const SingleProductDetails = ({ product }) => {
     setDescriptionVisible(!isDescriptionVisible);
   };
 
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQtyChange = (event) => {
+    const newQuantity = parseInt(event.target.value);
+    setQuantity(newQuantity);
+  };
+
   const handleAddToWishList = async() => {
-    // console.log('prdoct', _id);
     const authToken = localStorage.getItem('authToken');
     // console.log('authToken', authToken);
 
@@ -85,7 +90,7 @@ const SingleProductDetails = ({ product }) => {
           position: 'top-left'
         });
 
-        window.location.reload();
+        updateWishlist();
       } catch (error) {
         // Handle API errors here
         console.error(error);
@@ -95,7 +100,6 @@ const SingleProductDetails = ({ product }) => {
   }
   
   const handleAddToCart = async() => {
-    // console.log('prdoct', _id);
     const authToken = localStorage.getItem('authToken');
     // console.log('authToken', authToken);
 
@@ -114,12 +118,12 @@ const SingleProductDetails = ({ product }) => {
     else {
       try {
         // Call the API function to add the product to the cart
-        await addProductToCart(_id, 1, authToken, selectedSize); // Assuming quantity is 1
+        await addProductToCart(_id, quantity, authToken, selectedSize); // Assuming quantity is 1
         toast('Product added to the cart!', {
           position: 'top-left'
         });
 
-        window.location.reload();
+        updateCart();
       } catch (error) {
         // Handle API errors here
         console.error('error', error);
@@ -217,7 +221,11 @@ const SingleProductDetails = ({ product }) => {
                   />
                 ))}
               </Box>
-              <img src={displayImage} alt={name} className='displayImage' />
+              <img 
+                src={displayImage} 
+                alt={name} 
+                className='displayImage' 
+              />
             </Grid>
 
             <Grid item xs={12} md={12} lg={6} className='productDetails'>
@@ -253,6 +261,24 @@ const SingleProductDetails = ({ product }) => {
                   </Button>
                 ))}
               </div>
+              <FormControl sx={{minWidth: 120, mt: 2 }} size="small">
+                <InputLabel>QTY</InputLabel>
+                <Select
+                  value={quantity}
+                  displayEmpty
+                  label="QTY"
+                  onChange={handleQtyChange}
+                >
+                  <MenuItem value="" disabled>
+                    <em>Select Quantity</em>
+                  </MenuItem>
+                  {Array.from({ length: 10 }, (_, index) => (
+                    <MenuItem key={index + 1} value={index + 1}>
+                      {index + 1}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
               <div className='addToCartandWishButton'>
                 <Button variant="contained" className='add_to_cart' onClick={handleAddToCart}>
                   <LocalMall /> ADD TO BAG
@@ -296,7 +322,25 @@ const SingleProductDetails = ({ product }) => {
 
               <div className='reviewsHolder'>
                 <Typography>Product Reviews</Typography>
-                <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button>
+                <div>
+                  {reviews.map((review, i) => (
+                    <div className='usersRatings'>
+                      <Avatar className="ratingsUserAvatar" />
+                      <div>
+                        <Rating
+                          key={i+1}
+                          name="read-only"
+                          readOnly
+                          value={review.ratings}
+                        />
+                        <Typography variant='body2'>
+                          {review.text}
+                        </Typography>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                {/* <Button variant='outlined' className='rateButton' onClick={handleOpenReviewDialog}>RATE</Button> */}
               </div>
               <ReviewDialog open={isReviewDialogOpen} onClose={handleCloseReviewDialog} onSubmit={handleReviewSubmit} />
               {/* <div>{reviews}</div> */}
@@ -307,13 +351,6 @@ const SingleProductDetails = ({ product }) => {
       </>
     )
   }
-  // else if(!_id) {
-  //   return (
-  //     <strong style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
-  //       Something went wrong
-  //     </strong>
-  //   )
-  // }
 }
 
 export default SingleProductDetails

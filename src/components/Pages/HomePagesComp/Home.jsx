@@ -24,10 +24,10 @@ const Home = () => {
 
   const navigate = useNavigate();
   const toMensProducts = () => {
-    navigate('/mens-clothing');
+    navigate('/men-clothing');
   }
   const toWomensProducts = () => {
-    navigate('/womens-clothing');
+    navigate('/women-clothing');
   }
 
   return (

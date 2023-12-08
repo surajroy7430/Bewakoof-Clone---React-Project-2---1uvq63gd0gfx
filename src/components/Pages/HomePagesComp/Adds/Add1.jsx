@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Add1 = () => {
     const navigate = useNavigate();
     const toProducts = () => {
-        navigate('/mens-clothing');
+        navigate('/men-clothing');
     }
 
     const categories = [

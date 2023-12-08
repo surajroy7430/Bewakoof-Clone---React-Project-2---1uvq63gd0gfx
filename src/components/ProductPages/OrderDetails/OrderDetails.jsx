@@ -75,6 +75,9 @@ const isSm = useMediaQuery(theme.breakpoints.down('sm'));
                     <Typography className='orderedItemPrice'>
                       Size: {items && items[0].size}
                     </Typography>
+                    <Typography className='orderedItemPrice'>
+                      Quantity: {items && items[0].quantity}
+                    </Typography>
                   </CardContent>
                 </Grid>
             </Card>

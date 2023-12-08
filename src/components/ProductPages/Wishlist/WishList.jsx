@@ -8,8 +8,7 @@ import { deleteAllProductsFromWishlist } from '../../utils/Apis';
 import { toast } from 'react-toastify';
 
 const WishList = () => {
-  const { wishlist, user } = useAuth();
-  // console.log('wishlist', wishlist);
+  const { wishlist, updateWishlist } = useAuth();
 
   const removeAllProducts = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -17,7 +16,7 @@ const WishList = () => {
         await deleteAllProductsFromWishlist(authToken);
         toast.info('Deleted All');
 
-        window.location.reload();
+        updateWishlist();
     } catch (error) {
         toast.error(error);
         console.error('error: ', error);
@@ -39,7 +38,7 @@ const WishList = () => {
             className='empty_wish_button'
             variant='contained'
             LinkComponent={Link}
-            to='/mens-clothing'
+            to='/men-clothing'
           >Shop Now</Button>
         </div>
       </div>

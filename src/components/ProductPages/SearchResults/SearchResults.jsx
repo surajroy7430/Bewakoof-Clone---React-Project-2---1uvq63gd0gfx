@@ -10,7 +10,7 @@ const SearchResults = () => {
   const queryParams = new URLSearchParams(location.search);
   const searchTerm = queryParams.get('name');
   const [searchResults, setSearchResults] = useState([]);
-  const limit = 200;
+  const limit = 300;
 
   useEffect(() => {
     const fetchData = async () => {

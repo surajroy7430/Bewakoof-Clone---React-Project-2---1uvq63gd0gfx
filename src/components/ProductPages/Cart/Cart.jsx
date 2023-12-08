@@ -26,7 +26,7 @@ const Cart = () => {
             className='empty_cart_button'
             variant='contained'
             LinkComponent={Link}
-            to='/mens-clothing'
+            to='/men-clothing'
           >Continue Shopping</Button>
         </div>
       </div>

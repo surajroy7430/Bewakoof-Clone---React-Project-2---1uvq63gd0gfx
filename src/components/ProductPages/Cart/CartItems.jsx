@@ -1,11 +1,13 @@
-import { Button, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
+import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
 import './Cart.css'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { deleteOneProductFromCart } from '../../utils/Apis';
+import { useAuth } from '../../utils/AuthProvider';
 
 const CartItems = ({ product, quantity, size }) => {
+    const { updateCart} = useAuth();
     const { _id, displayImage, brand, name, price } = product;
     const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ const CartItems = ({ product, quantity, size }) => {
             await deleteOneProductFromCart(_id, authToken);
             toast.info('Deleted');
 
-            window.location.reload();
+            updateCart();
         } catch (error) {
             toast.error(error);
             console.error('error: ', error);

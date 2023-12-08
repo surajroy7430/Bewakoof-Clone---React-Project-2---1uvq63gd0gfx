@@ -98,17 +98,23 @@ export const getProductsBySearch = async (searchTerm, title, limit) => {
   }
 };
 
-export const getProductsByFilter = async (filterTerm, title, limit) => {
-  try {
-    const response = await axios.get(
-      `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter={"${title}":"${filterTerm}"}&limit=${limit}`, 
-      configById
-    );
-    console.log('filter DATA', response.data.data);
-    return response.data.data;
-  } catch (error) {
-    throw error.response.data.message;
-  }
+export const getProductsByFilter = async (filters, limit) => {
+    const filterParams = filters.map(({ title, filterTerm }) => ({
+        [title]: filterTerm,
+    }));
+    // console.log('filterParams before', filterParams);
+
+    try {
+        const response = await axios.get(
+            `${BASE_DOMAIN}/api/v1/ecommerce/clothes/products?filter=${encodeURIComponent(JSON.stringify({ $and: filterParams }))}&limit=${limit}`,
+            configById
+        );
+        // console.log('filter DATA', response.data.data);
+        // console.log('filterParams after', filterParams);
+        return response.data.data;
+    } catch (error) {
+        throw error.response.data.message;
+    }
 };
 
 {/* Cart */}
@@ -121,13 +127,8 @@ export const addProductToCart = async (productId, quantity, authToken) => {
             },
             getAuthHeaderConfig(authToken)
         );
-        if(response.data.status == 'success') {
-            sessionStorage.setItem('cartLength', response.data.data.items.length);
-            return response.data.data;
-        } else {
-            return response.data.data;
-        }
-        
+
+        return response.data.data;
     } catch (error) {
         throw error;
     }
@@ -150,13 +151,9 @@ export const deleteOneProductFromCart = async (productId, authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/cart/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        if(response.data.status == 'success') {
-            sessionStorage.setItem('cartLength', response.data.data.items.length);
-            return response.data.data;
-        } else {
-            return response.data.data;
-        }
+
         // console.log( 'cart API Delete', response.data.data);
+        return response.data.data;
     } catch (error) {
         throw error.response.data.message;
     }
@@ -172,14 +169,9 @@ export const addProductToWishlist = async (productId, authToken) => {
             },
             getAuthHeaderConfig(authToken)
         );
-        if(response.data.status == 'success') {
-            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
-            return response.data.data.items;
-        } else {
-            return response.data.data.items;
-        }
 
         // console.log('wishlist API Patch', response.data.data.items);
+        return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
     }
@@ -203,13 +195,9 @@ export const deleteOneProductFromWishlist = async (productId, authToken) => {
             `${BASE_DOMAIN}/api/v1/ecommerce/wishlist/${productId}`,
             getAuthHeaderConfig(authToken)
         );
-        if(response.data.status == 'success') {
-            sessionStorage.setItem('wishlistLength', response.data.data.items.length);
-            return response.data.data.items;
-        }
 
         // console.log( 'wishlist API Delete', response.data.data);
-        return response.data.data;
+        return response.data.data.items;
     } catch (error) {
         throw error.response.data.message;
     }

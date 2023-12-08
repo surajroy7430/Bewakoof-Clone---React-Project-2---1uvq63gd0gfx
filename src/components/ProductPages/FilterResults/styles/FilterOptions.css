@@ -1,0 +1,63 @@
+div.filterContainer {
+    position: sticky;
+    top: 60px;
+    z-index: 1000;
+    margin-left: 35px;
+}
+.stickyAccordion {
+    position: relative;
+    z-index: 999;
+}
+p.filterText {
+    color: rgba(82, 82, 82, 0.5);
+    font-weight: 600;
+}
+p.filterClearText {
+    color: #42a2a2;
+    font-weight: 500;
+    cursor: pointer;
+}
+div.filterandclearall span {
+    display: flex;
+    justify-content: space-between;
+}
+p.filterCategoryNames {
+    cursor: pointer;
+    font-weight: bold;
+    color: rgba(8, 8, 8, 0.5);
+}
+
+button.filterOptionsButton {
+    color: rgb(136, 136, 136);
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    font-size: 13px;
+    cursor: pointer;
+}
+button.filterOptionsButton span {
+    text-transform: capitalize;
+    padding-left: 8px;
+}
+button.filterOptionsButton:hover {
+    background-color: rgb(245, 245, 245);
+    color: rgb(92, 92, 92);
+    border-radius: 3px;
+}
+
+li.colorPalatte {
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+button.appliedFilterDot {
+    background-color: #42a2a2;
+    margin-left: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+}

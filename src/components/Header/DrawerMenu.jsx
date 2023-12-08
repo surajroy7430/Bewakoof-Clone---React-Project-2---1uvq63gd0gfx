@@ -20,7 +20,6 @@ const DrawerMenu = () => {
 
     const handleDrawerClose = (path) => {
         setOpenDrawer(false);
-        window.location.replace(path);
     }
     const handleDrawerToLogin = () => {
         setOpenDrawer(false);
@@ -28,8 +27,8 @@ const DrawerMenu = () => {
     }
 
     const productTabs = [
-        {id: 1, name: 'Men', link: '/mens-clothing'},
-        {id: 2, name: 'Women', link: '/womens-clothing'},
+        {id: 1, name: 'Men', link: '/men-clothing'},
+        {id: 2, name: 'Women', link: '/women-clothing'},
         {id: 3, name: 'Mobile Covers', link: '/mobile-covers'},
     ];
     const accountListRoutes = [

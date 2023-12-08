@@ -7,7 +7,7 @@ import "react-multi-carousel/lib/styles.css";
 const CarouselComp = () => {
     const navigate = useNavigate();
     const toProducts = () => {
-        navigate('/mens-clothing');
+        navigate('/men-clothing');
     }
 
     const responsive = {

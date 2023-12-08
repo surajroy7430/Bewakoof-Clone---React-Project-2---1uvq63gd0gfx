@@ -6,7 +6,7 @@ import { Grid, Paper } from '@mui/material';
 const WomensCategories = () => {
     const navigate = useNavigate();
     const toProducts = () => {
-        navigate('/womens-clothing');
+        navigate('/women-clothing');
     }
 
     const categories = [

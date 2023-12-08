@@ -59,7 +59,7 @@ const MyOrders = () => {
             className='empty_order_button'
             variant='contained'
             LinkComponent={Link}
-            to='/mens-clothing'
+            to='/men-clothing'
           >Continue Shopping</Button>
         </div>
       </div>
