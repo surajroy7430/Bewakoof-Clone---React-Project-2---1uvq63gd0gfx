@@ -225,7 +225,7 @@ const Checkout = () => {
                   <Button 
                   variant="contained" 
                   onClick={handlePlaceOrder} 
-                  style={{backgroundColor: '#42a2a2'}}
+                  style={{backgroundColor: isPlacingOrder ? '#4CAF50' : '#42a2a2'}}
                   className='placeOrderButton'
                 >
                   {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
