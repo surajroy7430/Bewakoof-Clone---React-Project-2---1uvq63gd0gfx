@@ -63,12 +63,14 @@ div.priceWrapper {
     .sortButtonContainer {
         justify-content: center;
         align-items: center;
+        margin-right: 0;
     }
     div.clothingLength {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-left: 0;
         margin-top: 70px;
         margin-bottom: 10px;
         font-size: small;
